@@ -1,45 +1,8 @@
-#include <SFML/Graphics.hpp>
+#include "Principal.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "My Program");
-	window.setFramerateLimit(60);
+    exercicio::Principal principal;
 
-	sf::RectangleShape rect;
-	sf::Vector2f rectanglePosition(600, 350);
-	rect.setPosition(rectanglePosition);
-	rect.setSize(sf::Vector2f(100, 100));
-
-	float xVelocity = 3;
-	float yVelocity = 3;
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-				window.close();
-		}
-
-		// se a posição estiver fora do tamanho da tela vai fazer inverter a velocidade para voltar para dentro da tela
-		if (rectanglePosition.x < 0 || rectanglePosition.x > 1280 - 100)
-			xVelocity *= -1;
-		if (rectanglePosition.y < 0 || rectanglePosition.y > 720 - 100)
-			yVelocity *= -1;
-
-		// "physics"
-		rectanglePosition.x += xVelocity;
-		rectanglePosition.y += yVelocity;
-		rect.setPosition(rectanglePosition);
-
-		// render
-		window.clear();
-		window.draw(rect);
-		window.display();
-	}
-
-	return 0;
+    return principal.executar();
 }

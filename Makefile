@@ -12,7 +12,7 @@ $(TARGET): $(OBJS)
 bin/%.o: src/%.cpp
 	$(CC) $< -c -o $@ -I./SFML-2.5.1/include -DSFML_STATIC
 clean:
-	rm -rf $(TARGET) *.o -I./SFML-2.5.1/include -DSFML_STATIC
+	rm -rf $(TARGET) bin/*.o -I./SFML-2.5.1/include -DSFML_STATIC
 
 .PHONY: all clean
 
