@@ -2,13 +2,11 @@
 
 namespace entidades {
     Principal::Principal() : terminar(false), janela(new sf::RenderWindow(sf::VideoMode(800, 600), "Teste 1")) {
-        listaAmigos.inserir(new Personagem(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(5, 5), "/Users/suzanabrasil/game/src/teste.jpeg"));
-        listaAmigos.inserir(new Personagem(sf::Vector2f(400.0f, 300.0f), sf::Vector2f(10, 0), "/Users/suzanabrasil/game/src/teste.jpeg"));
-        listaAmigos.inserir(new Personagem(sf::Vector2f(200.0f, 200.0f), sf::Vector2f(0, 5), "/Users/suzanabrasil/game/src/teste.jpeg"));
-        listaAmigos.inserir(new Personagem(sf::Vector2f(800.0f, 600.0f), sf::Vector2f(0, 0), "/Users/suzanabrasil/game/src/teste.jpeg"));
-        listaAmigos.inserir(new Personagem(sf::Vector2f(400.0f, 0.0f), sf::Vector2f(5, 5), "/Users/suzanabrasil/game/src/teste.jpeg"));
-
-        janela->setFramerateLimit(60);
+        listaAmigos.inserir(new Personagem(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(20, 20), "/Users/suzanabrasil/game/src/coelho.png"));
+        listaAmigos.inserir(new Personagem(sf::Vector2f(400.0f, 300.0f), sf::Vector2f(30, 0), "/Users/suzanabrasil/game/src/coelho.png"));
+        listaAmigos.inserir(new Personagem(sf::Vector2f(200.0f, 200.0f), sf::Vector2f(35, 15), "/Users/suzanabrasil/game/src/coelho.png"));
+        listaAmigos.inserir(new Personagem(sf::Vector2f(800.0f, 600.0f), sf::Vector2f(10, 40), "/Users/suzanabrasil/game/src/coelho.png"));
+        listaAmigos.inserir(new Personagem(sf::Vector2f(400.0f, 0.0f), sf::Vector2f(5, 5), "/Users/suzanabrasil/game/src/coelho.png"));
     }
 
     Principal::~Principal() {
