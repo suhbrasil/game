@@ -2,7 +2,7 @@
 
 int main()
 {
-    exercicio::Principal principal;
+    entidades::Principal principal;
 
     return principal.executar();
 }

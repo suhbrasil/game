@@ -2,23 +2,16 @@
 
 #include<iostream>
 
-namespace exercicio
+namespace entidades
 {
-    Personagem::Personagem(float xInicial, float yInicial, const char *caminhoTextura) {
-        x = xInicial;
-        y = yInicial;
-        text = nullptr;
-
-        // Vector2f é um vetor de 2 dimensões onde as 2 dimensões são float
-        corpo.setSize(sf::Vector2f(200.0f, 200.0f));
-
+    Personagem::Personagem(sf::Vector2f pos, sf::Vector2f vel, const char *caminhoTextura) : posicao(pos), v(vel), text(nullptr) {
         if(caminhoTextura) {
             text = new sf::Texture();
-            // carrega a textura do corpo do arquivo
-            std::cout << text->loadFromFile(caminhoTextura) << std::endl;
-            // como a textura vai ser desenhada no corpo
-            corpo.setTexture(text);
+            text->loadFromFile(caminhoTextura);
         }
+        corpo.setTexture(text);
+        corpo.setSize(sf::Vector2f(200.0f, 200.0f));
+        corpo.setOrigin(corpo.getSize()/2.0f);
     }
 
     Personagem::~Personagem() {
@@ -26,18 +19,13 @@ namespace exercicio
             delete text;
     }
 
-    void Personagem::atualizar() {
-        x += 0.008;
-        y += 0.006;
-
-        corpo.setPosition(sf::Vector2f(x, y));
+    void Personagem::atualizar(float t) {
+        posicao = v*t;
+        corpo.setPosition(posicao);
+        // corpo.move(v*t);
     }
 
-    void Personagem::desenhar(sf::RenderWindow *janela) {
-        sf::Texture tex;
-        tex.loadFromFile("TheUndying.png");
-        corpo.setTexture(&tex);
-
+    void Personagem::desenhar(sf::RenderWindow* janela) {
         janela->draw(corpo);
     }
 }
