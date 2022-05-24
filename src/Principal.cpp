@@ -7,6 +7,8 @@ namespace entidades {
         listaAmigos.inserir(new Personagem(sf::Vector2f(200.0f, 200.0f), sf::Vector2f(0, 5), "/Users/suzanabrasil/game/src/teste.jpeg"));
         listaAmigos.inserir(new Personagem(sf::Vector2f(800.0f, 600.0f), sf::Vector2f(0, 0), "/Users/suzanabrasil/game/src/teste.jpeg"));
         listaAmigos.inserir(new Personagem(sf::Vector2f(400.0f, 0.0f), sf::Vector2f(5, 5), "/Users/suzanabrasil/game/src/teste.jpeg"));
+
+        janela->setFramerateLimit(60);
     }
 
     Principal::~Principal() {
@@ -32,9 +34,8 @@ namespace entidades {
             listaAmigos.atualizarPersonagens(t.asSeconds());
             listaAmigos.desenharPersonagens(janela);
             janela->display();
-
-            relogio.restart();
         }
+        relogio.restart();
         return 0;
     }
 }
