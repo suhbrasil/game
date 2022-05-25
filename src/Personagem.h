@@ -1,21 +1,22 @@
 #ifndef _PERSONAGEM_H_
 #define _PERSONAGEM_H_
 
-#include <SFML/Graphics.hpp>
+#include "Vetor2D.h"
+#include "GerenciadorGrafico.h"
 
 namespace entidades {
     class Personagem
     {
     private:
-        sf::Vector2f posicao;
-        sf::Vector2f v;
-        sf::Texture* text;
-        sf::RectangleShape corpo;
+        Vetor2F posicao;
+        Vetor2F v;
+        const char* caminho;
     public:
-        Personagem(sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f), sf::Vector2f vel = sf::Vector2f(0.0f, 0.0f), const char* caminhoTextura = nullptr);
+        Personagem(Vetor2F pos, Vetor2F vel, const char* caminhoTextura = nullptr);
         ~Personagem();
+        void inicializar(GerenciadorGrafico &g);
         void atualizar(float t);
-        void desenhar(sf::RenderWindow* janela);
+        void desenhar(GerenciadorGrafico &g);
     };
 }
 

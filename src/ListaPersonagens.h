@@ -38,11 +38,13 @@ namespace entidades {
 
         void inserir(Personagem* info);
         void esvaziar();
-        Personagem* voltarInicio();
-        Personagem* irProximo();
 
+        Personagem* voltarInicio(); // retorna para o início e retorna o primeiro elemento da lista
+        Personagem* irProximo(); // vai para o próximo elemento da lista e retorna o próximo
+
+        void inicializarPersonagens(GerenciadorGrafico &g);
         void atualizarPersonagens(float t);
-        void desenharPersonagens(sf::RenderWindow* janela);
+        void desenharPersonagens(GerenciadorGrafico &g);
         void destruirPersonagens();
     };
 }

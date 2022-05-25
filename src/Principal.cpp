@@ -1,17 +1,17 @@
 #include "Principal.h"
 
 namespace entidades {
-    Principal::Principal() : terminar(false), janela(new sf::RenderWindow(sf::VideoMode(800, 600), "Teste 1")) {
-        listaAmigos.inserir(new Personagem(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(20, 20), "/Users/suzanabrasil/game/src/coelho.png"));
-        listaAmigos.inserir(new Personagem(sf::Vector2f(400.0f, 300.0f), sf::Vector2f(30, 0), "/Users/suzanabrasil/game/src/coelho.png"));
-        listaAmigos.inserir(new Personagem(sf::Vector2f(200.0f, 200.0f), sf::Vector2f(35, 15), "/Users/suzanabrasil/game/src/coelho.png"));
-        listaAmigos.inserir(new Personagem(sf::Vector2f(800.0f, 600.0f), sf::Vector2f(10, 40), "/Users/suzanabrasil/game/src/coelho.png"));
-        listaAmigos.inserir(new Personagem(sf::Vector2f(400.0f, 0.0f), sf::Vector2f(5, 5), "/Users/suzanabrasil/game/src/coelho.png"));
+    Principal::Principal() : terminar(false) {
+        listaAmigos.inserir(new Personagem(Vetor2F(0.0f, 0.0f), Vetor2F(0, 10), "/Users/suzanabrasil/game/src/coelho.png"));
+        listaAmigos.inserir(new Personagem(Vetor2F(0.0f, 300.0f), Vetor2F(5, 5), "/Users/suzanabrasil/game/src/coelho.png"));
+        listaAmigos.inserir(new Personagem(Vetor2F(200.0f, 200.0f), Vetor2F(10, 0), "/Users/suzanabrasil/game/src/coelho.png"));
+        listaAmigos.inserir(new Personagem(Vetor2F(800.0f, 600.0f), Vetor2F(0, 5), "/Users/suzanabrasil/game/src/coelho.png"));
+        listaAmigos.inserir(new Personagem(Vetor2F(400.0f, 0.0f), Vetor2F(5, 5), "/Users/suzanabrasil/game/src/coelho.png"));
+
+        listaAmigos.inicializarPersonagens(gerenciadorGrafico);
     }
 
     Principal::~Principal() {
-        delete janela;
-
         listaAmigos.destruirPersonagens();
     }
 
@@ -21,19 +21,19 @@ namespace entidades {
         sf::Event e;
 
         while(!terminar) {
-            if(janela->pollEvent(e)) {
+            sf::Time t = relogio.getElapsedTime();
+            relogio.restart();
+
+            if(gerenciadorGrafico.getJanela()->pollEvent(e)) {
                 if(e.type == sf::Event::Closed) {
                     terminar = true;
                 }
             }
-
-            sf::Time t = relogio.getElapsedTime();
-            janela->clear();
+            gerenciadorGrafico.limpar();
             listaAmigos.atualizarPersonagens(t.asSeconds());
-            listaAmigos.desenharPersonagens(janela);
-            janela->display();
+            listaAmigos.desenharPersonagens(gerenciadorGrafico);
+            gerenciadorGrafico.mostrar();
         }
-        relogio.restart();
         return 0;
     }
 }

@@ -99,6 +99,14 @@ namespace entidades
             return nullptr;
     }
 
+    void ListaPersonagens::inicializarPersonagens(GerenciadorGrafico &g) {
+        Personagem* p = voltarInicio();
+        while (p)
+        {
+            p->inicializar(g);
+            p = irProximo();
+        }
+    }
 
     void ListaPersonagens::atualizarPersonagens(float t){
         Personagem* p = voltarInicio();
@@ -109,11 +117,11 @@ namespace entidades
         }
     }
 
-    void ListaPersonagens::desenharPersonagens(sf::RenderWindow *janela){
+    void ListaPersonagens::desenharPersonagens(GerenciadorGrafico &g){
         Personagem* p = voltarInicio();
         while (p)
         {
-            p->desenhar(janela);
+            p->desenhar(g);
             p = irProximo();
         }
     }

@@ -1,9 +1,11 @@
 #ifndef _PRINCIPAL_H_
 #define _PRINCIPAL_H_
 
-#include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include "GerenciadorGrafico.h"
+#include "Vetor2D.h"
+#include "Personagem.h"
 #include "ListaPersonagens.h"
 
 namespace entidades {
@@ -11,7 +13,7 @@ namespace entidades {
     {
     private:
         bool terminar;
-        sf::RenderWindow* janela;
+        GerenciadorGrafico gerenciadorGrafico;
         sf::Clock relogio;
         ListaPersonagens listaAmigos;
     public:

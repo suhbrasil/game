@@ -1,4 +1,5 @@
 #include "Principal.h"
+#include <iostream>
 
 int main()
 {
