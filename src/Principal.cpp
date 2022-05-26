@@ -8,11 +8,11 @@ namespace entidades {
         listaAmigos.inserir(new Personagem(Vetor2F(800.0f, 600.0f), Vetor2F(0, 5), "/Users/suzanabrasil/game/src/coelho.png"));
         listaAmigos.inserir(new Personagem(Vetor2F(400.0f, 0.0f), Vetor2F(5, 5), "/Users/suzanabrasil/game/src/coelho.png"));
 
-        listaAmigos.inicializarPersonagens(gerenciadorGrafico);
+        listaAmigos.inicializarEntidades(gerenciadorGrafico, gerenciadorEventos);
     }
 
     Principal::~Principal() {
-        listaAmigos.destruirPersonagens();
+        listaAmigos.destruirEntidades();
     }
 
     int Principal::executar() {
@@ -30,8 +30,8 @@ namespace entidades {
                 }
             }
             gerenciadorGrafico.limpar();
-            listaAmigos.atualizarPersonagens(t.asSeconds());
-            listaAmigos.desenharPersonagens(gerenciadorGrafico);
+            listaAmigos.atualizarEntidades(t.asSeconds());
+            listaAmigos.desenharEntidades(gerenciadorGrafico);
             gerenciadorGrafico.mostrar();
         }
         return 0;

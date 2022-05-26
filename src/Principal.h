@@ -4,9 +4,10 @@
 #include <SFML/System.hpp>
 
 #include "GerenciadorGrafico.h"
+#include "GerenciadorEventos.h"
 #include "Vetor2D.h"
 #include "Personagem.h"
-#include "ListaPersonagens.h"
+#include "ListaEntidades.h"
 
 namespace entidades {
     class Principal
@@ -14,8 +15,9 @@ namespace entidades {
     private:
         bool terminar;
         GerenciadorGrafico gerenciadorGrafico;
+        GerenciadorEventos gerenciadorEventos;
         sf::Clock relogio;
-        ListaPersonagens listaAmigos;
+        ListaEntidades listaAmigos;
     public:
         Principal();
         ~Principal();
