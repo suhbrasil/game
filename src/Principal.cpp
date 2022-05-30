@@ -1,14 +1,22 @@
 #include "Principal.h"
+#include "Jogador.h"
+#include "Inimigo.h"
+
+#include <functional>
 
 namespace entidades {
-    Principal::Principal() : terminar(false) {
-        listaAmigos.inserir(new Personagem(Vetor2F(0.0f, 0.0f), Vetor2F(0, 10), "/Users/suzanabrasil/game/src/coelho.png"));
-        listaAmigos.inserir(new Personagem(Vetor2F(0.0f, 300.0f), Vetor2F(5, 5), "/Users/suzanabrasil/game/src/coelho.png"));
-        listaAmigos.inserir(new Personagem(Vetor2F(200.0f, 200.0f), Vetor2F(10, 0), "/Users/suzanabrasil/game/src/coelho.png"));
-        listaAmigos.inserir(new Personagem(Vetor2F(800.0f, 600.0f), Vetor2F(0, 5), "/Users/suzanabrasil/game/src/coelho.png"));
-        listaAmigos.inserir(new Personagem(Vetor2F(400.0f, 0.0f), Vetor2F(5, 5), "/Users/suzanabrasil/game/src/coelho.png"));
+    Principal::Principal() :
+        terminar(false),
+        IDjanelaFechada(gerenciadorColisoes.adicionarOuvinteOutros( [this] (const sf::Event& e) {janelaFechar(e);} ))
+    {
+        listaAmigos.inserir(new Jogador(Vetor2F(0.0f, 0.0f)));
+        listaAmigos.inserir(new Inimigo(Vetor2F(0.0f, 300.0f), Vetor2F(5, 5)));
+        listaAmigos.inserir(new Inimigo(Vetor2F(200.0f, 200.0f), Vetor2F(10, 0)));
+        listaAmigos.inserir(new Inimigo(Vetor2F(800.0f, 600.0f), Vetor2F(0, 5)));
+        listaAmigos.inserir(new Inimigo(Vetor2F(400.0f, 0.0f), Vetor2F(5, 5)));
 
-        listaAmigos.inicializarEntidades(gerenciadorGrafico, gerenciadorEventos);
+        listaAmigos.inicializarEntidades(gerenciadorGrafico, gerenciadorColisoes);
+        gerenciadorColisoes.setJanela(gerenciadorGrafico.getJanela());
     }
 
     Principal::~Principal() {
@@ -18,22 +26,20 @@ namespace entidades {
     int Principal::executar() {
         relogio.restart();
 
-        sf::Event e;
-
         while(!terminar) {
             sf::Time t = relogio.getElapsedTime();
             relogio.restart();
-
-            if(gerenciadorGrafico.getJanela()->pollEvent(e)) {
-                if(e.type == sf::Event::Closed) {
-                    terminar = true;
-                }
-            }
+            gerenciadorColisoes.tratarObstaculos();
             gerenciadorGrafico.limpar();
             listaAmigos.atualizarEntidades(t.asSeconds());
             listaAmigos.desenharEntidades(gerenciadorGrafico);
             gerenciadorGrafico.mostrar();
         }
         return 0;
+    }
+
+    void Principal::janelaFechar(const sf::Event& e) {
+        if(e.type == sf::Event::Closed)
+            terminar = true;
     }
 }

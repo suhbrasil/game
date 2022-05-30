@@ -15,11 +15,11 @@ namespace entidades
         lista.inserir(info);
     }
 
-    void ListaEntidades::inicializarEntidades(GerenciadorGrafico &gf, GerenciadorEventos &ge) {
+    void ListaEntidades::inicializarEntidades(GerenciadorGrafico &gf, GerenciadorColisoes &gc) {
         Personagem* p = lista.voltarInicio();
         while (p)
         {
-            p->inicializar(gf, ge);
+            p->inicializar(gf, gc);
             p = lista.irProximo();
         }
     }
@@ -34,20 +34,20 @@ namespace entidades
     }
 
     void ListaEntidades::desenharEntidades(GerenciadorGrafico &g){
-        Personagem* p = voltarInicio();
+        Personagem* p = lista.voltarInicio();
         while (p)
         {
             p->desenhar(g);
-            p = irProximo();
+            p = lista.irProximo();
         }
     }
 
     void ListaEntidades::destruirEntidades(){
-        Personagem* p = voltarInicio();
+        Personagem* p = lista.voltarInicio();
         while (p)
         {
             delete p;
-            p = irProximo();
+            p = lista.irProximo();
         }
 
         lista.esvaziar();

@@ -2,7 +2,7 @@ namespace entidades
 {
     template <typename TL>
     template <typename TE>
-    Lista<TL>::ElementoLista<TE>::ElementoLista(TE Info, ElementoLista<TE>* Ant, ElementoLista<TE>* Prox) :
+    Lista<TL>::Elemento<TE>::Elemento(TE Info, Elemento<TE>* Ant, Elemento<TE>* Prox) :
     info(Info), ant(Ant), prox(Prox)
     {
 
@@ -10,43 +10,43 @@ namespace entidades
 
     template <typename TL>
     template <typename TE>
-    Lista<TL>::ElementoLista<TE>::~ElementoLista(){
+    Lista<TL>::Elemento<TE>::~Elemento(){
 
     }
 
     template <typename TL>
     template <typename TE>
-    TE Lista<TL>::ElementoLista<TE>::getInfo(){
+    TE Lista<TL>::Elemento<TE>::getInfo(){
         return info;
     }
 
     template <typename TL>
     template <typename TE>
-    void Lista<TL>::ElementoLista<TE>::setInfo(TE Info){
+    void Lista<TL>::Elemento<TE>::setInfo(TE Info){
         info = Info;
     }
 
     template <typename TL>
     template <typename TE>
-    Lista<TL>::ElementoLista<TE>* Lista<TL>::ElementoLista<TE>::getAnt(){
+    typename Lista<TL>::template Elemento<TE>* Lista<TL>::Elemento<TE>::getAnt(){
         return ant;
     }
 
     template <typename TL>
     template <typename TE>
-    void Lista<TL>::ElementoLista<TE>::setAnt(ElementoLista<TE>* Ant){
+    void Lista<TL>::Elemento<TE>::setAnt(Elemento<TE>* Ant){
         ant = Ant;
     }
 
     template <typename TL>
     template <typename TE>
-    Lista<TL>::ElementoLista<TE>* Lista<TL>::ElementoLista<TE>::getProx(){
+    typename Lista<TL>::template Elemento<TE>* Lista<TL>::Elemento<TE>::getProx(){
         return prox;
     }
 
     template <typename TL>
     template <typename TE>
-    void Lista<TL>::ElementoLista<TE>::setProx(ElementoLista<TE>* Prox){
+    void Lista<TL>::Elemento<TE>::setProx(Elemento<TE>* Prox){
         prox = Prox;
     }
 
@@ -65,7 +65,7 @@ namespace entidades
     template <typename TL>
     void Lista<TL>::inserir(TL info){
         if(info) {
-            ElementoLista<TL>* novo = new ElementoLista<TL>(info);
+            Elemento<TL>* novo = new Elemento<TL>(info);
 
             if(!inicio) {
                 inicio = novo;
@@ -81,7 +81,7 @@ namespace entidades
 
     template <typename TL>
     void Lista<TL>::esvaziar(){
-        ElementoLista<TL>* Paux = inicio;
+        Elemento<TL>* Paux = inicio;
         atual = inicio;
 
         while(atual != nullptr) {
@@ -105,8 +105,8 @@ namespace entidades
         }
     }
 
-    template <typename T>
-    T Lista<T>::irProximo(){
+    template <typename TL>
+    TL Lista<TL>::irProximo(){
         atual = atual->getProx();
         if(atual)
             return atual->getInfo();

@@ -8,27 +8,27 @@ namespace entidades {
     {
     private:
         template <typename TE>
-        class ElementoLista {
+        class Elemento {
         private:
             TE info;
-            ElementoLista* ant;
-            ElementoLista* prox;
+            Elemento* ant;
+            Elemento* prox;
         public:
-            ElementoLista(TE Info = nullptr, ElementoLista* Ant = nullptr, ElementoLista* Prox = nullptr);
-            ~ElementoLista();
+            Elemento(TE Info = nullptr, Elemento* Ant = nullptr, Elemento* Prox = nullptr);
+            ~Elemento();
 
             TE getInfo();
             void setInfo(TE Info);
 
-            ElementoLista* getAnt();
-            void setAnt(ElementoLista* Ant);
+            Elemento* getAnt();
+            void setAnt(Elemento* Ant);
 
-            ElementoLista* getProx();
-            void setProx(ElementoLista* Prox);
+            Elemento* getProx();
+            void setProx(Elemento* Prox);
         };
-        ElementoLista<TL>* inicio;
-        ElementoLista<TL>* fim;
-        ElementoLista<TL>* atual;
+        Elemento<TL>* inicio;
+        Elemento<TL>* fim;
+        Elemento<TL>* atual;
     public:
         Lista();
         ~Lista();

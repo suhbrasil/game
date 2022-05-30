@@ -18,7 +18,7 @@ namespace entidades {
         Personagem* voltarInicio(); // retorna para o início e retorna o primeiro elemento da lista
         Personagem* irProximo(); // vai para o próximo elemento da lista e retorna o próximo
 
-        void inicializarEntidades(GerenciadorGrafico &gf, GerenciadorEventos &ge);
+        void inicializarEntidades(GerenciadorGrafico &gf, GerenciadorColisoes &gc);
         void atualizarEntidades(float t);
         void desenharEntidades(GerenciadorGrafico &g);
         void destruirEntidades();

@@ -10,7 +10,7 @@ namespace entidades
     Personagem::~Personagem() {
     }
 
-    void Personagem::inicializar(GerenciadorGrafico &gf, GerenciadorEventos &ge) {
+    void Personagem::inicializar(GerenciadorGrafico &gf, GerenciadorColisoes &gc) {
         gf.carregarTextura(caminho);
     }
 
