@@ -13,9 +13,9 @@ namespace entidades {
 
     }
 
-    void Jogador::inicializar(GerenciadorGrafico &gf, GerenciadorColisoes &gc) {
+    void Jogador::inicializar(GerenciadorGrafico &gf, GerenciadorEventos &ge) {
         gf.carregarTextura(caminho);
-        chaveOuvinte = gc.adicionarOuvinteTeclado( [this] (const sf::Event& e) {tratarObstaculo(e);} );
+        chaveOuvinte = ge.adicionarOuvinteTeclado( [this] (const sf::Event& e) {tratarEventos(e);} );
     }
 
     void Jogador::atualizar(float t) {
@@ -26,7 +26,7 @@ namespace entidades {
         g.desenhar(caminho, posicao);
     }
 
-    void Jogador::tratarObstaculo(const sf::Event& e) {
+    void Jogador::tratarEventos(const sf::Event& e) {
         if(e.type == sf::Event::KeyPressed) {
             switch (e.key.code)
             {

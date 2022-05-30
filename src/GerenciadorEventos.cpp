@@ -1,17 +1,17 @@
-#include "GerenciadorColisoes.h"
+#include "GerenciadorEventos.h"
 
 namespace entidades {
-    unsigned int GerenciadorColisoes::proximoID(0);
+    unsigned int GerenciadorEventos::proximoID(0);
 
-    GerenciadorColisoes::GerenciadorColisoes() {
-
-    }
-
-    GerenciadorColisoes::~GerenciadorColisoes() {
+    GerenciadorEventos::GerenciadorEventos() {
 
     }
 
-    void GerenciadorColisoes::tratarObstaculos() {
+    GerenciadorEventos::~GerenciadorEventos() {
+
+    }
+
+    void GerenciadorEventos::tratarEventos() {
         while(janela->pollEvent(evento))
         {
             if(evento.type == sf::Event::MouseWheelScrolled
@@ -38,37 +38,37 @@ namespace entidades {
         }
     }
 
-    void GerenciadorColisoes::setJanela(sf::RenderWindow* j) {
+    void GerenciadorEventos::setJanela(sf::RenderWindow* j) {
         janela = j;
 
         // faz com que quando a gente pressionar alguma tecla a velocidade fique constante e não que vá aumentando
         janela->setKeyRepeatEnabled(false);
     }
 
-    unsigned int GerenciadorColisoes::adicionarOuvinteMouse(std::function<void(const sf::Event&)> chamada) {
+    unsigned int GerenciadorEventos::adicionarOuvinteMouse(std::function<void(const sf::Event&)> chamada) {
         // ouvintesMouse.emplace(proximoID, chamada);
         ouvintesMouse.insert(std::pair<unsigned int, std::function<void(const sf::Event&)> >(proximoID, chamada));
         return proximoID++;
     }
-    void GerenciadorColisoes::removerOuvinteMouse(int id) {
+    void GerenciadorEventos::removerOuvinteMouse(int id) {
         ouvintesMouse.erase(id);
     }
 
-    unsigned int GerenciadorColisoes::adicionarOuvinteTeclado(std::function<void(const sf::Event&)> chamada) {
+    unsigned int GerenciadorEventos::adicionarOuvinteTeclado(std::function<void(const sf::Event&)> chamada) {
         // ouvintesTeclado.emplace(proximoID, chamada);
         ouvintesTeclado.insert(std::pair<unsigned int, std::function<void(const sf::Event&)> >(proximoID, chamada));
         return proximoID++;
     }
-    void GerenciadorColisoes::removerOuvinteTeclado(int id) {
+    void GerenciadorEventos::removerOuvinteTeclado(int id) {
         ouvintesTeclado.erase(id);
     }
 
-    unsigned int GerenciadorColisoes::adicionarOuvinteOutros(std::function<void(const sf::Event&)> chamada) {
+    unsigned int GerenciadorEventos::adicionarOuvinteOutros(std::function<void(const sf::Event&)> chamada) {
         // ouvintesOutros.emplace(proximoID, chamada);
         ouvintesOutros.insert(std::pair<unsigned int, std::function<void(const sf::Event&)> >(proximoID, chamada));
         return proximoID++;
     }
-    void GerenciadorColisoes::removerOuvinteOutros(int id) {
+    void GerenciadorEventos::removerOuvinteOutros(int id) {
         ouvintesOutros.erase(id);
     }
 }

@@ -11,10 +11,10 @@ namespace entidades {
     public:
         Jogador(Vetor2F pos);
         ~Jogador();
-        void inicializar(GerenciadorGrafico &gf, GerenciadorColisoes &gc);
+        void inicializar(GerenciadorGrafico &gf, GerenciadorEventos &ge);
         void atualizar(float t);
         void desenhar(GerenciadorGrafico &g);
-        void tratarObstaculo(const sf::Event& e);
+        void tratarEventos(const sf::Event& e);
     };
 }
 

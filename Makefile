@@ -1,4 +1,4 @@
-CC := g++
+CC := g++ -std=c++11
 TARGET := main
 
 # $(wildcard *.cpp /xxx/xxx/*.cpp): get all .cpp files from the current directory and dir "/xxx/xxx/"

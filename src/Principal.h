@@ -4,7 +4,7 @@
 #include <SFML/System.hpp>
 
 #include "GerenciadorGrafico.h"
-#include "GerenciadorColisoes.h"
+#include "GerenciadorEventos.h"
 #include "Vetor2D.h"
 #include "Personagem.h"
 #include "ListaEntidades.h"
@@ -15,7 +15,7 @@ namespace entidades {
     private:
         bool terminar;
         GerenciadorGrafico gerenciadorGrafico;
-        GerenciadorColisoes gerenciadorColisoes;
+        GerenciadorEventos gerenciadorEventos;
         sf::Clock relogio;
         ListaEntidades listaAmigos;
         unsigned int IDjanelaFechada;

@@ -1,5 +1,5 @@
-#ifndef _GERENCIADORCOLISOES_H_
-#define _GERENCIADORCOLISOES_H_
+#ifndef _GERENCIADOREVENTOS_H_
+#define _GERENCIADOREVENTOS_H_
 
 #include "SFML/Graphics.hpp"
 
@@ -7,7 +7,7 @@
 #include <functional>
 
 namespace entidades {
-    class GerenciadorColisoes
+    class GerenciadorEventos
     {
     private:
         static unsigned int proximoID;
@@ -19,9 +19,9 @@ namespace entidades {
 
         sf::Event evento;
     public:
-        GerenciadorColisoes();
-        ~GerenciadorColisoes();
-        void tratarObstaculos();
+        GerenciadorEventos();
+        ~GerenciadorEventos();
+        void tratarEventos();
         void setJanela(sf::RenderWindow* j);
 
         unsigned int adicionarOuvinteMouse(std::function<void(const sf::Event&)> chamada);

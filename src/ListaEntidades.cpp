@@ -15,11 +15,11 @@ namespace entidades
         lista.inserir(info);
     }
 
-    void ListaEntidades::inicializarEntidades(GerenciadorGrafico &gf, GerenciadorColisoes &gc) {
+    void ListaEntidades::inicializarEntidades(GerenciadorGrafico &gf, GerenciadorEventos &ge) {
         Personagem* p = lista.voltarInicio();
         while (p)
         {
-            p->inicializar(gf, gc);
+            p->inicializar(gf, ge);
             p = lista.irProximo();
         }
     }

@@ -3,7 +3,7 @@
 
 #include "Vetor2D.h"
 #include "GerenciadorGrafico.h"
-#include "GerenciadorColisoes.h"
+#include "GerenciadorEventos.h"
 
 namespace entidades {
     class Personagem
@@ -15,7 +15,7 @@ namespace entidades {
     public:
         Personagem(Vetor2F pos, Vetor2F vel, const char* caminhoTextura = nullptr);
         virtual ~Personagem();
-        virtual void inicializar(GerenciadorGrafico &gf, GerenciadorColisoes &gc);
+        virtual void inicializar(GerenciadorGrafico &gf, GerenciadorEventos &ge);
         virtual void atualizar(float t);
         virtual void desenhar(GerenciadorGrafico &g);
     };

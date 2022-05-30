@@ -3,8 +3,8 @@
 
 namespace entidades {
     GerenciadorGrafico::GerenciadorGrafico() :
-    janela(new sf::RenderWindow(sf::VideoMode(800, 600), "Testando")),
-    camera(sf::Vector2f(400, 300), sf::Vector2f(400, 300))
+    janela(new sf::RenderWindow(sf::VideoMode(1400, 800), "Testando")),
+    camera(sf::Vector2f(400, 200), sf::Vector2f(2300, 1400))
     {
         janela->setView(camera);
     }
