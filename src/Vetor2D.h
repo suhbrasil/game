@@ -18,7 +18,7 @@ namespace entidades {
 
         void operator +=(Vetor2D v);
         // void operator -=(Vetor2D v);
-        // void operator *=(int i);
+        void operator *=(int i);
         // void operator *=(float f);
         // void operator *=(double d);
 

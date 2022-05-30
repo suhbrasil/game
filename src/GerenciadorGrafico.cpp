@@ -4,20 +4,13 @@
 namespace entidades {
     GerenciadorGrafico::GerenciadorGrafico() :
     janela(new sf::RenderWindow(sf::VideoMode(1400, 800), "Testando")),
-    camera(sf::Vector2f(400, 200), sf::Vector2f(2300, 1400))
+    camera(sf::Vector2f(1400, 0), sf::Vector2f(3450, 2100))
     {
         janela->setView(camera);
     }
 
     GerenciadorGrafico::~GerenciadorGrafico() {
         delete janela;
-
-        // para todos os elementos dentro do mapa deleta só o valor (cada elemento do mapa tem uma chave e um valor, i->second deleta só o valor)
-        /*
-        for(auto i = texturas.begin(); i != texturas.end(); ++i) {
-            delete (*i)->second;
-        }
-        */
         for(auto i : texturas)
             delete i.second;
     }
@@ -37,10 +30,6 @@ namespace entidades {
         }
 
         sf::Texture* text = texturas[caminho];
-
-        // depois colocar algo aqui para verificar se a textura está completamente fora da câmera e não desenhá-la
-
-        // Sprite é uma classe do sfml só para criar texturas (pode ser com RectangleShape também)
         sf::Sprite sprite;
         sprite.setTexture(*text);
         sprite.setPosition(posicao.x, posicao.y);
@@ -71,5 +60,15 @@ namespace entidades {
 
     sf::RenderWindow* GerenciadorGrafico::getJanela() const {
         return janela;
+    }
+
+    const Vetor2F GerenciadorGrafico::getTamanho(const std::string& caminho) const {
+        if(texturas.count(caminho) == 0) {
+            std::cout << "Imagem em " << caminho << " não carregada." << std::endl;
+            exit(102);
+        }
+
+        sf::Vector2u dimensoes = (texturas.at(caminho))->getSize();
+        return Vetor2F(dimensoes.x, dimensoes.y);
     }
 }

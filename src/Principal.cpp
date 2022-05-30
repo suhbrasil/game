@@ -8,12 +8,12 @@ namespace entidades {
         IDjanelaFechada(gerenciadorEventos.adicionarOuvinteOutros( [this] (const sf::Event& e) {janelaFechar(e);} ))
     {
         listaAmigos.inserir(new Jogador(Vetor2F(0.0f, 0.0f)));
-        listaAmigos.inserir(new Inimigo(Vetor2F(-200.0f, 100.0f), Vetor2F(10, 50)));
-        listaAmigos.inserir(new Inimigo(Vetor2F(300.0f, -400.0f), Vetor2F(100, 20)));
-        listaAmigos.inserir(new Inimigo(Vetor2F(200.0f, 0.0f), Vetor2F(0, 5)));
-        listaAmigos.inserir(new Inimigo(Vetor2F(0.0f, 400.0f), Vetor2F(5, 5)));
+        listaAmigos.inserir(new Inimigo(Vetor2F(-200.0f, -500.0f), Vetor2F(0, 100)));
+        listaAmigos.inserir(new Inimigo(Vetor2F(-200.0f, 500.0f), Vetor2F(0, -100)));
+        listaAmigos.inserir(new Inimigo(Vetor2F(200.0f, 500.0f), Vetor2F(0, -100)));
+        listaAmigos.inserir(new Inimigo(Vetor2F(200.0f, -500.0f), Vetor2F(0, 100)));
 
-        listaAmigos.inicializarEntidades(gerenciadorGrafico, gerenciadorEventos);
+        listaAmigos.inicializarEntidades(gerenciadorGrafico, gerenciadorEventos, gerenciadorColisoes);
         gerenciadorEventos.setJanela(gerenciadorGrafico.getJanela());
     }
 
@@ -30,6 +30,7 @@ namespace entidades {
             gerenciadorEventos.tratarEventos();
             gerenciadorGrafico.limpar();
             listaAmigos.atualizarEntidades(t.asSeconds());
+            gerenciadorColisoes.verificarColisoes();
             listaAmigos.desenharEntidades(gerenciadorGrafico);
             gerenciadorGrafico.mostrar();
         }

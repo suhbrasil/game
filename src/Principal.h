@@ -5,8 +5,9 @@
 
 #include "GerenciadorGrafico.h"
 #include "GerenciadorEventos.h"
+#include "GerenciadorColisoes.h"
 #include "Vetor2D.h"
-#include "Personagem.h"
+#include "Ente.h"
 #include "ListaEntidades.h"
 
 namespace entidades {
@@ -16,6 +17,7 @@ namespace entidades {
         bool terminar;
         GerenciadorGrafico gerenciadorGrafico;
         GerenciadorEventos gerenciadorEventos;
+        GerenciadorColisoes gerenciadorColisoes;
         sf::Clock relogio;
         ListaEntidades listaAmigos;
         unsigned int IDjanelaFechada;

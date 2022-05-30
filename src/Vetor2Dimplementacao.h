@@ -15,12 +15,12 @@ namespace entidades {
     }
 
     template <typename T>
-    Vetor2D<T> Vetor2D<T>::operator +(Vetor2D v) {
+    Vetor2D<T> Vetor2D<T>::operator +(Vetor2D<T> v) {
         return Vetor2D<T>(x+v.x, y+v.y);
     }
 
     template <typename T>
-    Vetor2D<T> Vetor2D<T>::operator -(Vetor2D v) {
+    Vetor2D<T> Vetor2D<T>::operator -(Vetor2D<T> v) {
         return Vetor2D<T>(x-v.x, y-v.y);
     }
 
@@ -40,14 +40,20 @@ namespace entidades {
     }
 
     template <typename T>
-    T Vetor2D<T>::operator *(Vetor2D v) {
+    T Vetor2D<T>::operator *(Vetor2D<T> v) {
         return x*v.x + y*v.y;
     }
 
     template <typename T>
-    void Vetor2D<T>::operator +=(Vetor2D v) {
+    void Vetor2D<T>::operator +=(Vetor2D<T> v) {
         x += v.x;
         y += v.y;
+    }
+
+    template <typename T>
+    void Vetor2D<T>::operator *=(int i) {
+        x *= i;
+        y *= i;
     }
 
     template <typename T>
@@ -61,7 +67,7 @@ namespace entidades {
     }
 
     template <typename T>
-    Vetor2D<T> Vetor2D<T>::projOrtogonal(Vetor2D v) {
+    Vetor2D<T> Vetor2D<T>::projOrtogonal(Vetor2D<T> v) {
         return v*(this->operator*(v)/pow(v.modulo(), 2));
     }
 }

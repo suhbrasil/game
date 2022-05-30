@@ -24,6 +24,7 @@ namespace entidades {
         bool carregarTextura(const std::string caminho);
         void centralizar(const Vetor2F centro);
         sf::RenderWindow* getJanela() const;
+        const Vetor2F getTamanho(const std::string& caminho) const;
     };
 }
 

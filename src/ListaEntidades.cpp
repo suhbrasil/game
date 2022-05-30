@@ -11,21 +11,21 @@ namespace entidades
         destruirEntidades();
     }
 
-    void ListaEntidades::inserir(Personagem* info){
+    void ListaEntidades::inserir(Ente* info){
         lista.inserir(info);
     }
 
-    void ListaEntidades::inicializarEntidades(GerenciadorGrafico &gf, GerenciadorEventos &ge) {
-        Personagem* p = lista.voltarInicio();
+    void ListaEntidades::inicializarEntidades(GerenciadorGrafico& gf, GerenciadorEventos& ge, GerenciadorColisoes& gc) {
+        Ente* p = lista.voltarInicio();
         while (p)
         {
-            p->inicializar(gf, ge);
+            p->inicializar(gf, ge, gc);
             p = lista.irProximo();
         }
     }
 
     void ListaEntidades::atualizarEntidades(float t){
-        Personagem* p = lista.voltarInicio();
+        Ente* p = lista.voltarInicio();
         while (p)
         {
             p->atualizar(t);
@@ -33,8 +33,8 @@ namespace entidades
         }
     }
 
-    void ListaEntidades::desenharEntidades(GerenciadorGrafico &g){
-        Personagem* p = lista.voltarInicio();
+    void ListaEntidades::desenharEntidades(GerenciadorGrafico& g){
+        Ente* p = lista.voltarInicio();
         while (p)
         {
             p->desenhar(g);
@@ -43,7 +43,7 @@ namespace entidades
     }
 
     void ListaEntidades::destruirEntidades(){
-        Personagem* p = lista.voltarInicio();
+        Ente* p = lista.voltarInicio();
         while (p)
         {
             delete p;
