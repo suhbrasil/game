@@ -17,6 +17,8 @@ namespace entidades {
 
        Vetor2F distancia = posicao1 - posicao2;
 
+       
+
        return (fabs(distancia.x) < (dimensoes1.x + dimensoes2.x)/2.0) && (fabs(distancia.y) < (dimensoes1.y + dimensoes2.y)/2.0);
    }
 

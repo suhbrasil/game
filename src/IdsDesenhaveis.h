@@ -8,7 +8,9 @@ namespace entidades {
     namespace IdsDesenhaveis {
         enum IdsDesenhaveis {
             jogador,
-            inimigo
+            inimigo,
+            carta,
+            gato
         };
     }
 }

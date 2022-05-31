@@ -36,16 +36,16 @@ namespace entidades {
             switch (e.key.code)
             {
                 case sf::Keyboard::Key::Right:
-                    v.x += 100;
+                    v.x += 200;
                     break;
                 case sf::Keyboard::Key::Left:
-                    v.x -= 100;
+                    v.x -= 200;
                     break;
                 case sf::Keyboard::Key::Up:
-                    v.y -= 100;
+                    v.y -= 200;
                     break;
                 case sf::Keyboard::Key::Down:
-                    v.y += 100;
+                    v.y += 200;
                     break;
                 default:
                     break;
@@ -72,6 +72,14 @@ namespace entidades {
     }
 
     void Jogador::colidir(IdsDesenhaveis::IdsDesenhaveis IDOutro, Vetor2F posicaoOutro, Vetor2F dimensoesOutro) {
-        std::cout << "Colidiu" << std::endl;
+        if(IDOutro == IdsDesenhaveis::inimigo) {
+            // se colidir com o jogador (heroi)
+            std::cout << "Menos vida" << std::endl;
+            Vetor2F distancia = posicao - posicaoOutro;
+            posicao += distancia*(1/2);
+            v.x *= -1;
+            v.y *= -1;
+            std::cout << "Colidiu" << std::endl;
+        }
     }
 }
