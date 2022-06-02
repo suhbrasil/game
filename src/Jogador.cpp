@@ -6,7 +6,7 @@
 namespace entidades {
     // passa o IdsDesenhavel do jogador
     Jogador::Jogador(Vetor2F pos) :
-    Colidivel(pos, Vetor2F(), IdsDesenhaveis::jogador,  "/Users/suzanabrasil/game/src/coelho.png")
+    Colidivel(pos, Vetor2F(), IdsDesenhaveis::jogador,  "src/coelho.png")
     {
 
     }
@@ -17,9 +17,9 @@ namespace entidades {
 
     void Jogador::inicializar(GerenciadorGrafico& gf, GerenciadorEventos& ge, GerenciadorColisoes& gc) {
         gf.carregarTextura(caminho);
+        gc.adicionarColidivel(this);
         dimensoes = gf.getTamanho(caminho);
         chaveOuvinte = ge.adicionarOuvinteTeclado( [this] (const sf::Event& e) {tratarEventos(e);} );
-        gc.adicionarColidivel(this);
     }
 
     void Jogador::atualizar(float t) {
@@ -77,8 +77,9 @@ namespace entidades {
             std::cout << "Menos vida" << std::endl;
             Vetor2F distancia = posicao - posicaoOutro;
             posicao += distancia*(1/2);
-            v.x *= -1;
-            v.y *= -1;
+            v.x *= -0.5;
+            v.y *= -0.5;
+
             std::cout << "Colidiu" << std::endl;
         }
     }

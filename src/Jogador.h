@@ -1,7 +1,12 @@
+/*
+    - Física:
+    A parte do arrastar vai criar uma resistência no jogador ao colidir com outras, ou seja, vai desacelerar o jogador
+*/
+
 #ifndef _JOGADOR_H_
 #define _JOGADOR_H_
 
-// #include "Ente.h"
+
 #include "Colidivel.h"
 
 namespace entidades {

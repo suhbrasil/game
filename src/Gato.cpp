@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace entidades {
-    Gato::Gato(Vetor2F pos, Vetor2F vel) : Colidivel(pos, vel, IdsDesenhaveis::inimigo, "/Users/suzanabrasil/game/src/gato-inimigo.png") { }
+    Gato::Gato(Vetor2F pos, Vetor2F vel) : Colidivel(pos, vel, IdsDesenhaveis::inimigo, "src/gato-inimigo.png") { }
 
     Gato::~Gato() { }
 

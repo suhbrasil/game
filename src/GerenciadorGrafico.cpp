@@ -4,8 +4,10 @@
 namespace entidades {
     GerenciadorGrafico::GerenciadorGrafico() :
     janela(new sf::RenderWindow(sf::VideoMode(1400, 800), "Testando")),
-    camera(sf::Vector2f(1400, 0), sf::Vector2f(3450, 2100))
+    camera(sf::Vector2f(400, 300), sf::Vector2f(1400, 800))
     {
+        // Deixei comentado, pois não entendi muito bem o uso do setFramerateLimit
+        // janela->setFramerateLimit(144);
         janela->setView(camera);
     }
 

@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace entidades {
-    Carta::Carta(Vetor2F pos, Vetor2F vel) : Colidivel(pos, vel, IdsDesenhaveis::inimigo, "/Users/suzanabrasil/game/src/carta-inimiga.png") { }
+    Carta::Carta(Vetor2F pos, Vetor2F vel) : Colidivel(pos, vel, IdsDesenhaveis::inimigo, "src/carta-inimiga.png") { }
 
     Carta::~Carta() { }
 

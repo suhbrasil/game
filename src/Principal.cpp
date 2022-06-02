@@ -12,7 +12,6 @@ namespace entidades {
         listaAmigos.inserir(new Jogador(Vetor2F(0.0f, 0.0f)));
         listaAmigos.inserir(new Carta(Vetor2F(-200.0f, -500.0f), Vetor2F(100, 100)));
         listaAmigos.inserir(new Inimigo(Vetor2F(-200.0f, 500.0f), Vetor2F(-100, -100)));
-        listaAmigos.inserir(new Inimigo(Vetor2F(200.0f, 500.0f), Vetor2F(-100, -100)));
         listaAmigos.inserir(new Gato(Vetor2F(200.0f, -500.0f), Vetor2F(100, 100)));
 
         listaAmigos.inicializarEntidades(gerenciadorGrafico, gerenciadorEventos, gerenciadorColisoes);
