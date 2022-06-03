@@ -1,11 +1,11 @@
-#include "Menu.h"
+#include "Jogo.h"
 
-int main()
-{
-    Menu* menu = new Menu();
-    menu->executar();
-    delete menu;
-    menu = nullptr;
+int main() {
+
+    Jogo jogo;
+
+    jogo.executar();
 
     return 0;
-}
+
+};
