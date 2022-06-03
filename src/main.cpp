@@ -1,9 +1,11 @@
-#include "Principal.h"
-#include <iostream>
+#include "Menu.h"
 
 int main()
 {
-    entidades::Principal principal;
+    Menu* menu = new Menu();
+    menu->executar();
+    delete menu;
+    menu = nullptr;
 
-    return principal.executar();
+    return 0;
 }
