@@ -40,9 +40,6 @@ void Menu::definirValores()
     // Definir a imagem como a textura de fundo
     fundo->setTexture(*imagem);
 
-    posicaoMouse = {0, 0};
-    coordMouse = {0, 0};
-
     opcoes = {"Ranking" ,"Fase 2", "Fase 1"};
     // Resize atualiza o tamanho do vetor para o tamanho passado como parâmtro
     // Resize está sendo usado para se acontecer alguma falha de segmentação
@@ -107,7 +104,7 @@ void Menu::loopEventos()
             }
         }
 
-        // Se clicar em enter e não estiver selecionado
+        // Se clicar em enter e não estiver selecionado (evita de poder dar enter várias vezes)
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !selecionado)
         {
             selecionado = true;

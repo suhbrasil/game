@@ -18,10 +18,6 @@ private:
     sf::Texture* imagem;
     // Sprite (espaço que será colocada a imagem) para a imagem
     sf::Sprite* fundo;
-    // Será armazenada a posição do mouse;
-    sf::Vector2i posicaoMouse;
-    // Será armazenada as coordenadas do mouse
-    sf::Vector2f coordMouse;
     // Vetor para armazenas os nomes (opcoes para o jogo) que serão exibidos no menu
     std::vector<const char *> opcoes;
     // Coordenadas das posicoes dos nomes
