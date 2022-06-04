@@ -34,18 +34,19 @@ void Menu::definirValores()
     selecionado = false;
 
     // Carregar fonte do texto e a imagem de fundo do menu
-    fonte->loadFromFile("/Users/suzanabrasil/game/src/MiniHonysa.ttf");
-    imagem->loadFromFile("/Users/suzanabrasil/game/src/menu.png");
+    fonte->loadFromFile("/Users/suzanabrasil/jogo/src/Pacifico.ttf");
+    imagem->loadFromFile("/Users/suzanabrasil/jogo/src/menu.png");
 
     // Definir a imagem como a textura de fundo
     fundo->setTexture(*imagem);
 
-    opcoes = {"Ranking" ,"Fase 2", "Fase 1"};
+    opcoes = {"Ranking" ,"Fase 2", "Fase 1", "Cadastrar Jogador"};
+    opcoesPos = {0, 1, 2, 3};
     // Resize atualiza o tamanho do vetor para o tamanho passado como parâmtro
     // Resize está sendo usado para se acontecer alguma falha de segmentação
-    textos.resize(3);
-    coordOpcoes = {{470, 700}, {520, 500}, {520, 300}};
-    tamanho = {100, 100, 100};
+    textos.resize(4);
+    coordOpcoes = {{470, 900}, {520, 700}, {520, 500}, {300, 300}};
+    tamanho = {80, 80, 80, 70};
 
     for (std::size_t i{}; i < textos.size(); ++i)
     {
@@ -60,11 +61,11 @@ void Menu::definirValores()
         // Definir a posicao do texto
         textos[i].setPosition(coordOpcoes[i]);
     }
-    textos[2].setOutlineThickness(6);
-    posicao = 2;
+    textos[3].setOutlineThickness(8);
+    posicao = 3;
 }
 
-void Menu::loopEventos()
+int Menu::loopEventos()
 {
     sf::Event e;
     // Verifica se a janela está dando algum evento e recupera ele
@@ -78,12 +79,12 @@ void Menu::loopEventos()
         // !press verifica se ela já não estava pressionada antes, pois iria ficar indo para baixo sem parar
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !press)
         {
-            if (posicao < 2)
+            if (posicao < 3)
             {
                 posicao++;
                 press = true;
                 // coloca uma espessura no texto que está sendo selecionado pelo teclado
-                textos[posicao].setOutlineThickness(6);
+                textos[posicao].setOutlineThickness(8);
                 // tira a espessura que tinha sido colocada no texto que estava selecionado antes, pois a espessura não sai sozinha
                 textos[posicao - 1].setOutlineThickness(0);
                 press = false;
@@ -97,7 +98,7 @@ void Menu::loopEventos()
             {
                 posicao--;
                 press = true;
-                textos[posicao].setOutlineThickness(6);
+                textos[posicao].setOutlineThickness(8);
                 textos[posicao + 1].setOutlineThickness(0);
                 press = false;
                 selecionado = false;
@@ -108,7 +109,8 @@ void Menu::loopEventos()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !selecionado)
         {
             selecionado = true;
-            std::cout <<  opcoes[posicao] << std::endl;
+            std::cout << opcoes[posicao] << std::endl;
+            return opcoesPos[posicao];
         }
     }
 }
@@ -119,17 +121,31 @@ void Menu::desenhar()
     janela->clear();
     janela->draw(*fundo);
     // auto pega o tipo da variável que está sendo declarada
-    for (auto t : textos)
+    for (auto t : textos) {
         janela->draw(t);
-
+    }
     janela->display();
 }
 
 void Menu::executar()
 {
+    int pos;
     while (janela->isOpen())
     {
-        loopEventos();
+        pos = loopEventos();
         desenhar();
+        if(pos == 3) {
+            string nome;
+            // app = append (adiciona ao final do arquivo)
+            ofstream ofs("arquivo.txt", fstream::app);
+            cout << "Digite o nome da pessoa: ";
+            cin >> nome;
+            cout << endl;
+
+            pessoa.setNome(nome);
+
+            ofs << pessoa;
+            ofs.close();
+        }
     }
 }
