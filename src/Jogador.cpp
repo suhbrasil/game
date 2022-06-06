@@ -3,16 +3,15 @@
 using namespace entidades;
 using namespace sf;
 
-#define ESTADOINICIAL 0
-#define PULO 1
-#define SEGUNDOESTADO 2
-
 Jogador::Jogador()
 {
     inicializarVariaveis();
     inicializarTextura();
     inicializarDesenhavel();
     inicializarAnimacao();
+    inicializarFenomenosFisicos();
+
+    desenhavel.setPosition(posicaoInicialX,posicaoInicialY);
 }
 
 Jogador::~Jogador()
@@ -21,30 +20,10 @@ Jogador::~Jogador()
 
 void Jogador::atualizar()
 {
-    movimentar();
+    atualizarMovimentacao();
     atualizarAnimacao();
+    atualizarFenomenosFisicos();
     // std::cout << "Frame: " << countFrame << std::endl;
-}
-
-void Jogador::render(RenderTarget &target)
-{
-    target.draw(desenhavel);
-}
-void Jogador::inicializarTextura()
-{
-    if (!textura.loadFromFile("/Users/suzanabrasil/jogo/src/coelho.png"))
-    {
-        printf("imagem não encontrada");
-    }
-}
-
-void Jogador::inicializarDesenhavel()
-{
-    desenhavel.setTexture(textura);
-    frameAtual = IntRect(0, 0, 45, 34);
-    desenhavel.setTextureRect(frameAtual);
-    // pra mudar o tamanho do desenho
-    desenhavel.setScale(2.0f, 2.0f);
 }
 
 void Jogador::inicializarVariaveis()
@@ -52,11 +31,97 @@ void Jogador::inicializarVariaveis()
     countFrame = 0;
     movimentando = false;
     estadoDeAnimacao = ESTADOINICIAL;
+    podePular = true;
+    posicaoInicialX = 0.f;
+    posicaoInicialY = 632.f;
 }
 
-void Jogador::inicializarAnimacao()
+
+
+void Jogador::atualizarMovimentacao()
 {
-    timerAnimacao.restart();
+    movimentando = false;
+    if (Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+    {
+        movimentar(-0.5f, 0.f);
+        movimentando = true;
+    }
+
+    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+    {
+        movimentar(0.5f, 0.f);
+        movimentando = true;
+    }
+
+    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && podePular)
+    {
+        velocidade.y = -sqrtf(2.f * gravidade * alturaPulo);
+        movimentar(0.5f, 0.f);
+        movimentando = true;
+        estadoDeAnimacao = PULO;
+
+    }
+    if(abs(desenhavel.getPosition().y - posicaoInicialY) >= alturaPulo) podePular = false;
+    else podePular = true;
+
+    countFrame++;
+
+    if(estadoDeAnimacao == ESTADOINICIAL)
+        estadoDeAnimacao = SEGUNDOESTADO;
+    else
+        estadoDeAnimacao = ESTADOINICIAL;
+}
+
+void Jogador::inicializarFenomenosFisicos() {
+
+    velocidadeMaxima = 5.f;
+    velocidadeMinima = 1.f;
+    aceleracao = 3.f;
+    atrito  = 0.9f;
+    gravidade = 4.f;
+    velocidadeMaximaY  = 5.f;
+    velocidadeMinimaY = 1.f;
+    alturaPulo = 100.f;
+}
+
+void Jogador::movimentar(const float direcaoX, const float direcaoY) {
+
+    velocidade.x += direcaoX * aceleracao;
+    velocidade.y += direcaoY * aceleracao;
+
+    if(abs(velocidade.x) > velocidadeMaxima) {
+        if(velocidade.x < 0) velocidade.x = velocidadeMaxima * -1.f;
+        else if(velocidade.x > 0) velocidade.x  = velocidadeMaxima;
+    }
+}
+
+void Jogador::atualizarFenomenosFisicos() {
+
+    velocidade.y += 1.f * gravidade;
+
+   if(abs(velocidade.y) > velocidadeMaximaY) {
+        if(velocidade.y < 0) velocidade.y = velocidadeMaximaY * -1.f;
+        else if(velocidade.y > 0) velocidade.y  = velocidadeMaximaY;
+    }
+
+    velocidade.x  *= atrito;
+    if(abs(velocidade.x) < velocidadeMinima) {
+        velocidade.x = 0.0f;
+    }
+
+    if(abs(velocidade.y) <velocidadeMinima){
+        velocidade.y = 0.0f;
+    }
+
+    desenhavel.move(velocidade);
+
+
+}
+
+void Jogador::resetVelocidadeY() {
+
+    velocidade.y = 0.f;
+
 }
 
 void Jogador::atualizarAnimacao()
@@ -70,12 +135,16 @@ void Jogador::atualizarAnimacao()
             if (frameAtual.left >= 273.f)
                 frameAtual.left = 0;
         }
-        else if(movimentando && countFrame > 40){
+        else if(movimentando && countFrame > 20){
             if(estadoDeAnimacao == ESTADOINICIAL) {
-                frameAtual = IntRect(46, 0, 47, 34);
+                
+                 frameAtual = IntRect(0, 0, 45, 34);
             }
             else if(estadoDeAnimacao == SEGUNDOESTADO) {
-                frameAtual = IntRect(0, 0, 45, 34);
+               frameAtual = IntRect(46, 0, 47, 34);
+            }
+            else if(estadoDeAnimacao == PULO){
+                frameAtual = IntRect(96,0,55,34);
             }
             countFrame = 0;
         }
@@ -83,37 +152,5 @@ void Jogador::atualizarAnimacao()
     desenhavel.setTextureRect(frameAtual);
 }
 
-void Jogador::movimentar()
-{
-    movimentando = false;
-    if (Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-    {
-        desenhavel.move(-0.5f, 0.f);
-        movimentando = true;
-    }
 
-    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-    {
-        desenhavel.move(0.5f, 0.f);
-        movimentando = true;
-    }
 
-    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-    {
-        desenhavel.move(0.f, 0.5f);
-        movimentando = true;
-    }
-
-    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-    {
-        desenhavel.move(0.f, -0.5f);
-        movimentando = true;
-    }
-
-    countFrame++;
-
-    if(estadoDeAnimacao == ESTADOINICIAL)
-        estadoDeAnimacao = SEGUNDOESTADO;
-    else
-        estadoDeAnimacao = ESTADOINICIAL;
-}

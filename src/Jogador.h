@@ -2,31 +2,57 @@
 
 #include <SFML/Graphics.hpp>
 #include <math.h>
+#include "Entidade.h"
+
+#define ESTADOINICIAL 0
+#define PULO 1
+#define SEGUNDOESTADO 2
+
 using namespace sf;
 
 namespace entidades {
-    class Jogador {
+    class Jogador : public Entidade {
     private:
-        Sprite desenhavel;
-        Texture textura;
-        short estadoDeAnimacao;
-        IntRect frameAtual;
+
         // contar quantas vezes o teclado já foi pressionado (deixará a mudança de frame mais lenta)
         int countFrame;
-        Clock timerAnimacao;
+        
+    
+        //fisica
         bool movimentando;
+        float velocidadeMaxima;
+        float velocidadeMinima;
+        Vector2f velocidade;
+        float aceleracao;
+        float atrito;
+        float gravidade;
+        float velocidadeMaximaY;
+        float velocidadeMinimaY;
+        float posicaoInicialY;
+        float posicaoInicialX;
+
+        bool podePular;
+        float alturaPulo;
+
+
     public:
         Jogador();
         virtual ~Jogador();
 
         void atualizar();
-        //renderTarget é responsável por definir o comportamento de objetos 2D
-        void render(RenderTarget& target);
+        
         void inicializarVariaveis();
-        void inicializarTextura();
-        void inicializarDesenhavel();
-        void inicializarAnimacao();
+        
+        
+        void inicializarFenomenosFisicos();
+       
+        
+        void resetVelocidadeY();
         void atualizarAnimacao();
-        void movimentar();
+         //movimentar do teclado
+        void atualizarMovimentacao();
+        void atualizarFenomenosFisicos();
+        //movimentar fisicamente (diz a direcao do movimento)
+        void movimentar(const float direcaoX, const float direcaoY);
     };
 }

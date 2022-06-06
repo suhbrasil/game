@@ -37,6 +37,7 @@ public:
     void atualizarJogador();
     void atualizar();
     void atualizarRenderJogador();
+    void atualizarColisao();
     void render();
 
     void executar();
