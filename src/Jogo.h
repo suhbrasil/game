@@ -1,14 +1,10 @@
 #pragma once
 
-#include <iostream>
-#include <SFML/Graphics.hpp>
-
+#include "GerenciadorGrafico.h"
 #include "Jogador.h"
 #include "Menu.h"
-
-using namespace sf;
-using namespace std;
 using namespace entidades;
+using namespace gerenciadores;
 
 class Jogo {
 
@@ -16,9 +12,10 @@ private:
     Event event;
 
     // Tela
+    GerenciadorGrafico gerenciadorGrafico;
     RenderWindow janela;
-    Sprite fundoTela;
-    Texture fundoTelaTex;
+    // Sprite fundoTela;
+    // Texture fundoTelaTex;
 
     // Jogador
     Jogador* jogador;
@@ -27,10 +24,11 @@ public:
     ~Jogo();
 
     // Tela
-    void inicializarJanela();
-    const RenderWindow& getJanela() const;
-    void inicializarFundoTela();
-    void renderFundoTela();
+
+    // void inicializarJanela();
+    // const RenderWindow& getJanela() const;
+    // void inicializarFundoTela();
+    // void renderFundoTela();
 
     // Jogador
     void inicializarJogador();

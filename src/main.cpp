@@ -2,13 +2,13 @@
 
 int main() {
 
-    // Jogo jogo;
-    // jogo.executar();
+    Jogo jogo;
+    jogo.executar();
 
-    Menu* menu = new Menu();
-    menu->executar();
-    delete menu;
-    menu = nullptr;
+    // Menu* menu = new Menu();
+    // menu->executar();
+    // delete menu;
+    // menu = nullptr;
 
     return 0;
 

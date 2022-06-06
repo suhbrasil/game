@@ -144,6 +144,7 @@ void Menu::executar()
 
             pessoa.setNome(nome);
 
+            // salva o nome da pessoa no arquivo
             ofs << pessoa;
             ofs.close();
         }

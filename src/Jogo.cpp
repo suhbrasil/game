@@ -2,36 +2,14 @@
 
 Jogo::Jogo()
 {
-    inicializarJanela();
+    gerenciadorGrafico.inicializarJanela();
     inicializarJogador();
-    inicializarFundoTela();
+    gerenciadorGrafico.inicializarFundoTela();
 }
 
 Jogo::~Jogo()
 {
     delete jogador;
-}
-
-void Jogo::inicializarJanela()
-{
-    janela.create(sf::VideoMode(1400, 700), "Jogo", sf::Style::Close | sf::Style::Titlebar);
-    // limita a taxa de atualização da tela
-    janela.setFramerateLimit(60);
-}
-
-const RenderWindow& Jogo::getJanela() const
-{
-    return janela;
-}
-
-void Jogo::inicializarFundoTela() {
-    if(!fundoTelaTex.loadFromFile("/Users/suzanabrasil/jogo/textura/background.jpeg"))
-        cout << "Erro: nao foi possivel carregar o background" << endl;
-    fundoTela.setTexture(fundoTelaTex);
-}
-
-void Jogo::renderFundoTela() {
-    janela.draw(fundoTela);
 }
 
 void Jogo::inicializarJogador()
@@ -46,13 +24,12 @@ void Jogo::atualizarJogador()
 
 void Jogo::atualizar()
 {
-
-    while (janela.pollEvent(event))
+    while (gerenciadorGrafico.getJanela().pollEvent(event))
     {
         if (event.type == Event::Closed)
-            janela.close();
+            gerenciadorGrafico.getJanela().close();
         else if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
-            janela.close();
+            gerenciadorGrafico.getJanela().close();
 
         if(event.type ==  Event::KeyReleased &&
             (event.key.code == Keyboard::Escape || event.key.code == Keyboard::Up ||
@@ -67,32 +44,32 @@ void Jogo::atualizar()
 }
 
 void Jogo::atualizarRenderJogador() {
-    jogador->render(janela);
+    jogador->render(gerenciadorGrafico.getJanela());
 }
 
 void Jogo::atualizarColisao() {
 
-    if(jogador->getGlobalBounds().top + jogador->getGlobalBounds().height > janela.getSize().y) {
+    if(jogador->getGlobalBounds().top + jogador->getGlobalBounds().height > gerenciadorGrafico.getJanela().getSize().y) {
         jogador->resetVelocidadeY();
         jogador->setPosition(jogador->getGlobalBounds().left,
-                janela.getSize().y - jogador->getGlobalBounds().height);
+                gerenciadorGrafico.getJanela().getSize().y - jogador->getGlobalBounds().height);
     }
 }
 
 void Jogo::render()
 {
     // Desenhar fundo de tela
-    renderFundoTela();
+    gerenciadorGrafico.renderFundoTela();
 
     // janela.clear(Color::Black);
     atualizarRenderJogador();
-    janela.display();
+    gerenciadorGrafico.getJanela().display();
     // menu.executar();
 }
 
 void Jogo::executar()
 {
-    while (janela.isOpen())
+    while (gerenciadorGrafico.getJanela().isOpen())
     {
         atualizar();
         render();
