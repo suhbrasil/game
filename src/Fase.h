@@ -11,16 +11,9 @@ private:
 
 public:
     Fase(Texture& texture, IntRect textureRect,bool comDano=false);
-    Fase();
+    ~Fase();
 
     const FloatRect getGlobalBounds() const;
     void atualizar();
     void render(RenderTarget& target);
-
-
-
-
-
-
-
 };

@@ -25,7 +25,7 @@ const RenderWindow& Jogo::getJanela() const
 }
 
 void Jogo::inicializarFundoTela() {
-    if(!fundoTelaTex.loadFromFile("texture/background.jpeg"))
+    if(!fundoTelaTex.loadFromFile("/Users/suzanabrasil/jogo/textura/background.jpeg"))
         cout << "Erro: nao foi possivel carregar o background" << endl;
     fundoTela.setTexture(fundoTelaTex);
 }
@@ -54,11 +54,11 @@ void Jogo::atualizar()
         else if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
             janela.close();
 
-        if(event.type ==  Event::KeyReleased && 
+        if(event.type ==  Event::KeyReleased &&
             (event.key.code == Keyboard::Escape || event.key.code == Keyboard::Up ||
-                 event.key.code == Keyboard::Down || event.key.code == Keyboard::Left 
+                 event.key.code == Keyboard::Down || event.key.code == Keyboard::Left
                     || event.key.code == Keyboard::Right))
-            
+
             jogador->resetTimerAnimacao();
     }
 

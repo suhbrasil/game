@@ -34,8 +34,8 @@ void Menu::definirValores()
     selecionado = false;
 
     // Carregar fonte do texto e a imagem de fundo do menu
-    fonte->loadFromFile("/Users/suzanabrasil/jogo/src/Pacifico.ttf");
-    imagem->loadFromFile("/Users/suzanabrasil/jogo/src/menu.png");
+    fonte->loadFromFile("/Users/suzanabrasil/jogo/textura/Pacifico.ttf");
+    imagem->loadFromFile("/Users/suzanabrasil/jogo/textura/menu.png");
 
     // Definir a imagem como a textura de fundo
     fundo->setTexture(*imagem);

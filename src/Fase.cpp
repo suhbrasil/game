@@ -1,13 +1,13 @@
 #include "Fase.h"
 
 Fase::Fase(Texture& texture, IntRect  textureRect, bool dano):
-comDano(dano) 
+comDano(dano)
 {
     desenhavel.setTexture(texture);
     desenhavel.setTextureRect(textureRect);
 }
 
-Fase:: ~Fase() {
+Fase::~Fase() {
 
 }
 

@@ -30,7 +30,7 @@ void Entidade::render(RenderTarget &target)
 }
 void Entidade::inicializarTextura()
 {
-    if (!textura.loadFromFile("texture/coelho.png"))
+    if (!textura.loadFromFile("/Users/suzanabrasil/jogo/textura/coelho.png"))
     {
         printf("imagem não encontrada");
     }
@@ -54,6 +54,3 @@ void Entidade::resetTimerAnimacao() {
 
     timerAnimacao.restart();
 }
-
-
-
