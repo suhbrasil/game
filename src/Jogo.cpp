@@ -3,9 +3,8 @@
 Jogo::Jogo()
 {
     gerenciadorGrafico.inicializarJanela();
-    menu = new Menu(gerenciadorGrafico.getJanela().getSize().x, gerenciadorGrafico.getJanela().getSize().y);
-    ranking = new Ranking(gerenciadorGrafico.getJanela().getSize().x, gerenciadorGrafico.getJanela().getSize().y);
-
+    menu = new Menu();
+    ranking = new Ranking();
     // Background menu
     backgroundMenu.setSize(Vector2f(1280, 720));
     backgroundTextMenu.loadFromFile("/Users/suzanabrasil/jogo/textura/menu2.jpeg");
@@ -139,9 +138,9 @@ void Jogo::executar()
 
                             ranking->setNome(nome);
 
-                            ofs << ranking;
+                            ofs << *ranking;
                             ofs.close();
-                            // CADASTRAR.close();
+                            CADASTRAR.display();
                         }
                     }
                     if(x == 1) {
@@ -163,7 +162,6 @@ void Jogo::executar()
                             atualizar();
                             FASE1.draw(background);
                             render();
-                            // FASE1.display();
                         }
                     }
                     if(x == 2) {
@@ -216,7 +214,5 @@ void Jogo::executar()
         gerenciadorGrafico.getJanela().draw(backgroundMenu);
         menu->desenhar(gerenciadorGrafico.getJanela());
         gerenciadorGrafico.getJanela().display();
-        // atualizar();
-        // render();
     }
 }

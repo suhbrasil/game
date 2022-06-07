@@ -21,8 +21,7 @@ private:
     Font fonte;
     Text texto[max_texto];
 public:
-    Menu(float largura, float altura);
-    Menu() {}
+    Menu(float largura = 0.0f, float altura = 0.0f);
     ~Menu();
 
     void desenhar(RenderWindow& janela);

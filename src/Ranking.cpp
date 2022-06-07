@@ -37,11 +37,3 @@ void Ranking::desenhar(RenderWindow& janela) {
         janela.draw(textoRanking[i]);
     }
 }
-
-string& Ranking::getNome() {
-    return nome;
-}
-
-void Ranking::setNome(string& n) {
-    nome = n;
-}

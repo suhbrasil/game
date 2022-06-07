@@ -17,13 +17,12 @@ private:
     Text textoRanking[max_ranking];
     int maxRanking;
 public:
-    Ranking(float largura, float altura);
+    Ranking(float largura = 0.0f, float altura = 0.0f);
     ~Ranking();
 
-    void desenhar(RenderWindow& janela);
+    string& getNome() { return nome; }
+    void setNome(string& n) { nome = n; }
 
-    string& getNome();
-    void setNome(string& n);
     // sobrecarga do operador de fluxo de saída
     // a função friend retorna uma refência para "ostream" que é uma das classes definidas em "iostream.h"
     friend ostream& operator<<(ostream& os, const Ranking& dados) {
@@ -31,4 +30,6 @@ public:
          os << dados.nome << "\n";
         return os;
     }
+
+    void desenhar(RenderWindow& janela);
 };

@@ -30,7 +30,6 @@ private:
 
     // Fases
     RenderWindow FASE1;
-    RenderWindow FASE2;
 
     // Jogador
     Jogador* jogador;
