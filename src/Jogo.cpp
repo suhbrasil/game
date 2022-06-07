@@ -3,10 +3,8 @@
 Jogo::Jogo()
 {
     gerenciadorGrafico.inicializarJanela();
-    // FASE2.create(VideoMode(1280, 720), "Fase 2");
-    // gerenciadorGrafico.inserir(new Menu());
-    // gerenciadorGrafico.inserir(new Fase());
     menu = new Menu(gerenciadorGrafico.getJanela().getSize().x, gerenciadorGrafico.getJanela().getSize().y);
+    ranking = new Ranking(gerenciadorGrafico.getJanela().getSize().x, gerenciadorGrafico.getJanela().getSize().y);
 
     // Background menu
     backgroundMenu.setSize(Vector2f(1280, 720));
@@ -79,6 +77,7 @@ void Jogo::atualizarColisao()
 void Jogo::render()
 {
     atualizarRenderJogador();
+    FASE1.setFramerateLimit(60);
     FASE1.display();
 }
 
@@ -130,16 +129,16 @@ void Jogo::executar()
                             FASE1.close();
                             FASE2.close();
                             RANKING.close();
-                             string nome;
+                            string nome;
                             // app = append (adiciona ao final do arquivo)
                             ofstream ofs("arquivo.txt", fstream::app);
                             cout << "Digite o nome da pessoa: ";
                             cin >> nome;
                             cout << endl;
 
-                            nomeJogador.setNome(nome);
+                            ranking->setNome(nome);
 
-                            ofs << nomeJogador;
+                            ofs << ranking;
                             ofs.close();
                             CADASTRAR.display();
                         }
@@ -202,6 +201,7 @@ void Jogo::executar()
                             FASE2.close();
                             RANKING.clear();
                             RANKING.draw(backgroundRanking);
+                            ranking->desenhar(RANKING);
                             RANKING.display();
                         }
                     }

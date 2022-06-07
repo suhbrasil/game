@@ -1,3 +1,7 @@
+/*
+    Ifstream baseado no vídeo: https://www.youtube.com/watch?v=lzxWNtjii8U
+*/
+
 #include "Menu.h"
 
 Menu::Menu(float largura, float altura) {

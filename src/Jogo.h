@@ -13,7 +13,6 @@ class Jogo {
 private:
     Event event;
     GerenciadorGrafico gerenciadorGrafico;
-    Ranking nomeJogador;
 
     // Menu
     Menu* menu;
@@ -25,6 +24,7 @@ private:
     Texture backgroundText;
 
     // Ranking
+    Ranking* ranking;
     RectangleShape backgroundRanking;
     Texture backgroundTextRanking;
 
