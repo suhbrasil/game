@@ -3,6 +3,7 @@
 #include "GerenciadorGrafico.h"
 #include "Jogador.h"
 #include "Menu.h"
+#include "Ranking.h"
 #include "Fase.h"
 using namespace entidades;
 using namespace gerenciadores;
@@ -12,6 +13,7 @@ class Jogo {
 private:
     Event event;
     GerenciadorGrafico gerenciadorGrafico;
+    Ranking nomeJogador;
 
     // Menu
     Menu* menu;

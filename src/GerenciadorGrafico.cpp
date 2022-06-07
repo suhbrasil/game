@@ -6,7 +6,7 @@ GerenciadorGrafico::GerenciadorGrafico() {}
 GerenciadorGrafico::~GerenciadorGrafico() {}
 
 void GerenciadorGrafico::inicializarJanela() {
-    janela.create(sf::VideoMode(1200, 700), "Jogo", sf::Style::Close | sf::Style::Titlebar);
+    janela.create(sf::VideoMode(1280, 720), "Jogo", sf::Style::Close | sf::Style::Titlebar);
     // limita a taxa de atualização da tela
     janela.setFramerateLimit(60);
 }

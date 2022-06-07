@@ -54,6 +54,7 @@ void Menu::desenhar(RenderWindow& janela) {
 
 void Menu::MoverCima() {
     if(selecionado - 1 >= 0) {
+        // Se o botão estava branco deixa preto de volta
         texto[selecionado].setFillColor(Color::Black);
         selecionado--;
         if(selecionado == -1) {

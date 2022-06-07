@@ -3,23 +3,23 @@
 Jogo::Jogo()
 {
     gerenciadorGrafico.inicializarJanela();
-    // FASE2.create(VideoMode(1200, 700), "Fase 2");
+    // FASE2.create(VideoMode(1280, 720), "Fase 2");
     // gerenciadorGrafico.inserir(new Menu());
     // gerenciadorGrafico.inserir(new Fase());
     menu = new Menu(gerenciadorGrafico.getJanela().getSize().x, gerenciadorGrafico.getJanela().getSize().y);
 
     // Background menu
-    backgroundMenu.setSize(Vector2f(1400, 700));
+    backgroundMenu.setSize(Vector2f(1280, 720));
     backgroundTextMenu.loadFromFile("/Users/suzanabrasil/jogo/textura/menu2.jpeg");
     backgroundMenu.setTexture(&backgroundTextMenu);
 
     // Background JOGO
-    background.setSize(Vector2f(1400, 700));
+    background.setSize(Vector2f(1280, 720));
     backgroundText.loadFromFile("/Users/suzanabrasil/jogo/textura/background.jpeg");
     background.setTexture(&backgroundText);
 
     // Background ranking
-    backgroundRanking.setSize(Vector2f(1400, 700));
+    backgroundRanking.setSize(Vector2f(1280, 720));
     backgroundTextRanking.loadFromFile("/Users/suzanabrasil/jogo/textura/ranking.jpg");
     backgroundRanking.setTexture(&backgroundTextRanking);
 
@@ -105,10 +105,10 @@ void Jogo::executar()
                 }
                 if (e.key.code == Keyboard::Return)
                 {
-                    RenderWindow CADASTRAR(VideoMode(1200, 700), "Cadastrar");
-                    FASE1.create(VideoMode(1200, 700), "Fase 1");
-                    RenderWindow FASE2(VideoMode(1200, 700), "Fase 2");
-                    RenderWindow RANKING(VideoMode(1200, 700), "Ranking");
+                    RenderWindow CADASTRAR(VideoMode(1280, 720), "Cadastrar");
+                    FASE1.create(VideoMode(1280, 720), "Fase 1");
+                    RenderWindow FASE2(VideoMode(1280, 720), "Fase 2");
+                    RenderWindow RANKING(VideoMode(1280, 720), "Ranking");
 
                     int x = menu->pressionado();
                     if (x == 0)
@@ -130,6 +130,17 @@ void Jogo::executar()
                             FASE1.close();
                             FASE2.close();
                             RANKING.close();
+                             string nome;
+                            // app = append (adiciona ao final do arquivo)
+                            ofstream ofs("arquivo.txt", fstream::app);
+                            cout << "Digite o nome da pessoa: ";
+                            cin >> nome;
+                            cout << endl;
+
+                            nomeJogador.setNome(nome);
+
+                            ofs << nomeJogador;
+                            ofs.close();
                             CADASTRAR.display();
                         }
                     }

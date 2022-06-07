@@ -1,4 +1,6 @@
-#include "Menu.h"
+#include <fstream> // ofstream e ifstream
+#include <string.h>
+using namespace std;
 
 class Ranking
 {
