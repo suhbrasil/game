@@ -3,32 +3,38 @@
 #include "GerenciadorGrafico.h"
 #include "Jogador.h"
 #include "Menu.h"
+#include "Fase.h"
 using namespace entidades;
 using namespace gerenciadores;
+using namespace fases;
 
 class Jogo {
-
 private:
     Event event;
-
-    // Tela
     GerenciadorGrafico gerenciadorGrafico;
-    RenderWindow janela;
-    // Sprite fundoTela;
-    // Texture fundoTelaTex;
+
+    // Menu
+    Menu* menu;
+    RectangleShape backgroundMenu;
+    Texture backgroundTextMenu;
+
+    // Jogo
+    RectangleShape background;
+    Texture backgroundText;
+
+    // Ranking
+    RectangleShape backgroundRanking;
+    Texture backgroundTextRanking;
+
+    // Fases
+    RenderWindow FASE1;
+    RenderWindow FASE2;
 
     // Jogador
     Jogador* jogador;
 public:
     Jogo();
     ~Jogo();
-
-    // Tela
-
-    // void inicializarJanela();
-    // const RenderWindow& getJanela() const;
-    // void inicializarFundoTela();
-    // void renderFundoTela();
 
     // Jogador
     void inicializarJogador();

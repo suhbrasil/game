@@ -8,17 +8,16 @@ using namespace sf;
 namespace entidades {
 
     class Entidade {
-    
+
     protected:
-        
         Sprite desenhavel;
         Texture textura;
+
         //animacao
         short estadoDeAnimacao;
         IntRect frameAtual;
         bool trocouAnimacao;
         Clock timerAnimacao;
-
     public:
 
         Entidade();
@@ -26,7 +25,7 @@ namespace entidades {
         //virtual void executar();
         void inicializarDesenhavel();
         void inicializarAnimacao();
-        
+
         void resetTimerAnimacao();
 
         const FloatRect getGlobalBounds() const;
@@ -37,7 +36,5 @@ namespace entidades {
         void inicializarTextura();
         //renderTarget é responsável por definir o comportamento de objetos 2D
         void render(RenderTarget& target);
-
-
     };
 }

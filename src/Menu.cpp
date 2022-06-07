@@ -1,152 +1,80 @@
 #include "Menu.h"
 
-Menu::Menu()
-{
-    // Alocar todos
-    janela = new sf::RenderWindow();
-    fecharJanela = new sf::RectangleShape();
-    fonte = new sf::Font();
-    imagem = new sf::Texture();
-    fundo = new sf::Sprite();
+Menu::Menu(float largura, float altura) {
+    if(!fonte.loadFromFile("/Users/suzanabrasil/jogo/textura/Pacifico.ttf"))
+        cout << "Não tem nenhuma fonte" << endl;
 
-    definirValores();
+    // Cadastrar jogador
+    texto[0].setFont(fonte);
+    texto[0].setFillColor(Color::Black);
+    texto[0].setString("Cadastrar Jogador");
+    texto[0].setCharacterSize(35);
+    texto[0].setPosition(100, 150);
+
+    // Fase 1
+    texto[1].setFont(fonte);
+    texto[1].setFillColor(Color::Black);
+    texto[1].setString("Fase 1");
+    texto[1].setCharacterSize(40);
+    texto[1].setPosition(100, 250);
+
+    // Fase 2
+    texto[2].setFont(fonte);
+    texto[2].setFillColor(Color::Black);
+    texto[2].setString("Fase 2");
+    texto[2].setCharacterSize(40);
+    texto[2].setPosition(100, 350);
+
+    // Ranking
+    texto[3].setFont(fonte);
+    texto[3].setFillColor(Color::Black);
+    texto[3].setString("Ranking");
+    texto[3].setCharacterSize(40);
+    texto[3].setPosition(100, 450);
+
+    // Sair
+    texto[4].setFont(fonte);
+    texto[4].setFillColor(Color::Black);
+    texto[4].setString("Sair");
+    texto[4].setCharacterSize(40);
+    texto[4].setPosition(100, 550);
+
+    selecionado = -1;
 }
 
-Menu::~Menu()
-{
-    delete janela;
-    delete fecharJanela;
-    delete fonte;
-    delete imagem;
-    delete fundo;
+Menu::~Menu() {
+
 }
 
-void Menu::definirValores()
-{
-    // Video mode é o tamanho da janela que irá criar e
-    // 2250 e 1400
-    janela->create(sf::VideoMode(1400, 1525), "Menu jogo");
-    // Posição inicial que irá abrir a janelalkkokk;lll
-    janela->setPosition(sf::Vector2i(0, 0));
-
-    posicao = 0;
-    press = false;
-    selecionado = false;
-
-    // Carregar fonte do texto e a imagem de fundo do menu
-    fonte->loadFromFile("/Users/suzanabrasil/jogo/textura/Pacifico.ttf");
-    imagem->loadFromFile("/Users/suzanabrasil/jogo/textura/menu.png");
-
-    // Definir a imagem como a textura de fundo
-    fundo->setTexture(*imagem);
-
-    opcoes = {"Ranking" ,"Fase 2", "Fase 1", "Cadastrar Jogador"};
-    opcoesPos = {0, 1, 2, 3};
-    // Resize atualiza o tamanho do vetor para o tamanho passado como parâmtro
-    // Resize está sendo usado para se acontecer alguma falha de segmentação
-    textos.resize(4);
-    coordOpcoes = {{470, 900}, {520, 700}, {520, 500}, {300, 300}};
-    tamanho = {80, 80, 80, 70};
-
-    for (std::size_t i{}; i < textos.size(); ++i)
-    {
-        // Definir a fonte do texto
-        textos[i].setFont(*fonte);
-        // Definir qual é o texto que será escrito
-        textos[i].setString(opcoes[i]);
-        // Definir o tamanho do texto
-        textos[i].setCharacterSize(tamanho[i]);
-        // Definir cor do texto
-        textos[i].setOutlineColor(sf::Color::Black);
-        // Definir a posicao do texto
-        textos[i].setPosition(coordOpcoes[i]);
-    }
-    textos[3].setOutlineThickness(8);
-    posicao = 3;
-}
-
-int Menu::loopEventos()
-{
-    sf::Event e;
-    // Verifica se a janela está dando algum evento e recupera ele
-    while (janela->pollEvent(e))
-    {
-        // Se o evento recuperado da janela for para fechá-la
-        if (e.type == sf::Event::Closed)
-            janela->close();
-
-        // Verifica se a tecla para baixo do teclado está pressionada
-        // !press verifica se ela já não estava pressionada antes, pois iria ficar indo para baixo sem parar
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !press)
-        {
-            if (posicao < 3)
-            {
-                posicao++;
-                press = true;
-                // coloca uma espessura no texto que está sendo selecionado pelo teclado
-                textos[posicao].setOutlineThickness(8);
-                // tira a espessura que tinha sido colocada no texto que estava selecionado antes, pois a espessura não sai sozinha
-                textos[posicao - 1].setOutlineThickness(0);
-                press = false;
-                selecionado = false;
-            }
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !press)
-        {
-            if (posicao > 0)
-            {
-                posicao--;
-                press = true;
-                textos[posicao].setOutlineThickness(8);
-                textos[posicao + 1].setOutlineThickness(0);
-                press = false;
-                selecionado = false;
-            }
-        }
-
-        // Se clicar em enter e não estiver selecionado (evita de poder dar enter várias vezes)
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !selecionado)
-        {
-            selecionado = true;
-            std::cout << opcoes[posicao] << std::endl;
-            return opcoesPos[posicao];
-        }
+void Menu::desenhar(RenderWindow& janela) {
+    for(int i = 0; i < max_texto; i++) {
+        janela.draw(texto[i]);
     }
 }
 
-void Menu::desenhar()
-{
-    // limpar a janela
-    janela->clear();
-    janela->draw(*fundo);
-    // auto pega o tipo da variável que está sendo declarada
-    for (auto t : textos) {
-        janela->draw(t);
+void Menu::MoverCima() {
+    if(selecionado - 1 >= 0) {
+        texto[selecionado].setFillColor(Color::Black);
+        selecionado--;
+        if(selecionado == -1) {
+            selecionado = 2;
+        }
+        // Botão selecionado ficará branco
+        texto[selecionado].setFillColor(Color::White);
     }
-    janela->display();
 }
 
-void Menu::executar()
-{
-    int pos;
-    while (janela->isOpen())
-    {
-        pos = loopEventos();
-        desenhar();
-        if(pos == 3) {
-            string nome;
-            // app = append (adiciona ao final do arquivo)
-            ofstream ofs("arquivo.txt", fstream::app);
-            cout << "Digite o nome da pessoa: ";
-            cin >> nome;
-            cout << endl;
-
-            pessoa.setNome(nome);
-
-            // salva o nome da pessoa no arquivo
-            ofs << pessoa;
-            ofs.close();
+void Menu::MoverBaixo() {
+    if(selecionado + 1 <= max_texto) {
+        texto[selecionado].setFillColor(Color::Black);
+        selecionado++;
+        if(selecionado == 5) {
+            selecionado = 0;
         }
+        texto[selecionado].setFillColor(Color::White);
     }
+}
+
+int Menu::pressionado() {
+    return selecionado;
 }

@@ -13,11 +13,9 @@ using namespace sf;
 namespace entidades {
     class Jogador : public Entidade {
     private:
-
         // contar quantas vezes o teclado já foi pressionado (deixará a mudança de frame mais lenta)
         int countFrame;
-        
-    
+
         //fisica
         bool movimentando;
         float velocidadeMaxima;
@@ -33,20 +31,17 @@ namespace entidades {
 
         bool podePular;
         float alturaPulo;
-
-
     public:
         Jogador();
         virtual ~Jogador();
 
         void atualizar();
-        
+
         void inicializarVariaveis();
-        
-        
+
         void inicializarFenomenosFisicos();
-       
-        
+
+
         void resetVelocidadeY();
         void atualizarAnimacao();
          //movimentar do teclado

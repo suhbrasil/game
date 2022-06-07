@@ -1,13 +1,12 @@
 #include "GerenciadorGrafico.h"
 using namespace gerenciadores;
 
-
 GerenciadorGrafico::GerenciadorGrafico() {}
 
 GerenciadorGrafico::~GerenciadorGrafico() {}
 
 void GerenciadorGrafico::inicializarJanela() {
-    janela.create(sf::VideoMode(1400, 700), "Jogo", sf::Style::Close | sf::Style::Titlebar);
+    janela.create(sf::VideoMode(1200, 700), "Jogo", sf::Style::Close | sf::Style::Titlebar);
     // limita a taxa de atualização da tela
     janela.setFramerateLimit(60);
 }
@@ -24,4 +23,16 @@ void GerenciadorGrafico::inicializarFundoTela() {
 
 void GerenciadorGrafico::renderFundoTela() {
     janela.draw(fundoTela);
+}
+
+void GerenciadorGrafico::inserir(Ente* elem) {
+    pilha.push(elem);
+}
+
+Ente* GerenciadorGrafico::recuperar() {
+    if(pilha.empty())
+        cout << "Nenhum elemento" << endl;
+    Ente* elem = pilha.top();
+    pilha.pop();
+    return elem;
 }

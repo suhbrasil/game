@@ -5,38 +5,24 @@
 #include <fstream> // ofstream e ifstream
 #include <string.h>
 using namespace std;
+using namespace sf;
 
-#include "Pessoa.h"
+#define max_texto 5
 
 class Menu
 {
 private:
-    // Posição do menu
-    int posicao;
-    bool press, selecionado;
-    sf::RenderWindow* janela;
-    sf::RectangleShape* fecharJanela;
-    sf::Font* fonte;
-    sf::Texture* imagem;
-    sf::Sprite* fundo;
-    // Vetor para armazenas os nomes (opcoes para o jogo) que serão exibidos no menu
-    std::vector<const char *> opcoes;
-    std::vector<int> opcoesPos;
-    std::vector<sf::Vector2f> coordOpcoes;
-    std::vector<sf::Text> textos;
-    // Tamanho da palavra
-    std::vector<std::size_t> tamanho;
-
-    // Cadastro jogador
-    Pessoa pessoa;
+    int selecionado;
+    Font fonte;
+    Text texto[max_texto];
 public:
-    Menu();
+    Menu(float largura, float altura);
+    Menu() {}
     ~Menu();
-    void definirValores();
-    // Armazenar os eventos do click do mouse, quando apertar alguma tecla, ...
-    int loopEventos();
-    // Desenhar tudo na tela
-    void desenhar();
 
-    void executar();
+    void desenhar(RenderWindow& janela);
+    void MoverCima();
+    void MoverBaixo();
+    int pressionado();
+    void executar() {}
 };
