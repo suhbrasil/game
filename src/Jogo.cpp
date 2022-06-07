@@ -11,6 +11,7 @@ Jogo::Jogo()
     backgroundTextMenu.loadFromFile("/Users/suzanabrasil/jogo/textura/menu2.jpeg");
     backgroundMenu.setTexture(&backgroundTextMenu);
 
+
     // Background JOGO
     background.setSize(Vector2f(1280, 720));
     backgroundText.loadFromFile("/Users/suzanabrasil/jogo/textura/background.jpeg");
@@ -140,7 +141,7 @@ void Jogo::executar()
 
                             ofs << ranking;
                             ofs.close();
-                            CADASTRAR.display();
+                            // CADASTRAR.close();
                         }
                     }
                     if(x == 1) {

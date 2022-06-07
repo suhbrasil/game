@@ -15,24 +15,16 @@ RenderWindow& GerenciadorGrafico::getJanela() {
     return janela;
 }
 
-void GerenciadorGrafico::inicializarFundoTela() {
-    if(!fundoTelaTex.loadFromFile("/Users/suzanabrasil/jogo/textura/background.jpeg"))
-        cout << "Erro: nao foi possivel carregar o background" << endl;
-    fundoTela.setTexture(fundoTelaTex);
+void GerenciadorGrafico::setTextura(Texture* text) {
+    textura = text;
 }
 
-void GerenciadorGrafico::renderFundoTela() {
-    janela.draw(fundoTela);
+Texture* GerenciadorGrafico::getTextura() {
+    return textura;
 }
 
-void GerenciadorGrafico::inserir(Ente* elem) {
-    pilha.push(elem);
-}
+void GerenciadorGrafico::inicializarBackground(RectangleShape* background, Texture* text) {
+    background->setSize(Vector2f(1280, 720));
+    background->setTexture(text);
 
-Ente* GerenciadorGrafico::recuperar() {
-    if(pilha.empty())
-        cout << "Nenhum elemento" << endl;
-    Ente* elem = pilha.top();
-    pilha.pop();
-    return elem;
 }

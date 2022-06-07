@@ -13,13 +13,7 @@ namespace gerenciadores {
     {
     private:
         RenderWindow janela;
-
-        // Fundo tela
-        Sprite fundoTela;
-        Texture fundoTelaTex;
-
-        // Pilha
-        stack<Ente*> pilha;
+        Texture* textura;
     public:
         GerenciadorGrafico();
         ~GerenciadorGrafico();
@@ -27,11 +21,12 @@ namespace gerenciadores {
         // Fundo tela jogo
         void inicializarJanela();
         RenderWindow& getJanela();
-        void inicializarFundoTela();
-        void renderFundoTela();
 
-        // Pilha
-        void inserir(Ente* elem);
-        Ente* recuperar();
+        // Textura
+        void setTextura(Texture* text);
+        Texture* getTextura();
+
+        // Background
+        void inicializarBackground(RectangleShape* background, Texture* text);
     };
 }
