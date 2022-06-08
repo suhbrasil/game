@@ -15,16 +15,7 @@ RenderWindow& GerenciadorGrafico::getJanela() {
     return janela;
 }
 
-void GerenciadorGrafico::setTextura(Texture* text) {
-    textura = text;
-}
-
-Texture* GerenciadorGrafico::getTextura() {
-    return textura;
-}
-
-void GerenciadorGrafico::inicializarBackground(RectangleShape* background, Texture* text) {
+void GerenciadorGrafico::desenhar(RectangleShape* background, Texture* text) {
     background->setSize(Vector2f(1280, 720));
     background->setTexture(text);
-
 }

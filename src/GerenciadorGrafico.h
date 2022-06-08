@@ -6,14 +6,11 @@
 using namespace sf;
 using namespace std;
 
-#include "Ente.h"
-
 namespace gerenciadores {
     class GerenciadorGrafico
     {
     private:
         RenderWindow janela;
-        Texture* textura;
     public:
         GerenciadorGrafico();
         ~GerenciadorGrafico();
@@ -22,11 +19,7 @@ namespace gerenciadores {
         void inicializarJanela();
         RenderWindow& getJanela();
 
-        // Textura
-        void setTextura(Texture* text);
-        Texture* getTextura();
-
-        // Background
-        void inicializarBackground(RectangleShape* background, Texture* text);
+        // Inicializar Ente
+        void desenhar(RectangleShape* background, Texture* text);
     };
 }

@@ -3,15 +3,15 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 using namespace sf;
+using namespace std;
 
 
 namespace entidades {
-
     class Entidade {
-
     protected:
-        Sprite desenhavel;
-        Texture textura;
+        float x;
+        float y;
+
 
         //animacao
         short estadoDeAnimacao;
@@ -19,17 +19,19 @@ namespace entidades {
         bool trocouAnimacao;
         Clock timerAnimacao;
     public:
-
+        Sprite desenhavel;
+        Texture textura;
         Entidade();
         ~Entidade();
         //virtual void executar();
         void inicializarDesenhavel();
         void inicializarAnimacao();
+        virtual void inicializarVariaveis() = 0;
 
         void resetTimerAnimacao();
 
         const FloatRect getGlobalBounds() const;
-        const Vector2f  getPosition() const;
+        const Vector2f getPosition() const;
 
         void setPosition(const float x, const float y);
 

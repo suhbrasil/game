@@ -5,7 +5,7 @@
 #include "Menu.h"
 #include "Ranking.h"
 #include "Fase.h"
-using namespace entidades;
+using namespace personagens;
 using namespace gerenciadores;
 using namespace fases;
 

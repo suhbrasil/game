@@ -6,20 +6,18 @@ Jogo::Jogo()
     menu = new Menu();
     ranking = new Ranking();
     // Background menu
-    backgroundMenu.setSize(Vector2f(1280, 720));
     backgroundTextMenu.loadFromFile("/Users/suzanabrasil/jogo/textura/menu2.jpeg");
-    backgroundMenu.setTexture(&backgroundTextMenu);
+    gerenciadorGrafico.desenhar(&backgroundMenu, &backgroundTextMenu);
 
 
     // Background JOGO
-    background.setSize(Vector2f(1280, 720));
     backgroundText.loadFromFile("/Users/suzanabrasil/jogo/textura/background.jpeg");
-    background.setTexture(&backgroundText);
+    gerenciadorGrafico.desenhar(&background, &backgroundText);
 
     // Background ranking
-    backgroundRanking.setSize(Vector2f(1280, 720));
     backgroundTextRanking.loadFromFile("/Users/suzanabrasil/jogo/textura/ranking.jpg");
-    backgroundRanking.setTexture(&backgroundTextRanking);
+    gerenciadorGrafico.desenhar(&backgroundRanking, &backgroundTextRanking);
+
 
     inicializarJogador();
 }

@@ -1,23 +1,38 @@
 #pragma once
+
+#include <iostream>
 #include <SFML/Graphics.hpp>
+
+#include "Jogador.h"
+
 using namespace sf;
+using namespace std;
+using namespace personagens;
 
-#include "Ente.h"
+namespace fases{
 
-namespace fases {
-    class Fase : public Ente {
+    class Fase {
+
     private:
-        Sprite desenhavel;
-        const bool comDano;
+        Event event;
+
+        // Tela
+        RenderWindow* janela;
+        Sprite fundoTela;
+        Texture fundoTelaTex;
+
+        // Jogador
+        Jogador* jogador;
     public:
-        Fase(Texture& texture, IntRect textureRect, bool comDano = false);
-        Fase();
+        Fase(Jogador* j);
         ~Fase();
 
-        const FloatRect getGlobalBounds() const;
-        void atualizar();
-        void render(RenderTarget& target);
+        // Jogador
+        void atualizarJogador();
+        void atualizarRenderJogador();
+        void atualizarColisao();
+        void render(RenderWindow& janela);
 
-        void executar() {}
+        void executar();
     };
 }

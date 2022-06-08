@@ -1,6 +1,5 @@
 #include "Entidade.h"
 using namespace entidades;
-using namespace sf;
 
 Entidade::Entidade() {
 
@@ -21,19 +20,11 @@ void Entidade::setPosition(const float x, const float y) {
 
 const Vector2f Entidade::getPosition() const {
     desenhavel.getPosition();
-
 }
 
 void Entidade::render(RenderTarget &target)
 {
     target.draw(desenhavel);
-}
-void Entidade::inicializarTextura()
-{
-    if (!textura.loadFromFile("/Users/suzanabrasil/jogo/textura/coelho.png"))
-    {
-        printf("imagem não encontrada");
-    }
 }
 
 void Entidade::inicializarDesenhavel()

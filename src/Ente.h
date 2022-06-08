@@ -2,6 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "GerenciadorColisoes.h"
+using namespace gerenciadores;
+
 class Ente
 {
 private:

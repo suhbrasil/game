@@ -1,9 +1,9 @@
 #include "Jogador.h"
 #include <iostream>
-using namespace entidades;
+using namespace personagens;
 using namespace sf;
 
-Jogador::Jogador()
+Jogador::Jogador() : Personagem()
 {
     inicializarVariaveis();
     inicializarTextura();
@@ -12,18 +12,25 @@ Jogador::Jogador()
     inicializarFenomenosFisicos();
 
     desenhavel.setPosition(posicaoInicialX,posicaoInicialY);
+
 }
 
 Jogador::~Jogador()
 {
 }
 
+void Entidade::inicializarTextura()
+{
+    if (!textura.loadFromFile("textura/coelho.png"))
+    {
+        printf("imagem não encontrada");
+    }
+}
 void Jogador::atualizar()
 {
     atualizarMovimentacao();
     atualizarAnimacao();
     atualizarFenomenosFisicos();
-    // std::cout << "Frame: " << countFrame << std::endl;
 }
 
 void Jogador::inicializarVariaveis()
@@ -56,13 +63,15 @@ void Jogador::atualizarMovimentacao()
     else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && podePular)
     {
         velocidade.y = -sqrtf(2.f * gravidade * alturaPulo);
-        movimentar(0.5f, 0.f);
         movimentando = true;
         estadoDeAnimacao = PULO;
-
     }
-    if(abs(desenhavel.getPosition().y - posicaoInicialY) >= alturaPulo) podePular = false;
-    else podePular = true;
+
+    if(abs(desenhavel.getPosition().y - posicaoInicialY) < alturaPulo) podePular = true;
+    else podePular = false;
+
+
+
 
     countFrame++;
 
@@ -78,7 +87,7 @@ void Jogador::inicializarFenomenosFisicos() {
     velocidadeMinima = 1.f;
     aceleracao = 3.f;
     atrito  = 0.9f;
-    gravidade = 4.f;
+    gravidade = 2.f;
     velocidadeMaximaY  = 5.f;
     velocidadeMinimaY = 1.f;
     alturaPulo = 100.f;
@@ -137,20 +146,17 @@ void Jogador::atualizarAnimacao()
         }
         else if(movimentando && countFrame > 20){
             if(estadoDeAnimacao == ESTADOINICIAL) {
-                
+
                  frameAtual = IntRect(0, 0, 45, 34);
             }
             else if(estadoDeAnimacao == SEGUNDOESTADO) {
                frameAtual = IntRect(46, 0, 47, 34);
             }
             else if(estadoDeAnimacao == PULO){
-                frameAtual = IntRect(96,0,55,34);
+                frameAtual = IntRect(96,0,45,34);
             }
             countFrame = 0;
         }
     }
     desenhavel.setTextureRect(frameAtual);
 }
-
-
-

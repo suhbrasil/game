@@ -1,27 +1,49 @@
 #include "Fase.h"
 using namespace fases;
 
-Fase::Fase(Texture& texture, IntRect textureRect, bool comDano) : Ente(),
-comDano(comDano)
+Fase::Fase(Jogador* j)
 {
-    desenhavel.setTexture(texture);
-    desenhavel.setTextureRect(textureRect);
+    jogador = j;    
 }
 
-Fase::Fase() : Ente(), comDano(false) {}
-
-Fase::~Fase() {
-
+Fase::~Fase()
+{
 }
 
-const FloatRect Fase::getGlobalBounds() const {
-    return desenhavel.getGlobalBounds();
+void Fase::atualizarJogador()
+{
+    jogador->atualizar();
 }
 
-void Fase::atualizar() {
+void Fase::executar()
+{
 
+    if(event.type ==  Event::KeyReleased && 
+        (event.key.code == Keyboard::Escape || event.key.code == Keyboard::Up ||
+            event.key.code == Keyboard::Down || event.key.code == Keyboard::Left 
+            || event.key.code == Keyboard::Right))
+            
+        jogador->resetTimerAnimacao();
+    
 }
 
-void Fase::render(RenderTarget& target) {
-    target.draw(desenhavel);
+void Fase::atualizarRenderJogador() {
+    //jogador->render(janela);
+}
+
+void Fase::atualizarColisao() {
+
+    if(jogador->getGlobalBounds().top + jogador->getGlobalBounds().height > janela->getSize().y) {
+        jogador->resetVelocidadeY();
+        jogador->setPosition(jogador->getGlobalBounds().left,
+                janela->getSize().y - jogador->getGlobalBounds().height);
+    }
+}
+
+void Fase::render(RenderWindow& janela)
+{
+    
+    //atualizarRenderJogador(janela);
+    
+    // menu.executar();
 }

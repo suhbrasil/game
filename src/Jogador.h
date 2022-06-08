@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <math.h>
-#include "Entidade.h"
+#include "Personagem.h"
 
 #define ESTADOINICIAL 0
 #define PULO 1
@@ -10,8 +10,8 @@
 
 using namespace sf;
 
-namespace entidades {
-    class Jogador : public Entidade {
+namespace personagens {
+    class Jogador : public Personagem {
     private:
         // contar quantas vezes o teclado já foi pressionado (deixará a mudança de frame mais lenta)
         int countFrame;
@@ -40,7 +40,6 @@ namespace entidades {
         void inicializarVariaveis();
 
         void inicializarFenomenosFisicos();
-
 
         void resetVelocidadeY();
         void atualizarAnimacao();
