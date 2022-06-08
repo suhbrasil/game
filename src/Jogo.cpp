@@ -2,29 +2,24 @@
 
 Jogo::Jogo()
 {
-    gerenciadorGrafico.inicializarJanela();
     menu = new Menu();
     ranking = new Ranking();
-    // Background menu
-    backgroundTextMenu.loadFromFile("/Users/suzanabrasil/jogo/textura/menu2.jpeg");
-    gerenciadorGrafico.desenhar(&backgroundMenu, &backgroundTextMenu);
-
 
     // Background JOGO
-    backgroundText.loadFromFile("/Users/suzanabrasil/jogo/textura/background.jpeg");
-    gerenciadorGrafico.desenhar(&background, &backgroundText);
+    // backgroundText.loadFromFile("/Users/suzanabrasil/jogo/textura/background.jpeg");
+    // gerenciadorGrafico.desenhar(&background, &backgroundText);
 
     // Background ranking
-    backgroundTextRanking.loadFromFile("/Users/suzanabrasil/jogo/textura/ranking.jpg");
-    gerenciadorGrafico.desenhar(&backgroundRanking, &backgroundTextRanking);
-
-
+    // backgroundTextRanking.loadFromFile("/Users/suzanabrasil/jogo/textura/ranking.jpg");
+    // gerenciadorGrafico.desenhar(&backgroundRanking, &backgroundTextRanking);
     inicializarJogador();
 }
 
 Jogo::~Jogo()
 {
     delete jogador;
+    delete menu;
+    delete ranking;
 }
 
 void Jogo::inicializarJogador()
@@ -64,11 +59,11 @@ void Jogo::atualizarRenderJogador()
 
 void Jogo::atualizarColisao()
 {
-    if (jogador->getGlobalBounds().top + jogador->getGlobalBounds().height > gerenciadorGrafico.getJanela().getSize().y)
+    if (jogador->getGlobalBounds().top + jogador->getGlobalBounds().height > gerenciadorGrafico.getJanela()->getSize().y)
     {
         jogador->resetVelocidadeY();
         jogador->setPosition(jogador->getGlobalBounds().left,
-                             gerenciadorGrafico.getJanela().getSize().y - jogador->getGlobalBounds().height);
+                             gerenciadorGrafico.getJanela()->getSize().y - jogador->getGlobalBounds().height);
     }
 }
 
@@ -81,13 +76,13 @@ void Jogo::render()
 
 void Jogo::executar()
 {
-    while (gerenciadorGrafico.getJanela().isOpen())
+    while (gerenciadorGrafico.getJanela()->isOpen())
     {
         Event e;
-        while (gerenciadorGrafico.getJanela().pollEvent(e))
+        while (gerenciadorGrafico.getJanela()->pollEvent(e))
         {
             if (e.type == Event::Closed)
-                gerenciadorGrafico.getJanela().close();
+                gerenciadorGrafico.getJanela()->close();
             if (e.type == Event::KeyReleased)
             {
                 if (e.key.code == Keyboard::Up)
@@ -203,14 +198,16 @@ void Jogo::executar()
                         }
                     }
                     if(x == 4)
-                        gerenciadorGrafico.getJanela().close();
+                        gerenciadorGrafico.getJanela()->close();
                     break;
                 }
             }
         }
-        gerenciadorGrafico.getJanela().clear();
-        gerenciadorGrafico.getJanela().draw(backgroundMenu);
-        menu->desenhar(gerenciadorGrafico.getJanela());
-        gerenciadorGrafico.getJanela().display();
+        gerenciadorGrafico.getJanela()->clear();
+        // gerenciadorGrafico.getJanela()->draw(backgroundMenu);
+        // menu->desenhar(gerenciadorGrafico.getJanela());
+        menu->executar();
+        // menu->desenharMenu(gerenciadorGrafico.getJanela());
+        gerenciadorGrafico.mostrar();
     }
 }

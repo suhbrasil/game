@@ -4,7 +4,7 @@
 
 #include "Menu.h"
 
-Menu::Menu(float largura, float altura) {
+Menu::Menu() : Ente("/Users/suzanabrasil/jogo/textura/menu2.jpeg") {
     if(!fonte.loadFromFile("/Users/suzanabrasil/jogo/textura/Pacifico.ttf"))
         cout << "Não tem nenhuma fonte" << endl;
 
@@ -50,9 +50,9 @@ Menu::~Menu() {
 
 }
 
-void Menu::desenhar(RenderWindow& janela) {
+void Menu::desenharMenu() {
     for(int i = 0; i < max_texto; i++) {
-        janela.draw(texto[i]);
+        janela->draw(texto[i]);
     }
 }
 
@@ -83,4 +83,9 @@ void Menu::MoverBaixo() {
 
 int Menu::pressionado() {
     return selecionado;
+}
+
+void Menu::executar() {
+    desenharEnte();
+    desenharMenu();
 }

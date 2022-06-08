@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <stack>
+#include <string.h>
 using namespace sf;
 using namespace std;
 
@@ -10,16 +10,12 @@ namespace gerenciadores {
     class GerenciadorGrafico
     {
     private:
-        RenderWindow janela;
+        RenderWindow* janela;
     public:
         GerenciadorGrafico();
         ~GerenciadorGrafico();
-
-        // Fundo tela jogo
-        void inicializarJanela();
-        RenderWindow& getJanela();
-
-        // Inicializar Ente
-        void desenhar(RectangleShape* background, Texture* text);
+        void mostrar() const;
+        void desenhar(const string caminhoText);
+        RenderWindow* getJanela() const;
     };
 }
