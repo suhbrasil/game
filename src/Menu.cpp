@@ -1,7 +1,11 @@
+/*
+    Ifstream baseado no vídeo: https://www.youtube.com/watch?v=lzxWNtjii8U
+*/
+
 #include "Menu.h"
 
 Menu::Menu(float largura, float altura) {
-    if(!fonte.loadFromFile("/Users/suzanabrasil/jogo/textura/Pacifico.ttf"))
+    if(!fonte.loadFromFile("texture/Pacifico.ttf"))
         cout << "Não tem nenhuma fonte" << endl;
 
     // Cadastrar jogador
@@ -75,6 +79,7 @@ void Menu::MoverBaixo() {
         texto[selecionado].setFillColor(Color::White);
     }
 }
+
 
 int Menu::pressionado() {
     return selecionado;

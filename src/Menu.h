@@ -1,3 +1,7 @@
+/*
+    Vídeo base para o menu: https://www.youtube.com/watch?v=bOG8667yePY&t=602s
+*/
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -13,11 +17,11 @@ class Menu
 {
 private:
     int selecionado;
+    // Texto menu
     Font fonte;
     Text texto[max_texto];
 public:
-    Menu(float largura, float altura);
-    Menu() {}
+    Menu(float largura = 0.0f, float altura = 0.0f);
     ~Menu();
 
     void desenhar(RenderWindow& janela);
