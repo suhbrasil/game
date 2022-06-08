@@ -28,9 +28,6 @@ private:
     RectangleShape backgroundRanking;
     Texture backgroundTextRanking;
 
-    // Fases
-    RenderWindow FASE1;
-
     // Jogador
     Jogador* jogador;
 public:

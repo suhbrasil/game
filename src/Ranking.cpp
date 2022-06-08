@@ -32,6 +32,17 @@ Ranking::Ranking(float largura, float altura) {
 }
 Ranking::~Ranking() {}
 
+void Ranking::salvarNome() {
+    // app = append (adiciona ao final do arquivo)
+    ofstream ofs("arquivo.txt", fstream::app);
+    cout << "Digite o nome da pessoa: ";
+    cin >> nome;
+    cout << endl;
+
+    ofs << nome << "\n";
+    ofs.close();
+}
+
 void Ranking::desenhar(RenderWindow& janela) {
     for(int i = 0; i < maxRanking; i++) {
         janela.draw(textoRanking[i]);
