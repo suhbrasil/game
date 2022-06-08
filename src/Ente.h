@@ -2,17 +2,14 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "GerenciadorGrafico.h"
+#include "GerenciadorColisoes.h"
 using namespace gerenciadores;
 
 class Ente
 {
-protected:
-    GerenciadorGrafico* grafico;
-    const char* caminho;
+private:
 public:
-    Ente(const char* caminhoText = nullptr);
-    ~Ente();
-    void desenharEnte();
+    Ente() {}
+    ~Ente() {}
     virtual void executar() = 0;
 };

@@ -11,25 +11,22 @@
 using namespace std;
 using namespace sf;
 
-#include "Ente.h"
-
 #define max_texto 5
 
-class Menu : public Ente
+class Menu
 {
 private:
-    RenderWindow* janela;
     int selecionado;
     // Texto menu
     Font fonte;
     Text texto[max_texto];
 public:
-    Menu();
+    Menu(float largura = 0.0f, float altura = 0.0f);
     ~Menu();
 
-    void desenharMenu();
+    void desenhar(RenderWindow& janela);
     void MoverCima();
     void MoverBaixo();
     int pressionado();
-    void executar();
+    void executar() {}
 };

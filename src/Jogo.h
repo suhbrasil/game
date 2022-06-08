@@ -16,8 +16,8 @@ private:
 
     // Menu
     Menu* menu;
-    // RectangleShape backgroundMenu;
-    // Texture backgroundTextMenu;
+    RectangleShape backgroundMenu;
+    Texture backgroundTextMenu;
 
     // Jogo
     RectangleShape background;

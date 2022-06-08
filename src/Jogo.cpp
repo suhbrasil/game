@@ -2,24 +2,29 @@
 
 Jogo::Jogo()
 {
+    gerenciadorGrafico.inicializarJanela();
     menu = new Menu();
     ranking = new Ranking();
+    // Background menu
+    backgroundTextMenu.loadFromFile("/Users/suzanabrasil/jogo/textura/menu2.jpeg");
+    gerenciadorGrafico.desenhar(&backgroundMenu, &backgroundTextMenu);
+
 
     // Background JOGO
-    // backgroundText.loadFromFile("/Users/suzanabrasil/jogo/textura/background.jpeg");
-    // gerenciadorGrafico.desenhar(&background, &backgroundText);
+    backgroundText.loadFromFile("/Users/suzanabrasil/jogo/textura/background.jpeg");
+    gerenciadorGrafico.desenhar(&background, &backgroundText);
 
     // Background ranking
-    // backgroundTextRanking.loadFromFile("/Users/suzanabrasil/jogo/textura/ranking.jpg");
-    // gerenciadorGrafico.desenhar(&backgroundRanking, &backgroundTextRanking);
+    backgroundTextRanking.loadFromFile("/Users/suzanabrasil/jogo/textura/ranking.jpg");
+    gerenciadorGrafico.desenhar(&backgroundRanking, &backgroundTextRanking);
+
+
     inicializarJogador();
 }
 
 Jogo::~Jogo()
 {
     delete jogador;
-    delete menu;
-    delete ranking;
 }
 
 void Jogo::inicializarJogador()
@@ -34,12 +39,12 @@ void Jogo::atualizarJogador()
 
 void Jogo::atualizar()
 {
-    while (FASE1.pollEvent(event))
+    while (gerenciadorGrafico.getJanela().pollEvent(event))
     {
         if (event.type == Event::Closed)
-            FASE1.close();
+            gerenciadorGrafico.getJanela().close();
         else if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
-            FASE1.close();
+            gerenciadorGrafico.getJanela().close();
 
         if (event.type == Event::KeyReleased &&
             (event.key.code == Keyboard::Escape || event.key.code == Keyboard::Up ||
@@ -54,35 +59,34 @@ void Jogo::atualizar()
 
 void Jogo::atualizarRenderJogador()
 {
-    jogador->render(FASE1);
+    jogador->render(gerenciadorGrafico.getJanela());
 }
 
 void Jogo::atualizarColisao()
 {
-    if (jogador->getGlobalBounds().top + jogador->getGlobalBounds().height > gerenciadorGrafico.getJanela()->getSize().y)
+    if (jogador->getGlobalBounds().top + jogador->getGlobalBounds().height > gerenciadorGrafico.getJanela().getSize().y)
     {
         jogador->resetVelocidadeY();
         jogador->setPosition(jogador->getGlobalBounds().left,
-                             gerenciadorGrafico.getJanela()->getSize().y - jogador->getGlobalBounds().height);
+                             gerenciadorGrafico.getJanela().getSize().y - jogador->getGlobalBounds().height);
     }
 }
 
 void Jogo::render()
 {
     atualizarRenderJogador();
-    FASE1.setFramerateLimit(60);
-    FASE1.display();
+    gerenciadorGrafico.getJanela().setFramerateLimit(60);
 }
 
 void Jogo::executar()
 {
-    while (gerenciadorGrafico.getJanela()->isOpen())
+    while (gerenciadorGrafico.getJanela().isOpen())
     {
         Event e;
-        while (gerenciadorGrafico.getJanela()->pollEvent(e))
+        while (gerenciadorGrafico.getJanela().pollEvent(e))
         {
             if (e.type == Event::Closed)
-                gerenciadorGrafico.getJanela()->close();
+                gerenciadorGrafico.getJanela().close();
             if (e.type == Event::KeyReleased)
             {
                 if (e.key.code == Keyboard::Up)
@@ -97,64 +101,34 @@ void Jogo::executar()
                 }
                 if (e.key.code == Keyboard::Return)
                 {
-                    RenderWindow CADASTRAR(VideoMode(1280, 720), "Cadastrar");
-                    FASE1.create(VideoMode(1280, 720), "Fase 1");
                     RenderWindow FASE2(VideoMode(1280, 720), "Fase 2");
-                    RenderWindow RANKING(VideoMode(1280, 720), "Ranking");
+                    // RenderWindow RANKING(VideoMode(1280, 720), "Ranking");
 
                     int x = menu->pressionado();
+                    // Cadastro
                     if (x == 0)
                     {
-                        while (CADASTRAR.isOpen())
-                        {
-                            Event ca;
-                            while (CADASTRAR.pollEvent(ca))
-                            {
-                                if (ca.type == Event::Closed)
-                                    CADASTRAR.close();
-                                if (ca.type == Event::KeyPressed)
-                                {
-                                    if (ca.key.code == Keyboard::Escape)
-                                        CADASTRAR.close();
-                                }
-                            }
-                            CADASTRAR.clear();
-                            FASE1.close();
-                            FASE2.close();
-                            RANKING.close();
-                            string nome;
-                            // app = append (adiciona ao final do arquivo)
-                            ofstream ofs("arquivo.txt", fstream::app);
-                            cout << "Digite o nome da pessoa: ";
-                            cin >> nome;
-                            cout << endl;
+                        string nome;
+                        // app = append (adiciona ao final do arquivo)
+                        ofstream ofs("arquivo.txt", fstream::app);
+                        cout << "Digite o nome da pessoa: ";
+                        cin >> nome;
+                        cout << endl;
 
-                            ranking->setNome(nome);
+                        ranking->setNome(nome);
 
-                            ofs << *ranking;
-                            ofs.close();
-                            CADASTRAR.display();
-                        }
+                        ofs << *ranking;
+                        ofs.close();
                     }
+                    // Fase 1
                     if(x == 1) {
-                        while(FASE1.isOpen()) {
-                            Event f1e;
-                            while(FASE1.pollEvent(f1e)) {
-                                if(f1e.type == Event::Closed) {
-                                    FASE1.close();
-                                }
-                                if(f1e.type == Event::KeyPressed) {
-                                    if(f1e.key.code == Keyboard::Escape)
-                                        FASE1.close();
-                                }
-                            }
-                            CADASTRAR.close();
-                            FASE1.clear();
+                        while(gerenciadorGrafico.getJanela().isOpen()) {
+                            gerenciadorGrafico.getJanela().clear();
                             FASE2.close();
-                            RANKING.close();
                             atualizar();
-                            FASE1.draw(background);
+                            gerenciadorGrafico.getJanela().draw(background);
                             render();
+                            gerenciadorGrafico.getJanela().display();
                         }
                     }
                     if(x == 2) {
@@ -169,45 +143,39 @@ void Jogo::executar()
                                         FASE2.close();
                                 }
                             }
-                            CADASTRAR.close();
                             FASE1.close();
                             FASE2.clear();
-                            RANKING.close();
                             FASE2.display();
                         }
                     }
                     if(x == 3) {
-                        while(RANKING.isOpen()) {
-                            Event re;
-                            while(RANKING.pollEvent(re)) {
-                                if(re.type == Event::Closed) {
-                                    RANKING.close();
+                        while(gerenciadorGrafico.getJanela().isOpen()) {
+                            while(gerenciadorGrafico.getJanela().pollEvent(e)) {
+                                if(e.type == Event::Closed) {
+                                    gerenciadorGrafico.getJanela().close();
                                 }
-                                if(re.type == Event::KeyPressed) {
-                                    if(re.key.code == Keyboard::Escape)
-                                        RANKING.close();
+                                if(e.type == Event::KeyPressed) {
+                                    if(e.key.code == Keyboard::Escape)
+                                        gerenciadorGrafico.getJanela().close();
                                 }
                             }
-                            CADASTRAR.close();
-                            FASE1.close();
+                            // FASE1.close();
                             FASE2.close();
-                            RANKING.clear();
-                            RANKING.draw(backgroundRanking);
-                            ranking->desenhar(RANKING);
-                            RANKING.display();
+                            gerenciadorGrafico.getJanela().clear();
+                            gerenciadorGrafico.getJanela().draw(backgroundRanking);
+                            ranking->desenhar(gerenciadorGrafico.getJanela());
+                            gerenciadorGrafico.getJanela().display();
                         }
                     }
                     if(x == 4)
-                        gerenciadorGrafico.getJanela()->close();
+                        gerenciadorGrafico.getJanela().close();
                     break;
                 }
             }
         }
-        gerenciadorGrafico.getJanela()->clear();
-        // gerenciadorGrafico.getJanela()->draw(backgroundMenu);
-        // menu->desenhar(gerenciadorGrafico.getJanela());
-        menu->executar();
-        // menu->desenharMenu(gerenciadorGrafico.getJanela());
-        gerenciadorGrafico.mostrar();
+        gerenciadorGrafico.getJanela().clear();
+        gerenciadorGrafico.getJanela().draw(backgroundMenu);
+        menu->desenhar(gerenciadorGrafico.getJanela());
+        gerenciadorGrafico.getJanela().display();
     }
 }
