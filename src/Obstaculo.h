@@ -13,7 +13,6 @@ namespace obstaculos {
         bool dano;
         int quantidadeInstancias;
     public:
-        vector<Sprite> obstaculos;
         Obstaculo();
         ~Obstaculo();
         void inicializarVariaveis();

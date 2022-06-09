@@ -160,3 +160,7 @@ void Jogador::atualizarAnimacao()
     }
     desenhavel.setTextureRect(frameAtual);
 }
+
+Vector2f Jogador::getVelocidade() {
+    return velocidade;
+}

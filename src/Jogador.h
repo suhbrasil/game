@@ -48,5 +48,6 @@ namespace personagens {
         void atualizarFenomenosFisicos();
         //movimentar fisicamente (diz a direcao do movimento)
         void movimentar(const float direcaoX, const float direcaoY);
+        Vector2f getVelocidade();
     };
 }

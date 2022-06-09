@@ -1,7 +1,7 @@
 #include "Cogumelo.h"
 using namespace obstaculos;
 
-Cogumelo::Cogumelo() {
+Cogumelo::Cogumelo() : Obstaculo() {
     inicializarTextura();
     inicializarDesenhavel();
 }
@@ -18,9 +18,9 @@ void Cogumelo::inicializarTextura() {
 }
 
 void Cogumelo::inicializarDesenhavel() {
-    // desenhavel.setColor(Color::Red);
-    desenhavel.setTexture(textura);
-    desenhavel.setScale(2.0f, 2.0f);
-    setPosicao();
-    obstaculos.push_back(desenhavel);
+    // // desenhavel.setColor(Color::Red);
+    // desenhavel.setTexture(textura);
+    // desenhavel.setScale(2.0f, 2.0f);
+    // setPosicao();
+    // obstaculos.push_back(desenhavel);
 }

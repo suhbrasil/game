@@ -4,13 +4,12 @@ using namespace fases;
 FaseUm::FaseUm(Jogador* j) : Fase(j)
 {
     inicializarJogador(j);
-    inicializarObstaculo();
     inicializarFundoTela();
 }
 
 FaseUm::~FaseUm()
 {
-    delete obstaculo;
+
 }
 
 void FaseUm::inicializarJanela()
@@ -31,9 +30,6 @@ void FaseUm::inicializarFundoTela() {
     fundoTela.setTexture(fundoTelaTex);
 }
 
-void FaseUm::inicializarObstaculo() {
-    obstaculo = new Obstaculo();
-}
 
 void FaseUm::renderFundoTela() {
     janela.draw(fundoTela);
@@ -74,16 +70,11 @@ void FaseUm::atualizar()
 
 void FaseUm::atualizarRenderJogador() {
     jogador->render(janela);
-    obstaculo->render(janela);
+    gerenciadorColisao.getObstaculo()->render(janela);
 }
 
 void FaseUm::atualizarColisao() {
-
-    if(jogador->getGlobalBounds().top + jogador->getGlobalBounds().height > janela.getSize().y) {
-        jogador->resetVelocidadeY();
-        jogador->setPosition(jogador->getGlobalBounds().left,
-                janela.getSize().y - jogador->getGlobalBounds().height);
-    }
+    gerenciadorColisao.verificarColisoes(janela, jogador);
 }
 
 void FaseUm::render()

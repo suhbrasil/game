@@ -1,10 +1,13 @@
 #pragma once
-#include <iostream>
+
 #include "Inimigo.h"
+#include "Obstaculo.h"
+#include "Jogador.h"
+#include "ListaEntidades.h"
+
+#include <iostream>
 #include <vector>
 #include <list>
-#include "Obstaculo.h"
-#include "ListaEntidades.h"
 #include <math.h>
 
 using namespace personagens;
@@ -16,13 +19,18 @@ namespace gerenciadores {
     class GerenciadorColisoes {
     private:
         vector<Inimigo*> inimigos;
-        list<Obstaculo*> obstaculos;
+
+        // list<Obstaculo*> obstaculos;
+        Obstaculo* obstaculo;
+
+        FloatRect proxPosicao;
     public:
         GerenciadorColisoes();
         ~GerenciadorColisoes();
-        // void inicializarObjetos(ListaEntidades* listaEntidades);
+        void adicionarObstaculo(Obstaculo* obstaculo);
+        Obstaculo* getObstaculo();
         bool estaoColidindo(Entidade* p1, Entidade* p2);
-        void verificarColisoes();
+        void verificarColisoes(RenderWindow& janela, Jogador* j);
 
     };
 

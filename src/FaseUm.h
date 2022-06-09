@@ -4,6 +4,8 @@
 #include "Jogador.h"
 #include "Obstaculo.h"
 #include "Fase.h"
+#include "GerenciadorColisoes.h"
+using namespace gerenciadores;
 using namespace obstaculos;
 using namespace entidades;
 using namespace personagens;
@@ -17,6 +19,9 @@ namespace fases
     private:
         Event event;
 
+        // colisao
+        GerenciadorColisoes gerenciadorColisao;
+
         // Tela
         RenderWindow janela;
         Sprite fundoTela;
@@ -26,7 +31,7 @@ namespace fases
         Jogador* jogador;
 
         // Obstaculo
-        Obstaculo* obstaculo;
+        // Obstaculo* obstaculo;
     public:
         FaseUm(Jogador *j);
         ~FaseUm();
@@ -36,9 +41,6 @@ namespace fases
         const RenderWindow& getJanela() const;
         void inicializarFundoTela();
         void renderFundoTela();
-
-        // Obstaculos
-        void inicializarObstaculo();
 
         // Jogador
         void inicializarJogador(Jogador* j);
