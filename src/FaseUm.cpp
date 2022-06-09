@@ -48,22 +48,18 @@ void FaseUm::atualizarJogador()
 
 void FaseUm::atualizar()
 {
-
     while (janela.pollEvent(event))
     {
         if (event.type == Event::Closed)
             janela.close();
         else if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
             janela.close();
-
         if(event.type ==  Event::KeyReleased &&
             (event.key.code == Keyboard::Escape || event.key.code == Keyboard::Up ||
                  event.key.code == Keyboard::Down || event.key.code == Keyboard::Left
                     || event.key.code == Keyboard::Right))
-
             jogador->resetTimerAnimacao();
     }
-
     atualizarJogador();
     atualizarColisao();
 }

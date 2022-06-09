@@ -54,6 +54,18 @@ void Jogador::atualizarMovimentacao()
         movimentando = true;
     }
 
+    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && podePular) {
+        movimentar(0.5f, -sqrtf(2.f * gravidade * alturaPulo));
+        movimentando = true;
+        estadoDeAnimacao = PULO;
+    }
+
+    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && podePular) {
+        movimentar(-0.5f, -sqrtf(2.f * gravidade * alturaPulo));
+        movimentando = true;
+        estadoDeAnimacao = PULO;
+    }
+
     else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
     {
         movimentar(0.5f, 0.f);
@@ -69,9 +81,6 @@ void Jogador::atualizarMovimentacao()
 
     if(abs(desenhavel.getPosition().y - posicaoInicialY) < alturaPulo) podePular = true;
     else podePular = false;
-
-
-
 
     countFrame++;
 
@@ -90,7 +99,7 @@ void Jogador::inicializarFenomenosFisicos() {
     gravidade = 2.f;
     velocidadeMaximaY  = 5.f;
     velocidadeMinimaY = 1.f;
-    alturaPulo = 100.f;
+    alturaPulo = 150.f;
 }
 
 void Jogador::movimentar(const float direcaoX, const float direcaoY) {
@@ -105,7 +114,6 @@ void Jogador::movimentar(const float direcaoX, const float direcaoY) {
 }
 
 void Jogador::atualizarFenomenosFisicos() {
-
     velocidade.y += 1.f * gravidade;
 
    if(abs(velocidade.y) > velocidadeMaximaY) {
@@ -113,23 +121,25 @@ void Jogador::atualizarFenomenosFisicos() {
         else if(velocidade.y > 0) velocidade.y  = velocidadeMaximaY;
     }
 
-    velocidade.x  *= atrito;
+    velocidade.x *= atrito;
     if(abs(velocidade.x) < velocidadeMinima) {
         velocidade.x = 0.0f;
     }
 
-    if(abs(velocidade.y) <velocidadeMinima){
+    if(abs(velocidade.y) < velocidadeMinima){
         velocidade.y = 0.0f;
     }
 
     desenhavel.move(velocidade);
-
-
 }
 
 void Jogador::resetVelocidadeY() {
-
     velocidade.y = 0.f;
+}
+
+void Jogador::resetVelocidadeX() {
+
+    velocidade.x = 0.f;
 
 }
 
@@ -147,7 +157,7 @@ void Jogador::atualizarAnimacao()
         else if(movimentando && countFrame > 20){
             if(estadoDeAnimacao == ESTADOINICIAL) {
 
-                 frameAtual = IntRect(0, 0, 45, 34);
+                 frameAtual = IntRect(0, 0, 40, 34);
             }
             else if(estadoDeAnimacao == SEGUNDOESTADO) {
                frameAtual = IntRect(46, 0, 47, 34);

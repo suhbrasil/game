@@ -42,6 +42,7 @@ namespace personagens {
         void inicializarFenomenosFisicos();
 
         void resetVelocidadeY();
+        void resetVelocidadeX();
         void atualizarAnimacao();
          //movimentar do teclado
         void atualizarMovimentacao();
@@ -49,5 +50,6 @@ namespace personagens {
         //movimentar fisicamente (diz a direcao do movimento)
         void movimentar(const float direcaoX, const float direcaoY);
         Vector2f getVelocidade();
+        void setVelocidade(float x, float y);
     };
 }
