@@ -8,7 +8,7 @@ namespace personagens {
     private:
         /* data */
     public:
-        Rainha(/* args */);
+        Rainha();
         ~Rainha();
     };
 }

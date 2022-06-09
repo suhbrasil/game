@@ -1,15 +1,16 @@
 #include "FaseUm.h"
 using namespace fases;
 
-FaseUm::FaseUm(Jogador* j)
+FaseUm::FaseUm(Jogador* j) : Fase(j)
 {
     inicializarJogador(j);
+    inicializarObstaculo();
     inicializarFundoTela();
 }
 
 FaseUm::~FaseUm()
 {
-
+    delete obstaculo;
 }
 
 void FaseUm::inicializarJanela()
@@ -30,14 +31,19 @@ void FaseUm::inicializarFundoTela() {
     fundoTela.setTexture(fundoTelaTex);
 }
 
+void FaseUm::inicializarObstaculo() {
+    obstaculo = new Obstaculo();
+}
+
 void FaseUm::renderFundoTela() {
     janela.draw(fundoTela);
 }
 
 void FaseUm::inicializarJogador(Jogador* j)
 {
-    jogador = new Jogador();
+    jogador = j;
 }
+
 
 void FaseUm::atualizarJogador()
 {
@@ -68,6 +74,7 @@ void FaseUm::atualizar()
 
 void FaseUm::atualizarRenderJogador() {
     jogador->render(janela);
+    obstaculo->render(janela);
 }
 
 void FaseUm::atualizarColisao() {
@@ -83,11 +90,8 @@ void FaseUm::render()
 {
     // Desenhar fundo de tela
     renderFundoTela();
-
-    // janela.clear(Color::Black);
     atualizarRenderJogador();
     janela.display();
-    // menu.executar();
 }
 
 void FaseUm::executar()

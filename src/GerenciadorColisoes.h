@@ -14,16 +14,14 @@ using namespace std;
 
 namespace gerenciadores {
     class GerenciadorColisoes {
-
     private:
         vector<Inimigo*> inimigos;
         list<Obstaculo*> obstaculos;
     public:
-
         GerenciadorColisoes();
         ~GerenciadorColisoes();
         // void inicializarObjetos(ListaEntidades* listaEntidades);
-        bool estaoColidindo(Entidade* p1, Entidade*p2);
+        bool estaoColidindo(Entidade* p1, Entidade* p2);
         void verificarColisoes();
 
     };

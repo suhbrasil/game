@@ -8,11 +8,6 @@ Jogo::Jogo() {
     backgroundTextMenu.loadFromFile("texture/menu2.jpeg");
     gerenciadorGrafico.desenhar(&backgroundMenu, &backgroundTextMenu);
 
-
-    // Background JOGO
-    backgroundText.loadFromFile("texture/background.jpeg");
-    gerenciadorGrafico.desenhar(&background, &backgroundText);
-
     // Background ranking
     backgroundTextRanking.loadFromFile("texture/ranking.jpg");
     gerenciadorGrafico.desenhar(&backgroundRanking, &backgroundTextRanking);
@@ -66,6 +61,7 @@ void Jogo::executar() {
                     // Fase 1
                     if(x == 1) {
                         faseUm->executar();
+
                     }
 
                     // Fase 2

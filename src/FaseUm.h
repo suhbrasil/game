@@ -1,12 +1,17 @@
 #pragma once
-#include "Jogador.h"
+
 #include <SFML/Graphics.hpp>
+#include "Jogador.h"
+#include "Obstaculo.h"
+#include "Fase.h"
+using namespace obstaculos;
+using namespace entidades;
 using namespace personagens;
 using namespace sf;
 
 namespace fases
 {
-    class FaseUm
+    class FaseUm : public Fase
     {
 
     private:
@@ -18,7 +23,10 @@ namespace fases
         Texture fundoTelaTex;
 
         // Jogador
-        Jogador *jogador;
+        Jogador* jogador;
+
+        // Obstaculo
+        Obstaculo* obstaculo;
     public:
         FaseUm(Jogador *j);
         ~FaseUm();
@@ -28,6 +36,9 @@ namespace fases
         const RenderWindow& getJanela() const;
         void inicializarFundoTela();
         void renderFundoTela();
+
+        // Obstaculos
+        void inicializarObstaculo();
 
         // Jogador
         void inicializarJogador(Jogador* j);

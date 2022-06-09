@@ -6,9 +6,12 @@ using namespace sf;
 
 namespace obstaculos {
     class Cogumelo : public Obstaculo {
-
-    protected:
-
+    private:
+    
     public:
+        Cogumelo();
+        ~Cogumelo();
+        void inicializarTextura();
+        void inicializarDesenhavel();
     };
 }

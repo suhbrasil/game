@@ -4,30 +4,30 @@
 #include <SFML/Graphics.hpp>
 
 #include "Jogador.h"
+#include "Ente.h"
+#include "Fase.h"
+#include "ListaEntidades.h"
+#include "Obstaculo.h"
 
 using namespace sf;
 using namespace std;
 using namespace personagens;
+using namespace obstaculos;
 
 namespace fases{
-
-    class Fase {
-
-    private:
-        Event event;
-
-        // Tela
-        RenderWindow* janela;
-        Sprite fundoTela;
-        Texture fundoTelaTex;
-
-        // Jogador
+    class Fase : public Ente {
+    protected:
+        // ListaEntidades obstaculos;
+        // // ListaEntidades inimigos;
+        // RenderWindow janela;
+        // Event event;
+        // Obstaculo* obstaculo;
         Jogador* jogador;
     public:
         Fase(Jogador* j);
         ~Fase();
 
-     
+
 
     // Tela
     void inicializarJanela();
@@ -42,6 +42,7 @@ namespace fases{
     void atualizarRenderJogador();
     void atualizarColisao();
     void render();
+    int gerarAleatoriamente();
 
     void executar();
     };
