@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <math.h>
+#include <fstream> // ofstream e ifstream
+#include <string.h>
 #include "Personagem.h"
 
 #define ESTADOINICIAL 0
@@ -29,6 +31,8 @@ namespace personagens {
         float posicaoInicialY;
         float posicaoInicialX;
 
+        bool pausado;
+
         bool podePular;
         float alturaPulo;
     public:
@@ -36,9 +40,7 @@ namespace personagens {
         virtual ~Jogador();
 
         void atualizar();
-
         void inicializarVariaveis();
-
         void inicializarFenomenosFisicos();
 
         void resetVelocidadeY();

@@ -3,7 +3,7 @@
 using namespace personagens;
 using namespace sf;
 
-Jogador::Jogador() : Personagem()
+Jogador::Jogador() : Personagem(), pausado(false)
 {
     inicializarVariaveis();
     inicializarTextura();
@@ -39,8 +39,21 @@ void Jogador::inicializarVariaveis()
     movimentando = false;
     estadoDeAnimacao = ESTADOINICIAL;
     podePular = true;
-    posicaoInicialX = 0.f;
-    posicaoInicialY = 632.f;
+    fstream pos ("jogada.txt");
+    if(pos.is_open()) {
+        string linhaPosX;
+        pos >> linhaPosX;
+        posicaoInicialX = std::stof(linhaPosX);
+        string linhaPosY;
+        pos >> linhaPosY;
+        posicaoInicialY = std::stof(linhaPosX);
+        pos.close();
+        remove("jogada.txt");
+    }
+    else {
+        posicaoInicialX = 0.f;
+        posicaoInicialY = 632.f;
+    }
 }
 
 

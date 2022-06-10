@@ -49,11 +49,14 @@ void FaseUm::inicializarBotaoPausar() {
     texto.setString("Pausar");
     texto.setCharacterSize(30);
     texto.setPosition(10, 10);
+
+    posMouse = {0,0};
+    coordMouse = {0.0f,0.0f};
 }
 
 void FaseUm::salvarJogada() {
     ofstream arq("jogada.txt", fstream::app);
-    arq << "Jogada: " << "\n" << jogador->getPosition().x << "\n" << jogador->getPosition().y << "\n";
+    arq << jogador->getPosition().x << "\n" << jogador->getPosition().y << "\n";
     arq.close();
 }
 
@@ -74,8 +77,6 @@ void FaseUm::inicializarJogador(Jogador* j)
 {
     jogador = new Jogador();
     jogador = j;
-    posMouse = {0,0};
-    coordMouse = {0.0f,0.0f};
 }
 
 
