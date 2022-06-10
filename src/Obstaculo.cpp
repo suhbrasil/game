@@ -4,9 +4,8 @@ using namespace entidades;
 
 Obstaculo::Obstaculo() : Entidade() {
     inicializarVariaveis();
-    inicializarTextura();
-    inicializarDesenhavel();
-    setPosicao();
+    //inicializarTextura();
+    //inicializarDesenhavel();
 }
 
 Obstaculo::~Obstaculo() {
@@ -19,33 +18,30 @@ void Obstaculo::inicializarDesenhavel() {
 
 void Obstaculo::inicializarVariaveis() {
     dano = false;
-    quantidadeInstancias = 0;
+    posicaoX = 10;
 }
 
 void Obstaculo::inicializarTextura()
-{   printf("text");
-    if (!textura.loadFromFile("texture/cogumelo.png"))
-    {
-        printf("imagem não encontrada");
-    }
+{
+
 }
 
-int Obstaculo::gerarAleatoriamente() {
-    srand((unsigned)time(NULL)); //para gerar números aleatórios reais.
-    int maior = 5;
-    int menor = 3;
+int Obstaculo::gerarAleatoriamente(int maior, int menor) {
+    srand((unsigned)time(0)); //para gerar números aleatórios reais.
     int aleatorio = rand()%(maior-menor+1) + menor;
 
     return aleatorio;
 }
 
-void Obstaculo::setPosicao() {
-    srand((unsigned)time(NULL)); //para gerar números aleatórios reais.
-    int maior = 1000;
-    int menor = 100;
-    int aleatorio = rand()%(maior-menor+1) + menor;
+void Obstaculo::setPosicao(int i) {
+    float posicao = operator+(i);
+    desenhavel.setPosition(posicao, 500.f);
+    this->posicaoX = posicao;
 
-    this->y = 632.0f;
-    this->x = static_cast<float>(aleatorio);
-    desenhavel.setPosition(this->x, this->y);
+}
+
+float Obstaculo::operator+(float i){
+    float intervalo = 250.f;
+    intervalo*= i;
+    return this->posicaoX + intervalo;
 }

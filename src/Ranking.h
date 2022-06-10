@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include <fstream> // ofstream e ifstream
 #include <iostream>

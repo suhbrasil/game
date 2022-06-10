@@ -19,9 +19,7 @@ namespace gerenciadores {
     class GerenciadorColisoes {
     private:
         vector<Inimigo*> inimigos;
-
-        // list<Obstaculo*> obstaculos;
-        Obstaculo* obstaculo;
+        list<Obstaculo*> obstaculos;
 
         FloatRect proxPosicao;
     public:

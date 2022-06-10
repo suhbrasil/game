@@ -1,36 +1,29 @@
 #include "ListaEntidades.h"
-// using namespace lista;
+using namespace lista;
 
-// ListaEntidades::ListaEntidades() {
 
-// }
+ListaEntidades::ListaEntidades()
+{
 
-// ListaEntidades::~ListaEntidades(){
-//     destruirEntidade();
-// }
-// void ListaEntidades::inserir(Entidade* info) {
-//     entidade.inserir(info);
-// }
+}
 
-// Entidade* ListaEntidades::inicio() {
-//     return entidade.voltarInicio();
-// }
+ListaEntidades::~ListaEntidades() {
+        destruirEntidades();
+}
 
-// Entidade* ListaEntidades::proximo() {
-//     return entidade.irProximo();
-// }
+void ListaEntidades::inserir(Entidade* info){
+        lista.inserir(info);
+}
 
-// void ListaEntidades::inicializarEntidade() {
 
-// }
 
-// void ListaEntidades::atualizarEntidade() {
+void ListaEntidades::destruirEntidades(){
+    Entidade* p = lista.voltarInicio();
+    while (p)
+    {
+        delete p;
+        p = lista.irProximo();
+    }
 
-// }
-
-// void ListaEntidades::desenharEntidade() {
-
-// }
-
-// void destruirEntidade() {
-// }
+    lista.retirar();
+}

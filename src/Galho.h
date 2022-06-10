@@ -6,10 +6,15 @@
 using namespace sf;
 
 namespace obstaculos {
-    class Flor : public Obstaculo {
+    class Galho : public Obstaculo {
 
     protected:
 
     public:
+
+     Galho();
+    ~Galho();
+    void inicializarTextura();
+    void inicializarDesenhavel();
     };
 }

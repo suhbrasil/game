@@ -99,7 +99,7 @@ void Jogador::inicializarFenomenosFisicos() {
     gravidade = 2.f;
     velocidadeMaximaY  = 5.f;
     velocidadeMinimaY = 1.f;
-    alturaPulo = 150.f;
+    alturaPulo = 300.f;
 }
 
 void Jogador::movimentar(const float direcaoX, const float direcaoY) {
@@ -108,8 +108,10 @@ void Jogador::movimentar(const float direcaoX, const float direcaoY) {
     velocidade.y += direcaoY * aceleracao;
 
     if(abs(velocidade.x) > velocidadeMaxima) {
-        if(velocidade.x < 0) velocidade.x = velocidadeMaxima * -1.f;
-        else if(velocidade.x > 0) velocidade.x  = velocidadeMaxima;
+        if(velocidade.x < 0)
+            velocidade.x = velocidadeMaxima * -1.f;
+        else if(velocidade.x > 0)
+            velocidade.x  = velocidadeMaxima;
     }
 }
 
@@ -117,8 +119,10 @@ void Jogador::atualizarFenomenosFisicos() {
     velocidade.y += 1.f * gravidade;
 
    if(abs(velocidade.y) > velocidadeMaximaY) {
-        if(velocidade.y < 0) velocidade.y = velocidadeMaximaY * -1.f;
-        else if(velocidade.y > 0) velocidade.y  = velocidadeMaximaY;
+        if(velocidade.y < 0)
+            velocidade.y = velocidadeMaximaY * -1.f;
+        else if(velocidade.y > 0)
+            velocidade.y  = velocidadeMaximaY;
     }
 
     velocidade.x *= atrito;
@@ -138,9 +142,7 @@ void Jogador::resetVelocidadeY() {
 }
 
 void Jogador::resetVelocidadeX() {
-
     velocidade.x = 0.f;
-
 }
 
 void Jogador::atualizarAnimacao()
@@ -156,14 +158,13 @@ void Jogador::atualizarAnimacao()
         }
         else if(movimentando && countFrame > 20){
             if(estadoDeAnimacao == ESTADOINICIAL) {
-
                  frameAtual = IntRect(0, 0, 40, 34);
             }
             else if(estadoDeAnimacao == SEGUNDOESTADO) {
                frameAtual = IntRect(46, 0, 47, 34);
             }
             else if(estadoDeAnimacao == PULO){
-                frameAtual = IntRect(96,0,45,34);
+                frameAtual = IntRect(96,0,49,34);
             }
             countFrame = 0;
         }

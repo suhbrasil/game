@@ -84,3 +84,9 @@ void Menu::MoverBaixo() {
 int Menu::pressionado() {
     return selecionado;
 }
+
+void salvarJogada(Vector2f posicao) {
+    ofstream arq("jogada.txt", fstream::app);
+    arq << "Jogada: " << "\n" << posicao.x << "\n" << posicao.y << "\n";
+    arq.close();
+}

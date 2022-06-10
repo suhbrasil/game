@@ -22,7 +22,7 @@ namespace entidades {
         Sprite desenhavel;
         Texture textura;
         Entidade();
-        ~Entidade();
+        virtual ~Entidade();
         //virtual void executar();
         void inicializarDesenhavel();
         void inicializarAnimacao();

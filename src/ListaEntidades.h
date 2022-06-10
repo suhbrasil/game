@@ -1,27 +1,30 @@
-#pragma once
+#ifndef _LISTAENTIDADES_H_
+#define _LISTAENTIDADES_H_
 
 #include "Entidade.h"
 #include "Lista.h"
+using namespace lista;
 using namespace entidades;
 
-// namespace lista {
+namespace lista {
 
-//     class ListaEntidades
-//     {
-//     private:
-//         Lista<Entidade*> entidade;
-//     public:
-//         ListaEntidades();
-//         ~ListaEntidades();
+    class ListaEntidades
+    {
+    private:
 
-//         void inserir(Entidade* info);
+    public:
+    Lista<Entidade*> lista;
+        ListaEntidades();
+        ~ListaEntidades();
 
-//         Entidade* inicio(); // vai para o início da lista e retorna o primeiro elemento
-//         Entidade* proximo(); // vai para o próximo da lista e retorno o elemento;
+        void inserir(Entidade* info);
 
-//         void inicializarEntidade();
-//         void atualizarEntidade();
-//         void desenharEntidade();
-//         void destruirEntidade();
-//     };
-// }
+        Entidade* voltarInicio(); // retorna para o início e retorna o primeiro elemento da lista
+        Entidade* irProximo(); // vai para o próximo elemento da lista e retorna o próximo
+
+        void atualizarEntidades(float t);
+        void destruirEntidades();
+    };
+}
+
+#endif

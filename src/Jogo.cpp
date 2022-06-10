@@ -61,7 +61,6 @@ void Jogo::executar() {
                     // Fase 1
                     if(x == 1) {
                         faseUm->executar();
-
                     }
 
                     // Fase 2
