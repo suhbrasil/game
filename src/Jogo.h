@@ -1,7 +1,9 @@
 #pragma once
 
+#include <stack>
 #include "GerenciadorGrafico.h"
 #include "Jogador.h"
+#include "Ente.h"
 #include "Menu.h"
 #include "Ranking.h"
 #include "Fase.h"
@@ -26,6 +28,8 @@ private:
     // Ranking
     RectangleShape backgroundRanking;
     Texture backgroundTextRanking;
+
+    stack<Ente*> pilha;
 
     Menu* menu;
     FaseUm* faseUm;

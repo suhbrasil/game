@@ -2,14 +2,15 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "GerenciadorColisoes.h"
-using namespace gerenciadores;
 
 class Ente
 {
-private:
+protected:
+    int id;
 public:
-    Ente() {}
-    ~Ente() {}
+    Ente();
+    ~Ente();
+    int getId();
+    void imprimir();
     virtual void executar() = 0;
 };

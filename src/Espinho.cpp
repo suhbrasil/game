@@ -2,10 +2,10 @@
 using namespace obstaculos;
 
 Espinho::Espinho(): Obstaculo() {
+    id = 4;
 
     inicializarTextura();
     inicializarDesenhavel();
-
 }
 
 Espinho::~Espinho() {
@@ -18,7 +18,7 @@ void Espinho::inicializarVariaveis() {
 
 void Espinho::inicializarDesenhavel() {
      desenhavel.setTexture(textura);
-     desenhavel.setScale(0.15f,0.15f);
+     desenhavel.setScale(0.2f,0.2f);
 }
 
 void Espinho::inicializarTextura()
@@ -32,7 +32,7 @@ void Espinho::inicializarTextura()
 void Espinho::setPosicao(int i) {
 
     float posicao = operator+(i);
-    desenhavel.setPosition(posicao, 645.f);
+    desenhavel.setPosition(posicao, 630.f);
     this->posicaoX = posicao;
 
 

@@ -8,12 +8,13 @@
 #include <iostream>
 #include <fstream> // ofstream e ifstream
 #include <string.h>
+#include "Ente.h"
 using namespace std;
 using namespace sf;
 
 #define max_texto 5
 
-class Menu
+class Menu : public Ente
 {
 private:
     int selecionado;

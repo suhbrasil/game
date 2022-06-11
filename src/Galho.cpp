@@ -2,9 +2,10 @@
 using namespace obstaculos;
 
 Galho::Galho(): Obstaculo() {
+    id = 8;
+
     inicializarTextura();
     inicializarDesenhavel();
-
 }
 
 Galho::~Galho() {
@@ -21,16 +22,13 @@ void Galho::inicializarTextura()
 
 void Galho::inicializarDesenhavel() {
      desenhavel.setTexture(textura);
-     desenhavel.setScale(0.2f,0.2f);
+     desenhavel.setScale(0.6f,0.4f);
 }
 
 void Galho::setPosicao(int i) {
-
     float posicao = operator+(i);
-    desenhavel.setPosition(posicao, 550.f);
+    desenhavel.setPosition(posicao, 450.f);
     this->posicaoX = posicao;
-
-
 }
 
 float Galho::operator+(float i){

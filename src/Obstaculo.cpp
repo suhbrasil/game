@@ -3,9 +3,8 @@ using namespace obstaculos;
 using namespace entidades;
 
 Obstaculo::Obstaculo() : Entidade() {
+    id = 13;
     inicializarVariaveis();
-    //inicializarTextura();
-    //inicializarDesenhavel();
 }
 
 Obstaculo::~Obstaculo() {

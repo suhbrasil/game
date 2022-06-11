@@ -2,7 +2,7 @@
 using namespace personagens;
 
 Inimigo::Inimigo(Vector2f pos, Vector2f v) : Personagem(pos, v) {
-
+    id = 10;
 }
 
 Inimigo::~Inimigo() {}

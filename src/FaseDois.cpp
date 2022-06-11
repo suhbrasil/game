@@ -4,6 +4,8 @@ using namespace fases;
 
 FaseDois::FaseDois(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
 {
+    id = 6;
+
     inicializarFundoTela();
     inicializarJogador(j);
     qtdeGalhos = gerarAleatoriamente(3,7);

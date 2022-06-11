@@ -4,11 +4,12 @@ using namespace fases;
 
 FaseUm::FaseUm(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
 {
+    id = 7;
+
     inicializarFundoTela();
-    inicializarBotaoPausar();
     inicializarJogador(j);
-    qtdeGalhos = 1;
-    qtdeEspinhos = 1;
+    qtdeGalhos = 3;
+    qtdeEspinhos = 2;
     gerarObstaculos();
 }
 
@@ -27,10 +28,10 @@ void FaseUm::gerarEspinhos(){
 }
 
 void FaseUm::gerarGalhos(){
-   for (int i = 0 ; i < qtdeGalhos; i++) {
+   for (int i = 0;  i < qtdeGalhos; i++) {
         Galho* temp = new Galho();
         galhos.lista.inserir(dynamic_cast<Entidade*> (temp));
-        temp->setPosicao(i);
+        temp->setPosicao(i+2);
         gerenciadorColisao.adicionarObstaculo(temp);
     }
 }

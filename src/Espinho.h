@@ -18,6 +18,6 @@ namespace obstaculos {
         void inicializarDesenhavel();
         void setPosicao(int i);
         float operator+(float i);
-
+        void executar() {}
     };
 }

@@ -2,6 +2,8 @@
 using namespace obstaculos;
 
 Cogumelo::Cogumelo() : Obstaculo() {
+    id = 2;
+
     inicializarTextura();
     inicializarDesenhavel();
 }

@@ -2,8 +2,9 @@
 using namespace fases;
 
 
-Fase::Fase(Jogador* j, GerenciadorGrafico* gf) : gerenciadorGrafico(gf)
+Fase::Fase(Jogador* j, GerenciadorGrafico* gf) : Ente(), gerenciadorGrafico(gf)
 {
+    id = 5;
     inicializarFundoTela();
     inicializarJogador(j);
     janela = gerenciadorGrafico->getJanela();
@@ -25,22 +26,6 @@ void Fase::renderFundoTela() {
     janela->draw(fundoTela);
 }
 
-
-void Fase::inicializarBotaoPausar() {
-    if(!fonte.loadFromFile("texture/Pacifico.ttf"))
-        cout << "Não tem nenhuma fonte" << endl;
-
-    // Botao salvar
-    texto.setFont(fonte);
-    texto.setFillColor(Color::White);
-    texto.setString("Pausar");
-    texto.setCharacterSize(30);
-    texto.setPosition(10, 10);
-
-    posMouse = {0,0};
-    coordMouse = {0.0f,0.0f};
-}
-
 void Fase::salvarJogada() {
     ofstream arq("jogada.txt", fstream::app);
     arq << jogador->getPosition().x << "\n" << jogador->getPosition().y << "\n";
@@ -48,16 +33,9 @@ void Fase::salvarJogada() {
 }
 
 void Fase::pausarJogada() {
-    inicializarBotaoPausar();
-    posMouse = sf::Mouse::getPosition(*janela);
-    // Mapear as coordenadas da posicao do mouse
-    coordMouse = janela->mapPixelToCoords(posMouse);
-
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        if(texto.getGlobalBounds().contains(coordMouse)) {
-            salvarJogada();
-            janela->close();
-        }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+        salvarJogada();
+        janela->close();
     }
 }
 
@@ -121,6 +99,9 @@ void Fase::executar()
 {
     while (janela->isOpen())
     {
+        if(jogador->getPosition().x > fundoTelaTex.getSize().x) {
+            janela->close();
+        }
         janela->clear();
         gerenciadorGrafico->centralizar(jogador->getPosition());
         pausarJogada();

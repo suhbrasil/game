@@ -5,6 +5,8 @@ using namespace sf;
 
 Jogador::Jogador() : Personagem()
 {
+    id = 11;
+
     inicializarVariaveis();
     inicializarTextura();
     inicializarDesenhavel();
@@ -52,7 +54,7 @@ void Jogador::inicializarVariaveis()
         remove("jogada.txt");
     }
     else {
-        posicaoInicialX = 600.f;
+        posicaoInicialX = 0.f;
         posicaoInicialY = 637.f;
     }
 }
@@ -69,13 +71,13 @@ void Jogador::atualizarMovimentacao()
 
     else if(Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && podePular) {
         podePular = false;
-        movimentar(0.5f, -sqrtf(2.f * gravidade * alturaPulo));
+        movimentar(2.f, -sqrtf(2.f * gravidade * alturaPulo));
         movimentando = true;
     }
 
     else if(Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && podePular) {
         podePular = false;
-        movimentar(-0.5f, -sqrtf(2.f * gravidade * alturaPulo));
+        movimentar(-2.0f, -sqrtf(2.f * gravidade * alturaPulo));
         movimentando = true;
     }
 

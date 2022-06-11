@@ -54,5 +54,6 @@ namespace personagens {
         void setPodePular(bool pular);
         void diminuirPontos();
         int getPontos();
+        void executar() {}
     };
 }

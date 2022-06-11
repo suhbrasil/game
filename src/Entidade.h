@@ -2,12 +2,13 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Ente.h"
 using namespace sf;
 using namespace std;
 
 
 namespace entidades {
-    class Entidade {
+    class Entidade : public Ente {
     protected:
         float x;
         float y;
@@ -23,6 +24,7 @@ namespace entidades {
         Sprite desenhavel;
         Texture textura;
         RectangleShape shape;
+
         Entidade();
         virtual ~Entidade();
         void inicializarDesenhavel();
@@ -41,6 +43,6 @@ namespace entidades {
         //renderTarget é responsável por definir o comportamento de objetos 2D
         void render(RenderTarget& target);
         void colidir(Entidade* p, Vector2f posicaoOutro, Vector2f dimensaoOutro);
-
+        void executar() {}
     };
 }

@@ -1,13 +1,14 @@
 #pragma once
 
 #include "Entidade.h"
-using namespace entidades;
 
-class Projetil : public Entidade
+namespace entidades
 {
-private:
-    /* data */
-public:
-    Projetil(/* args */);
-    ~Projetil();
-};
+    class Projetil : public Entidade
+    {
+    private:
+    public:
+        Projetil();
+        ~Projetil();
+    };
+}

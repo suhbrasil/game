@@ -10,6 +10,7 @@
 #include "Lista.h"
 #include "Espinho.h"
 #include "Galho.h"
+#include "Ente.h"
 using namespace obstaculos;
 using namespace entidades;
 using namespace personagens;
@@ -19,9 +20,8 @@ using namespace gerenciadores;
 
 namespace fases
 {
-    class Fase
+    class Fase : public Ente
     {
-
     protected:
         Event event;
         RenderWindow* janela;
@@ -49,7 +49,6 @@ namespace fases
         void renderFundoTela();
 
         // Pausar jogada
-        void inicializarBotaoPausar();
         void salvarJogada();
         void pausarJogada();
 

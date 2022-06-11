@@ -1,8 +1,8 @@
 #include "Entidade.h"
 using namespace entidades;
 
-Entidade::Entidade() {
-
+Entidade::Entidade() : Ente() {
+    id = 3;
 }
 
 Entidade::~Entidade() {

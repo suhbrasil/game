@@ -4,7 +4,9 @@
 
 #include "Menu.h"
 
-Menu::Menu(float largura, float altura) {
+Menu::Menu(float largura, float altura) : Ente() {
+    id = 12;
+
     if(!fonte.loadFromFile("texture/Pacifico.ttf"))
         cout << "Não tem nenhuma fonte" << endl;
 
