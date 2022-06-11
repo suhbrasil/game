@@ -6,11 +6,11 @@ FaseUm::FaseUm(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
 {
     id = 7;
 
-    inicializarFundoTela();
+    inicializarFundoTela("texture/background.jpeg");
     inicializarJogador(j);
-    qtdeGalhos = 1;
-    qtdeEspinhos = 1;
-    qtdeCartas = 1;
+    qtdeGalhos = 0;
+    qtdeEspinhos = 4;
+    qtdeCartas = 4;
     qtdeGatos = 0;
     gerarObstaculos();
     gerarInimigos();
@@ -108,7 +108,3 @@ void FaseUm::atualizarRenderObstaculos() {
        atualizarRenderEspinhos(j);
     }
 }
-
-// void FaseUm::executar() {
-
-// }

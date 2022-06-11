@@ -6,7 +6,6 @@ Fase::Fase(Jogador* j, GerenciadorGrafico* gf) : Ente(), gerenciadorGrafico(gf)
 {
     id = 5;
 
-    inicializarFundoTela();
     inicializarJogador(j);
     janela = gerenciadorGrafico->getJanela();
 }
@@ -17,8 +16,8 @@ Fase::~Fase()
 }
 
 
-void Fase::inicializarFundoTela() {
-    if(!fundoTelaTex.loadFromFile("texture/background.jpeg"))
+void Fase::inicializarFundoTela(const char* caminho) {
+    if(!fundoTelaTex.loadFromFile(caminho))
         cout << "Erro: nao foi possivel carregar o background" << endl;
     fundoTela.setTexture(fundoTelaTex);
 }

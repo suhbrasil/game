@@ -54,6 +54,5 @@ namespace fases
         void gerarCartas();
         void gerarObstaculos();
         void gerarInimigos();
-        // void executar();
     };
 }

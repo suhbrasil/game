@@ -45,7 +45,7 @@ namespace fases
 
         // Tela
         Sprite getImagem();
-        void inicializarFundoTela();
+        void inicializarFundoTela(const char* caminho);
         void renderFundoTela();
         Texture getFundoTela();
 
@@ -69,7 +69,6 @@ namespace fases
 
         // obstaculo
         virtual void gerarObstaculos() = 0;
-
         virtual void executar();
     };
 }

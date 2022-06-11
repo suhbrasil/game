@@ -27,7 +27,7 @@ void GerenciadorGrafico::centralizar(const Vector2f centro) {
 }
 
 void GerenciadorGrafico::resetCamera() {
-    camera.setCenter(Vector2f(600, 350));
+    camera.setCenter(Vector2f(1200, 350));
     janela.setView(camera);
 }
 

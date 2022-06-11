@@ -69,7 +69,6 @@ bool GerenciadorColisoes::colisaoSuperior(FloatRect entidade1, FloatRect entidad
         && entidade1.left < entidade2.left + entidade2.width
         && entidade1.left + entidade1.width > entidade2.left)
     {
-        contar = 1;
         return true;
     }
     return false;
@@ -157,12 +156,14 @@ void GerenciadorColisoes::verificarColisaoJogadorObstaculo(Jogador* jogador) {
                 // Espinho
                 else if (obst->getId() == 4) {
                     jogador->setPosition(jogadorLimites.left, obstaculoLimites.top - obstaculoLimites.height + 40.f);
-                    cout << "Coord: " << 700 - obstaculoLimites.top - obstaculoLimites.height << endl;
-                    cout << "Contar: " << contar << endl;
-                    if(contar) {
-                        // jogador->diminuirPontos();
+                    // cout << "Coord: " << 720 - obstaculoLimites.top - obstaculoLimites.height << endl;
+                    // cout << "Contar: " << contar << endl;
+                    if(720 - obstaculoLimites.top - obstaculoLimites.height) {
+                        if(contar) {
+                            jogador->diminuirPontos();
+                            contar = 0;
+                        }
                     }
-                    contar = 0;
                 }
                 else {
                     jogador->setPosition(jogadorLimites.left, obstaculoLimites.top - obstaculoLimites.height + 40.f);
@@ -184,6 +185,7 @@ void GerenciadorColisoes::verificarColisaoChao(RenderWindow &janela,Jogador* jog
             jogador->setPosition(jogador->getGlobalBounds().left,
                                  janela.getSize().y - jogador->getGlobalBounds().height);
             jogador->setPodePular(true);
+            contar = 1;
     }
 }
 

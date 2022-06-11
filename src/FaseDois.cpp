@@ -6,11 +6,11 @@ FaseDois::FaseDois(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
 {
     id = 6;
 
-    inicializarFundoTela();
+    inicializarFundoTela("texture/background2.jpeg");
     inicializarJogador(j);
     qtdeGalhos = 0;
     qtdeCogumelos = 1;
-    qtdeRainhas = 1;
+    qtdeRainhas = 0;
     qtdeGatos = 0;
     gerarObstaculos();
     gerarInimigos();

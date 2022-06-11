@@ -77,7 +77,7 @@ void Jogador::atualizarMovimentacao()
 
     else if(Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && podePular) {
         podePular = false;
-        movimentar(-2.0f, -sqrtf(2.f * gravidade * alturaPulo));
+        movimentar(-3.0f, -sqrtf(2.f * gravidade * alturaPulo));
         movimentando = true;
     }
 
@@ -133,7 +133,7 @@ void Jogador::movimentar(const float direcaoX, const float direcaoY) {
 }
 
 void Jogador::atualizarFenomenosFisicos() {
-    velocidade.y += 1.f * gravidade;
+    velocidade.y += 0.5f * gravidade;
 
    if(abs(velocidade.y) > velocidadeMaximaY) {
         if(velocidade.y < 0)
