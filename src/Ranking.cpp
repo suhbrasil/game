@@ -1,7 +1,6 @@
 #include "Ranking.h"
 
-Ranking::Ranking() {
-    pontos = 100;
+Ranking::Ranking() : salvo(0), pontos(100) {
     if(!fonteRanking.loadFromFile("texture/Pacifico.ttf"))
         cout << "Não tem nenhuma fonte" << endl;
 
@@ -31,16 +30,18 @@ Ranking::~Ranking() {}
 
 void Ranking::salvarPontos(int p) {
     pontos = p;
-
-    // app = append (adiciona ao final do arquivo)
-    ofstream ofs("arquivo.txt", fstream::app);
-    ofs << nome << " ............................................................ " << pontos << " pontos" << "\n";
-    ofs.close();
+    if(salvo) {
+        // app = append (adiciona ao final do arquivo)
+        ofstream ofs("arquivo.txt", fstream::app);
+        ofs << nome << " ............................................................ " << pontos << " pontos" << "\n";
+        ofs.close();
+    }
 }
 
 void Ranking::salvarNome() {
     cout << "Digite o nome da pessoa: ";
     cin >> nome;
+    salvo = 1;
 }
 
 void Ranking::desenhar(RenderWindow& janela) {

@@ -15,6 +15,8 @@ class Ranking
 private:
     string nome;
     int pontos;
+    // verificar se tem algum nome salvo
+    int salvo;
 
     // Texto ranking
     Font fonteRanking;
