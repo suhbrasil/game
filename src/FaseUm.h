@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <fstream> // ofstream e ifstream
 #include "Jogador.h"
 #include "Obstaculo.h"
 #include "GerenciadorColisoes.h"
@@ -10,6 +9,8 @@
 #include "Lista.h"
 #include "Espinho.h"
 #include "Galho.h"
+#include "Carta.h"
+#include "Gato.h"
 using namespace obstaculos;
 using namespace entidades;
 using namespace personagens;
@@ -25,53 +26,31 @@ namespace fases
         int qtdeGalhos;
         int qtdeEspinhos;
 
-        // Tela
-        Event event;
-        RenderWindow janela;
-        GerenciadorColisoes gerenciadorColisao;
-        Sprite fundoTela;
-        Texture fundoTelaTex;
-        Vector2i posMouse;
-        Vector2f coordMouse;
-
-        // Texto pause
-        Font fonte;
-        Text texto;
+        int qtdeGatos;
+        int qtdeCartas;
 
         ListaEntidades galhos;
         ListaEntidades espinhos;
+
+        ListaEntidades gatos;
+        ListaEntidades cartas;
+
     public:
-        FaseUm(Jogador *j);
+        FaseUm(Jogador* j, GerenciadorGrafico* gf);
         ~FaseUm();
 
-        // Tela
-        void inicializarJanela();
-        const RenderWindow& getJanela() const;
-        void inicializarFundoTela();
-        void renderFundoTela();
-
-        // Pausar jogada
-        void inicializarBotaoPausar();
-        void salvarJogada();
-        void pausarJogada();
-
         // Jogador
-        void inicializarJogador(Jogador* j);
-        void inicializarObstaculos();
-        void atualizarRenderObstaculos();
         void atualizarRenderGalhos(int pos);
         void atualizarRenderEspinhos(int pos);
-        void atualizarJogador();
-        void atualizar();
-        void atualizarRenderJogador();
-        void atualizarColisao();
-        void render();
+        void atualizarRenderObstaculos();
+        void atualizarRenderInimigos();
 
         // obstaculo
         void gerarEspinhos();
         void gerarGalhos();
+       // void gerarGatos();
+        //void gerarCartas();
         void gerarObstaculos();
-
-        void executar();
+        //void gerarInimigos();
     };
 }

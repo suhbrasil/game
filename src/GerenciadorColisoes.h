@@ -27,9 +27,9 @@ namespace gerenciadores {
         ~GerenciadorColisoes();
         void adicionarObstaculo(Obstaculo* obstaculo);
         Obstaculo* getObstaculo();
-        bool estaoColidindo(Entidade* p1, Entidade* p2);
-        void verificarColisoes(RenderWindow& janela, Jogador* j);
-
+        bool estaoColidindo(Jogador *p1, Obstaculo *p2, float push);
+        void verificarColisoes(RenderWindow &janela, Jogador *jogador);
+        bool verificarColisaoEmBaixo(Jogador*j, Obstaculo* obs);
     };
 
 }

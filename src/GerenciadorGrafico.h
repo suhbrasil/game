@@ -11,13 +11,16 @@ namespace gerenciadores {
     {
     private:
         RenderWindow janela;
+        View camera;
     public:
         GerenciadorGrafico();
         ~GerenciadorGrafico();
 
         // Fundo tela jogo
         void inicializarJanela();
-        RenderWindow& getJanela();
+        RenderWindow* getJanela();
+        View* getView();
+        void centralizar(const Vector2f centro);
 
         // Inicializar Ente
         void desenhar(RectangleShape* background, Texture* text);

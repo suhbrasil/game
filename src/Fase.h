@@ -1,55 +1,75 @@
 #pragma once
 
-#include <iostream>
 #include <SFML/Graphics.hpp>
-
 #include "Jogador.h"
-#include "Ente.h"
+#include "Obstaculo.h"
+#include "GerenciadorColisoes.h"
+#include "GerenciadorGrafico.h"
 #include "Fase.h"
 #include "ListaEntidades.h"
-
-using namespace sf;
-using namespace std;
+#include "Lista.h"
+#include "Espinho.h"
+#include "Galho.h"
+using namespace obstaculos;
+using namespace entidades;
 using namespace personagens;
+using namespace sf;
 using namespace lista;
+using namespace gerenciadores;
 
-namespace fases{
-
-    class Fase : public Ente {
+namespace fases
+{
+    class Fase
+    {
 
     protected:
+        Event event;
+        RenderWindow* janela;
+        GerenciadorColisoes gerenciadorColisao;
+        GerenciadorGrafico* gerenciadorGrafico;
 
-       Event event;
+        Vector2i posMouse;
+        Vector2f coordMouse;
 
-        // Tela
-        RenderWindow janela;
+        // Texto pause
+        Font fonte;
+        Text texto;
+
         Sprite fundoTela;
         Texture fundoTelaTex;
-
-        // Jogador
         Jogador* jogador;
 
     public:
-        Fase(Jogador* j);
+        Fase(Jogador *j, GerenciadorGrafico* gf);
         ~Fase();
 
+        // Tela
+        Sprite getImagem();
+        void inicializarFundoTela();
+        void renderFundoTela();
 
-    // Tela
-    void inicializarJanela();
-    const RenderWindow& getJanela() const;
-    void inicializarFundoTela();
-    void renderFundoTela();
+        // Pausar jogada
+        void inicializarBotaoPausar();
+        void salvarJogada();
+        void pausarJogada();
 
-    // Jogador
-    void inicializarJogador();
-    void atualizarJogador();
-    void atualizar();
-    void atualizarRenderJogador();
-    void atualizarColisao();
-    void render();
-    int gerarAleatoriamente(int menor);
-    void gerarObstaculos();
+        // Pontos
+        void verPontos();
 
-    void executar();
+        // Jogador
+        void inicializarJogador(Jogador* j);
+        virtual void atualizarRenderObstaculos() = 0;
+       // virtual void atualizarRenderInimigos() = 0;
+        void atualizarJogador();
+        void atualizar();
+        void atualizarRenderJogador();
+        void atualizarColisao();
+        void render();
+        int gerarAleatoriamente(int maior, int menor);
+
+        // obstaculo
+        virtual void gerarObstaculos() = 0;
+
+        void executar();
     };
 }

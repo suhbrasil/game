@@ -17,7 +17,7 @@ namespace personagens {
     private:
         // contar quantas vezes o teclado já foi pressionado (deixará a mudança de frame mais lenta)
         int countFrame;
-
+        int pontos;
         //fisica
         bool movimentando;
         float velocidadeMaxima;
@@ -30,8 +30,6 @@ namespace personagens {
         float velocidadeMinimaY;
         float posicaoInicialY;
         float posicaoInicialX;
-
-        bool pausado;
 
         bool podePular;
         float alturaPulo;
@@ -52,6 +50,9 @@ namespace personagens {
         //movimentar fisicamente (diz a direcao do movimento)
         void movimentar(const float direcaoX, const float direcaoY);
         Vector2f getVelocidade();
-        void setVelocidade(float x, float y);
+        bool getPodePular();
+        void setPodePular(bool pular);
+        void diminuirPontos();
+        int getPontos();
     };
 }

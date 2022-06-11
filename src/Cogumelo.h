@@ -13,5 +13,7 @@ namespace obstaculos {
         ~Cogumelo();
         void inicializarTextura();
         void inicializarDesenhavel();
+        float operator+(float i);
+        void setPosicao(int i);
     };
 }

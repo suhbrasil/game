@@ -12,6 +12,7 @@ namespace entidades {
         float x;
         float y;
 
+        Vector2f dimensoes;
 
         //animacao
         short estadoDeAnimacao;
@@ -21,9 +22,9 @@ namespace entidades {
     public:
         Sprite desenhavel;
         Texture textura;
+        RectangleShape shape;
         Entidade();
         virtual ~Entidade();
-        //virtual void executar();
         void inicializarDesenhavel();
         void inicializarAnimacao();
         virtual void inicializarVariaveis() = 0;
@@ -32,11 +33,14 @@ namespace entidades {
 
         const FloatRect getGlobalBounds() const;
         const Vector2f getPosition() const;
+        const Vector2f getDimensoesMetade() const;
 
         void setPosition(const float x, const float y);
 
         void inicializarTextura();
         //renderTarget é responsável por definir o comportamento de objetos 2D
         void render(RenderTarget& target);
+        void colidir(Entidade* p, Vector2f posicaoOutro, Vector2f dimensaoOutro);
+
     };
 }

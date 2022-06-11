@@ -18,9 +18,21 @@ void Cogumelo::inicializarTextura() {
 }
 
 void Cogumelo::inicializarDesenhavel() {
-    // // desenhavel.setColor(Color::Red);
-    // desenhavel.setTexture(textura);
-    // desenhavel.setScale(2.0f, 2.0f);
-    // setPosicao();
-    // obstaculos.push_back(desenhavel);
+    desenhavel.setTexture(textura);
+    desenhavel.setScale(0.2f, 0.2f);
+}
+
+float Cogumelo::operator+(float i){
+    float intervalo = 400.f;
+    intervalo*= i;
+    return this->posicaoX + intervalo;
+}
+
+void Cogumelo::setPosicao(int i) {
+
+    float posicao = operator+(i);
+    desenhavel.setPosition(posicao, 630.f);
+    this->posicaoX = posicao;
+
+
 }

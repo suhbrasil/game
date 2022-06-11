@@ -3,7 +3,7 @@
 using namespace personagens;
 using namespace sf;
 
-Jogador::Jogador() : Personagem(), pausado(false)
+Jogador::Jogador() : Personagem()
 {
     inicializarVariaveis();
     inicializarTextura();
@@ -39,6 +39,7 @@ void Jogador::inicializarVariaveis()
     movimentando = false;
     estadoDeAnimacao = ESTADOINICIAL;
     podePular = true;
+    pontos = 100;
     fstream pos ("jogada.txt");
     if(pos.is_open()) {
         string linhaPosX;
@@ -51,16 +52,15 @@ void Jogador::inicializarVariaveis()
         remove("jogada.txt");
     }
     else {
-        posicaoInicialX = 0.f;
-        posicaoInicialY = 632.f;
+        posicaoInicialX = 600.f;
+        posicaoInicialY = 637.f;
     }
 }
-
-
 
 void Jogador::atualizarMovimentacao()
 {
     movimentando = false;
+
     if (Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
     {
         movimentar(-0.5f, 0.f);
@@ -68,15 +68,15 @@ void Jogador::atualizarMovimentacao()
     }
 
     else if(Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && podePular) {
+        podePular = false;
         movimentar(0.5f, -sqrtf(2.f * gravidade * alturaPulo));
         movimentando = true;
-        estadoDeAnimacao = PULO;
     }
 
     else if(Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && podePular) {
+        podePular = false;
         movimentar(-0.5f, -sqrtf(2.f * gravidade * alturaPulo));
         movimentando = true;
-        estadoDeAnimacao = PULO;
     }
 
     else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
@@ -87,13 +87,16 @@ void Jogador::atualizarMovimentacao()
 
     else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && podePular)
     {
+        podePular = false;
+        //desenhavel.setPosition(desenhavel.getPosition().x ,desenhavel.getPosition().y -100.f);
         velocidade.y = -sqrtf(2.f * gravidade * alturaPulo);
+        velocidade.y *= 10.f;
         movimentando = true;
-        estadoDeAnimacao = PULO;
+
     }
 
-    if(abs(desenhavel.getPosition().y - posicaoInicialY) < alturaPulo) podePular = true;
-    else podePular = false;
+    velocidade.y += gravidade * 0.8;
+
 
     countFrame++;
 
@@ -104,13 +107,12 @@ void Jogador::atualizarMovimentacao()
 }
 
 void Jogador::inicializarFenomenosFisicos() {
-
     velocidadeMaxima = 5.f;
     velocidadeMinima = 1.f;
     aceleracao = 3.f;
     atrito  = 0.9f;
-    gravidade = 2.f;
-    velocidadeMaximaY  = 5.f;
+    gravidade = 1.f;
+    velocidadeMaximaY  = 35.f;
     velocidadeMinimaY = 1.f;
     alturaPulo = 300.f;
 }
@@ -187,4 +189,21 @@ void Jogador::atualizarAnimacao()
 
 Vector2f Jogador::getVelocidade() {
     return velocidade;
+}
+
+bool Jogador::getPodePular() {
+    return podePular;
+}
+
+void Jogador::setPodePular(bool pular) {
+    podePular = pular;
+}
+
+void Jogador::diminuirPontos() {
+    pontos -= 10;
+    cout << pontos << endl;
+}
+
+int Jogador::getPontos() {
+    return pontos;
 }

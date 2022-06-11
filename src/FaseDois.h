@@ -1,33 +1,44 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
 #include "Jogador.h"
-
+#include "Obstaculo.h"
+#include "GerenciadorColisoes.h"
+#include "Fase.h"
+#include "ListaEntidades.h"
+#include "Lista.h"
+#include "Cogumelo.h"
+#include "Galho.h"
+using namespace obstaculos;
+using namespace entidades;
 using namespace personagens;
+using namespace sf;
+using namespace lista;
 
-namespace fases {
-    class FaseDois {
+namespace fases
+{
+    class FaseDois : public Fase
+    {
 
     private:
-        Event event;
+        int qtdeGalhos;
+        int qtdeCogumelos;
 
-        // Tela
-        RenderWindow* janela;
-        Sprite fundoTela;
-        Texture fundoTelaTex;
-
-        // Jogador
-        Jogador* jogador;
+        ListaEntidades galhos;
+        ListaEntidades cogumelos;
     public:
-        FaseDois(Jogador* j);
+        FaseDois(Jogador* j, GerenciadorGrafico* gf);
         ~FaseDois();
 
         // Jogador
-        void atualizarJogador();
-        void atualizarRenderJogador();
-        void atualizarColisao();
-        void render(RenderWindow& janela);
+        void atualizarRenderGalhos(int pos);
+        void atualizarRenderCogumelos(int pos);
+        void atualizarRenderObstaculos();
 
-        void executar();
+        // obstaculo
+        void gerarCogumelos();
+        void gerarGalhos();
+        void gerarObstaculos();
+
     };
-
 }

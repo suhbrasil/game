@@ -1,6 +1,7 @@
 #include "Ranking.h"
 
-Ranking::Ranking(float largura, float altura) {
+Ranking::Ranking() {
+    pontos = 100;
     if(!fonteRanking.loadFromFile("texture/Pacifico.ttf"))
         cout << "Não tem nenhuma fonte" << endl;
 
@@ -10,20 +11,15 @@ Ranking::Ranking(float largura, float altura) {
     string linha;
     if(arq.is_open()) {
         int posicaoY = 50;
-        int posicaoX = 100;
         int i = 0;
         while(getline(arq, linha)) {
             textoRanking[i].setFont(fonteRanking);
             textoRanking[i].setFillColor(Color::Black);
             textoRanking[i].setString(linha);
-            textoRanking[i].setCharacterSize(40);
-            textoRanking[i].setPosition(posicaoX, posicaoY);
+            textoRanking[i].setCharacterSize(35);
+            textoRanking[i].setPosition(30, posicaoY);
             posicaoY += 50;
             i++;
-            if(i%10 == 0) {
-                posicaoX += 300;
-                posicaoY = 50;
-            }
         }
         maxRanking = i;
         arq.close();
@@ -33,15 +29,18 @@ Ranking::Ranking(float largura, float altura) {
 }
 Ranking::~Ranking() {}
 
-void Ranking::salvarNome() {
+void Ranking::salvarPontos(int p) {
+    pontos = p;
+
     // app = append (adiciona ao final do arquivo)
     ofstream ofs("arquivo.txt", fstream::app);
+    ofs << nome << " ............................................................ " << pontos << " pontos" << "\n";
+    ofs.close();
+}
+
+void Ranking::salvarNome() {
     cout << "Digite o nome da pessoa: ";
     cin >> nome;
-    cout << endl;
-
-    ofs << nome << "\n";
-    ofs.close();
 }
 
 void Ranking::desenhar(RenderWindow& janela) {

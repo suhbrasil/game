@@ -18,7 +18,7 @@ void Obstaculo::inicializarDesenhavel() {
 
 void Obstaculo::inicializarVariaveis() {
     dano = false;
-    posicaoX = 10;
+    posicaoX = 200;
 }
 
 void Obstaculo::inicializarTextura()

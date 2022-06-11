@@ -32,7 +32,7 @@ void Espinho::inicializarTextura()
 void Espinho::setPosicao(int i) {
 
     float posicao = operator+(i);
-    desenhavel.setPosition(posicao, 650.f);
+    desenhavel.setPosition(posicao, 645.f);
     this->posicaoX = posicao;
 
 
