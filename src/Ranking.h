@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Jogador.h"
+#include "Ente.h"
 #include <fstream> // ofstream e ifstream
 #include <iostream>
 #include <string.h>

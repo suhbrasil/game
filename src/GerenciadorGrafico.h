@@ -21,6 +21,7 @@ namespace gerenciadores {
         RenderWindow* getJanela();
         View* getView();
         void centralizar(const Vector2f centro);
+        void resetCamera();
 
         // Inicializar Ente
         void desenhar(RectangleShape* background, Texture* text);

@@ -113,7 +113,7 @@ void Jogador::inicializarFenomenosFisicos() {
     velocidadeMinima = 1.f;
     aceleracao = 3.f;
     atrito  = 0.9f;
-    gravidade = 1.f;
+    gravidade = 2.f;
     velocidadeMaximaY  = 35.f;
     velocidadeMinimaY = 1.f;
     alturaPulo = 300.f;
@@ -160,6 +160,10 @@ void Jogador::resetVelocidadeY() {
 
 void Jogador::resetVelocidadeX() {
     velocidade.x = 0.f;
+}
+
+void Jogador::resetPosicao() {
+    desenhavel.setPosition(0,632);
 }
 
 void Jogador::atualizarAnimacao()

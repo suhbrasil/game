@@ -47,6 +47,7 @@ namespace fases
         Sprite getImagem();
         void inicializarFundoTela();
         void renderFundoTela();
+        Texture getFundoTela();
 
         // Pausar jogada
         void salvarJogada();
@@ -58,7 +59,7 @@ namespace fases
         // Jogador
         void inicializarJogador(Jogador* j);
         virtual void atualizarRenderObstaculos() = 0;
-       // virtual void atualizarRenderInimigos() = 0;
+       virtual void atualizarRenderInimigos() = 0;
         void atualizarJogador();
         void atualizar();
         void atualizarRenderJogador();
@@ -69,6 +70,6 @@ namespace fases
         // obstaculo
         virtual void gerarObstaculos() = 0;
 
-        void executar();
+        virtual void executar();
     };
 }

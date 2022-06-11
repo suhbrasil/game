@@ -30,7 +30,7 @@ private:
     Texture backgroundTextRanking;
 
     stack<Ente*> pilha;
-
+    int proximo;
     Menu* menu;
     FaseUm* faseUm;
     FaseDois* faseDois;

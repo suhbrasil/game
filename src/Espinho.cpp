@@ -18,7 +18,7 @@ void Espinho::inicializarVariaveis() {
 
 void Espinho::inicializarDesenhavel() {
      desenhavel.setTexture(textura);
-     desenhavel.setScale(0.2f,0.2f);
+     desenhavel.setScale(0.2f,0.3f);
 }
 
 void Espinho::inicializarTextura()
@@ -32,10 +32,8 @@ void Espinho::inicializarTextura()
 void Espinho::setPosicao(int i) {
 
     float posicao = operator+(i);
-    desenhavel.setPosition(posicao, 630.f);
+    desenhavel.setPosition(posicao, 610.f);
     this->posicaoX = posicao;
-
-
 }
 
 float Espinho::operator+(float i){

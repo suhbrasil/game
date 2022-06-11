@@ -4,6 +4,7 @@ using namespace entidades;
 
 Obstaculo::Obstaculo() : Entidade() {
     id = 13;
+
     inicializarVariaveis();
 }
 
@@ -18,20 +19,24 @@ void Obstaculo::inicializarDesenhavel() {
 void Obstaculo::inicializarVariaveis() {
     dano = false;
     posicaoX = 200;
+    ePlataforma = false;
+    eEspinho = false;
+}
+
+const bool Obstaculo::getEPlataforma() const {
+    return ePlataforma;
+
+}
+
+const bool Obstaculo::getEEspinho() const {
+    return eEspinho;
+
 }
 
 void Obstaculo::inicializarTextura()
 {
 
 }
-
-int Obstaculo::gerarAleatoriamente(int maior, int menor) {
-    srand((unsigned)time(0)); //para gerar números aleatórios reais.
-    int aleatorio = rand()%(maior-menor+1) + menor;
-
-    return aleatorio;
-}
-
 void Obstaculo::setPosicao(int i) {
     float posicao = operator+(i);
     desenhavel.setPosition(posicao, 500.f);

@@ -21,7 +21,7 @@ void Cogumelo::inicializarTextura() {
 
 void Cogumelo::inicializarDesenhavel() {
     desenhavel.setTexture(textura);
-    desenhavel.setScale(0.2f, 0.2f);
+    desenhavel.setScale(0.31f, 0.23f);
 }
 
 float Cogumelo::operator+(float i){
@@ -31,10 +31,7 @@ float Cogumelo::operator+(float i){
 }
 
 void Cogumelo::setPosicao(int i) {
-
     float posicao = operator+(i);
     desenhavel.setPosition(posicao, 630.f);
     this->posicaoX = posicao;
-
-
 }

@@ -8,13 +8,39 @@ FaseUm::FaseUm(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
 
     inicializarFundoTela();
     inicializarJogador(j);
-    qtdeGalhos = 3;
-    qtdeEspinhos = 2;
+    qtdeGalhos = 1;
+    qtdeEspinhos = 1;
+    qtdeCartas = 1;
+    qtdeGatos = 0;
     gerarObstaculos();
+    gerarInimigos();
 }
 
 FaseUm::~FaseUm()
 {
+}
+
+void FaseUm::gerarGatos(){
+   for (int i = 0 ; i < qtdeGatos; i++) {
+        Gato* temp = new Gato();
+        gatos.lista.inserir(dynamic_cast<Entidade*> (temp));
+        temp->setPosicao(i);
+        gerenciadorColisao.adicionarInimigo(temp);
+    }
+}
+
+void FaseUm::gerarCartas(){
+   for (int i = 0 ; i < qtdeCartas; i++) {
+        Carta* temp = new Carta();
+        cartas.lista.inserir(dynamic_cast<Entidade*> (temp));
+        temp->setPosicao(i);
+        gerenciadorColisao.adicionarInimigo(temp);
+    }
+}
+
+void FaseUm::gerarInimigos() {
+    gerarCartas();
+    gerarGatos();
 }
 
 
@@ -28,10 +54,10 @@ void FaseUm::gerarEspinhos(){
 }
 
 void FaseUm::gerarGalhos(){
-   for (int i = 0;  i < qtdeGalhos; i++) {
+   for (int i = 0 ; i < qtdeGalhos; i++) {
         Galho* temp = new Galho();
         galhos.lista.inserir(dynamic_cast<Entidade*> (temp));
-        temp->setPosicao(i+2);
+        temp->setPosicao(i);
         gerenciadorColisao.adicionarObstaculo(temp);
     }
 }
@@ -39,6 +65,17 @@ void FaseUm::gerarGalhos(){
 void FaseUm::gerarObstaculos() {
     gerarGalhos();
     gerarEspinhos();
+}
+
+void FaseUm::atualizarRenderGatos(int i) {
+    Gato* gato = dynamic_cast <Gato*>(gatos.lista.getItem(i)->getInfo());
+    gato->render(*janela);
+
+}
+
+void FaseUm::atualizarRenderCartas(int j) {
+    Carta* carta = dynamic_cast <Carta*>(cartas.lista.getItem(j)->getInfo());
+    carta->render(*janela);
 }
 
 void FaseUm::atualizarRenderGalhos(int i) {
@@ -52,6 +89,16 @@ void FaseUm::atualizarRenderEspinhos(int j) {
     espinho->render(*janela);
 }
 
+void FaseUm::atualizarRenderInimigos() {
+    for (int i = 0 ; i < qtdeGatos; i++){
+       atualizarRenderGatos(i);
+    }
+
+    for (int j = 0 ; j < qtdeCartas; j++){
+       atualizarRenderCartas(j);
+    }
+}
+
 void FaseUm::atualizarRenderObstaculos() {
     for (int i = 0 ; i < qtdeGalhos; i++){
        atualizarRenderGalhos(i);
@@ -61,3 +108,7 @@ void FaseUm::atualizarRenderObstaculos() {
        atualizarRenderEspinhos(j);
     }
 }
+
+// void FaseUm::executar() {
+
+// }

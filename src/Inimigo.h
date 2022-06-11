@@ -3,11 +3,20 @@
 #include "Personagem.h"
 
 namespace personagens {
-    class Inimigo : public Personagem {
+     class Inimigo : public Personagem {
     protected:
+        bool dano;
+        float posicaoX;
+        bool ePlataforma;
+        bool eEspinho;
     public:
-        Inimigo(Vector2f pos = Vector2f(0.0f, 0.0f), Vector2f v = Vector2f(0.0f, 0.0f));
+        Inimigo();
         ~Inimigo();
+        void inicializarVariaveis();
         void inicializarTextura();
+        void inicializarDesenhavel();
+        void setPosicao(int i);
+        void desenharInimigos(RenderWindow& janela);
+        float operator+(float i);
     };
 }

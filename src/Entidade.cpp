@@ -31,8 +31,6 @@ void Entidade::render(RenderTarget &target)
 void Entidade::inicializarDesenhavel()
 {
     desenhavel.setTexture(textura);
-    //shape.setSize(Vector2f(50.f,50.f));
-    //shape.setFillColor(Color::Red);
     frameAtual = IntRect(0, 0, 45, 34);
     desenhavel.setTextureRect(frameAtual);
     // pra mudar o tamanho do desenho

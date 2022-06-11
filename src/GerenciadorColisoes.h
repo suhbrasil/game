@@ -18,6 +18,7 @@ using namespace std;
 namespace gerenciadores {
     class GerenciadorColisoes {
     private:
+        int contar;
         vector<Inimigo*> inimigos;
         list<Obstaculo*> obstaculos;
 
@@ -26,10 +27,20 @@ namespace gerenciadores {
         GerenciadorColisoes();
         ~GerenciadorColisoes();
         void adicionarObstaculo(Obstaculo* obstaculo);
+        void adicionarInimigo(Inimigo* inimigo);
         Obstaculo* getObstaculo();
-        bool estaoColidindo(Jogador *p1, Obstaculo *p2, float push);
+        Inimigo* getInimigo();
+
         void verificarColisoes(RenderWindow &janela, Jogador *jogador);
-        bool verificarColisaoEmBaixo(Jogador*j, Obstaculo* obs);
+        void verificarColisaoJogadorInimigo(Jogador* jogador);
+        void verificarColisaoJogadorObstaculo(Jogador* jogador);
+        void verificarColisaoObstaculoInimigo();
+        void verificarColisaoChao(RenderWindow &janela, Jogador *jogador);
+
+        bool colisaoDireita(FloatRect entidade1, FloatRect entidade2);
+        bool colisaoEsquerda(FloatRect entidade1, FloatRect entidade2);
+        bool colisaoInferior(FloatRect entidade1, FloatRect entidade2);
+        bool colisaoSuperior(FloatRect entidade1, FloatRect entidade2);
     };
 
 }

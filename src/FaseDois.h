@@ -8,6 +8,8 @@
 #include "ListaEntidades.h"
 #include "Lista.h"
 #include "Cogumelo.h"
+#include "Gato.h"
+#include "Rainha.h"
 #include "Galho.h"
 using namespace obstaculos;
 using namespace entidades;
@@ -24,8 +26,14 @@ namespace fases
         int qtdeGalhos;
         int qtdeCogumelos;
 
+        int qtdeGatos;
+        int qtdeRainhas;
+
         ListaEntidades galhos;
         ListaEntidades cogumelos;
+
+        ListaEntidades gatos;
+        ListaEntidades rainhas;
     public:
         FaseDois(Jogador* j, GerenciadorGrafico* gf);
         ~FaseDois();
@@ -35,10 +43,17 @@ namespace fases
         void atualizarRenderCogumelos(int pos);
         void atualizarRenderObstaculos();
 
+         void atualizarRenderGatos(int pos);
+        void atualizarRenderRainhas(int pos);
+        void atualizarRenderInimigos();
+
         // obstaculo
         void gerarCogumelos();
         void gerarGalhos();
         void gerarObstaculos();
 
+        void gerarGatos();
+        void gerarRainhas();
+        void gerarInimigos();
     };
 }

@@ -5,6 +5,7 @@ using namespace fases;
 Fase::Fase(Jogador* j, GerenciadorGrafico* gf) : Ente(), gerenciadorGrafico(gf)
 {
     id = 5;
+
     inicializarFundoTela();
     inicializarJogador(j);
     janela = gerenciadorGrafico->getJanela();
@@ -24,6 +25,10 @@ void Fase::inicializarFundoTela() {
 
 void Fase::renderFundoTela() {
     janela->draw(fundoTela);
+}
+
+Texture Fase::getFundoTela() {
+    return fundoTelaTex;
 }
 
 void Fase::salvarJogada() {
@@ -91,24 +96,18 @@ void Fase::render()
     renderFundoTela();
     atualizarRenderJogador();
     atualizarRenderObstaculos();
-
+    atualizarRenderInimigos();
     janela->display();
 }
 
-void Fase::executar()
-{
-    while (janela->isOpen())
-    {
-        if(jogador->getPosition().x > fundoTelaTex.getSize().x) {
-            janela->close();
-        }
+
+void Fase::executar() {
         janela->clear();
         gerenciadorGrafico->centralizar(jogador->getPosition());
         pausarJogada();
         verPontos();
         atualizar();
         render();
-    }
 }
 
 int Fase::gerarAleatoriamente(int maior, int menor) {

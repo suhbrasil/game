@@ -40,17 +40,20 @@ namespace fases
         ~FaseUm();
 
         // Jogador
-        void atualizarRenderGalhos(int pos);
-        void atualizarRenderEspinhos(int pos);
+        void atualizarRenderGalhos(int i);
+        void atualizarRenderEspinhos(int j);
+        void atualizarRenderGatos(int i);
+        void atualizarRenderCartas(int j);
         void atualizarRenderObstaculos();
         void atualizarRenderInimigos();
 
         // obstaculo
         void gerarEspinhos();
         void gerarGalhos();
-       // void gerarGatos();
-        //void gerarCartas();
+        void gerarGatos();
+        void gerarCartas();
         void gerarObstaculos();
-        //void gerarInimigos();
+        void gerarInimigos();
+        // void executar();
     };
 }

@@ -11,16 +11,18 @@ namespace obstaculos {
     class Obstaculo : public Entidade {
     protected:
         bool dano;
-        int quantidadeInstancias;
         float posicaoX;
+        bool ePlataforma;
+        bool eEspinho;
     public:
         vector<Sprite> obstaculos;
         Obstaculo();
         ~Obstaculo();
         void inicializarVariaveis();
-        void inicializarTextura();
+        void inicializarTextura() ;
         void inicializarDesenhavel();
-        int gerarAleatoriamente(int maior, int menor);
+        const bool getEPlataforma() const;
+        const bool getEEspinho() const;
         void setPosicao(int i);
         void desenharObstaculos(RenderWindow& janela);
         float operator+(float i);

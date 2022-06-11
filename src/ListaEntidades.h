@@ -7,7 +7,6 @@ using namespace lista;
 using namespace entidades;
 
 namespace lista {
-
     class ListaEntidades
     {
     private:

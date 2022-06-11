@@ -43,6 +43,7 @@ namespace personagens {
 
         void resetVelocidadeY();
         void resetVelocidadeX();
+        void resetPosicao();
         void atualizarAnimacao();
          //movimentar do teclado
         void atualizarMovimentacao();

@@ -16,6 +16,7 @@ namespace obstaculos
         ~Galho();
         void inicializarTextura();
         void inicializarDesenhavel();
+        void inicializarVariaveis();
         void setPosicao(int i);
         float operator+(float i);
     };
