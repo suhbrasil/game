@@ -4,10 +4,6 @@ Jogo::Jogo() : proximo(0)
 {
     gerenciadorGrafico.inicializarJanela();
     inicializar();
-
-    // Background ranking
-    backgroundTextRanking.loadFromFile("texture/ranking.jpg");
-    gerenciadorGrafico.desenhar(&backgroundRanking, &backgroundTextRanking);
 }
 
 Jogo::~Jogo()
@@ -81,13 +77,17 @@ void Jogo::executar() {
                                     jogador2->resetPosicao();
                                 proximo = 1;
                             }
-                            else if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x && proximo)
-                                gerenciadorGrafico.getJanela()->close();
-                            if(proximo)
-                                faseDois->executar();
-                            else {
-                                faseUm->executar();
+                            else if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x && proximo) {
+                                menu->desenharGameOver(*gerenciadorGrafico.getJanela(), 0);
                             }
+                            if(!faseUm->getPerdeu()) {
+                                if(proximo)
+                                    faseDois->executar();
+                                else
+                                    faseUm->executar();
+                            }
+                            else
+                                menu->desenharGameOver(*gerenciadorGrafico.getJanela(), 1);
                         }
                     }
 
@@ -95,9 +95,13 @@ void Jogo::executar() {
                     if(x == 3) {
                         while (gerenciadorGrafico.getJanela()->isOpen())
                         {
-                            if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x)
-                                gerenciadorGrafico.getJanela()->close();
-                            faseDois->executar();
+                            if(!faseDois->getPerdeu()) {
+                                if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x)
+                                    menu->desenharGameOver(*gerenciadorGrafico.getJanela(), 0);
+                                faseDois->executar();
+                            }
+                            else
+                                menu->desenharGameOver(*gerenciadorGrafico.getJanela(), 1);
                         }
                     }
 

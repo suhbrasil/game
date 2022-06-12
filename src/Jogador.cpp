@@ -70,7 +70,7 @@ void Jogador::inicializarVariaveis()
         remove("jogada.txt");
     }
     else {
-        posicaoInicialX = 0.f;
+        posicaoInicialX = 640.f;
         posicaoInicialY = 637.f;
     }
 }

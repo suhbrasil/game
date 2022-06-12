@@ -22,6 +22,8 @@ private:
     Sprite fundoTela;
     Texture fundoTelaTex;
 
+    RenderWindow j;
+
     // Texto menu
     Font fonte;
     Text texto[max_texto];
@@ -34,11 +36,11 @@ public:
     ~Menu();
     void inicializarFundoTela();
     void inicializarTextoMenu();
-    void inicializarTextoGameOver();
+    void inicializarTextoGameOver(int perdeu);
     void MoverCima();
     void MoverBaixo();
     int pressionado();
     void desenhar(RenderWindow& janela);
-    void desenharGameOver(RenderWindow& janela);
+    void desenharGameOver(RenderWindow& janela, int perdeu);
     void executar() {}
 };

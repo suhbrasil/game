@@ -9,7 +9,6 @@ Menu::Menu(float largura, float altura) : Ente() {
 
     inicializarFundoTela();
     inicializarTextoMenu();
-    inicializarTextoGameOver();
 
     selecionado = -1;
 }
@@ -72,16 +71,19 @@ void Menu::inicializarTextoMenu() {
     texto[5].setPosition(100, 600);
 }
 
-void Menu::inicializarTextoGameOver() {
+void Menu::inicializarTextoGameOver(int perdeu) {
      if(!fonteGameOver.loadFromFile("texture/GameOfSquids.ttf"))
         cout << "Não tem nenhuma fonte" << endl;
 
     // Game Over
     textoGameOver.setFont(fonteGameOver);
     textoGameOver.setFillColor(Color::White);
-    textoGameOver.setString("Game Over");
+    if(perdeu)
+        textoGameOver.setString("Game Over");
+    else
+        textoGameOver.setString("Ganhou!!!");
     textoGameOver.setCharacterSize(50);
-    textoGameOver.setPosition(300, 100);
+    textoGameOver.setPosition(400, 200);
 }
 
 void Menu::MoverCima() {
@@ -114,7 +116,7 @@ int Menu::pressionado() {
 }
 
 void Menu::desenhar(RenderWindow& janela) {
-     janela.clear();
+    janela.clear();
     janela.draw(fundoTela);
     // desenhar(janela);
     for(int i = 0; i < max_texto; i++) {
@@ -123,6 +125,19 @@ void Menu::desenhar(RenderWindow& janela) {
     janela.display();
 }
 
-void Menu::desenharGameOver(RenderWindow& janela) {
-    janela.draw(textoGameOver);
+void Menu::desenharGameOver(RenderWindow& janela, int perdeu) {
+    j.create(sf::VideoMode(1200, 700), "Game Over", sf::Style::Close | sf::Style::Titlebar);
+    inicializarTextoGameOver(perdeu);
+    Event e;
+    while (j.pollEvent(e))
+    {
+        if (e.type == Event::Closed)
+            janela.close();
+        else if (e.type == Event::KeyPressed && e.key.code == Keyboard::Escape)
+            janela.close();
+
+        j.clear();
+        j.draw(textoGameOver);
+        j.display();
+    }
 }

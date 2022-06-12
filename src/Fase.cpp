@@ -2,7 +2,7 @@
 using namespace fases;
 
 
-Fase::Fase(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Ente(), gerenciadorGrafico(gf), qtdJogadores(1)
+Fase::Fase(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Ente(), gerenciadorGrafico(gf), qtdJogadores(1), perdeu(0)
 {
     id = 5;
 
@@ -42,14 +42,14 @@ void Fase::salvarJogada() {
 void Fase::pausarJogada() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F)) {
         salvarJogada();
-        janela->close();
+        perdeu = 1;
     }
 }
 
 void Fase::verPontos() {
     if(qtdJogadores == 1) {
         if(jogador1->getPontos() <= 0) {
-            janela->close();
+            perdeu = 1;
         }
     }
     else {
@@ -59,7 +59,7 @@ void Fase::verPontos() {
         else if (jogador1->getPontos() > 0 && jogador2->getPontos() <= 0)
             jogador2->desenhavel.move(0.0f, 500.f);
         else if(jogador1->getPontos() <= 0 && jogador2->getPontos() <= 0) {
-            janela->close();
+            perdeu = 1;
         }
     }
 }
@@ -165,6 +165,14 @@ void Fase::setQtdJogadores(int qtd) {
 
 int Fase::getQtdJogadores() {
     return qtdJogadores;
+}
+
+void Fase::setPerdeu(int p) {
+    perdeu = p;
+}
+
+int Fase::getPerdeu() {
+    return perdeu;
 }
 
 void Fase::executar() {

@@ -23,6 +23,7 @@ namespace fases
     class Fase : public Ente
     {
     protected:
+        int perdeu;
         int qtdJogadores;
         Event event1;
         Event event2;
@@ -32,7 +33,6 @@ namespace fases
 
         Vector2i posMouse;
         Vector2f coordMouse;
-
 
         Sprite fundoTela;
         Texture fundoTelaTex;
@@ -72,8 +72,12 @@ namespace fases
         virtual void gerarObstaculos() = 0;
         virtual void gerarInimigos() = 0;
 
+        // Numero de jogadores
         void setQtdJogadores(int qtd);
         int getQtdJogadores();
+
+        void setPerdeu(int p);
+        int getPerdeu();
 
         void executar();
     };
