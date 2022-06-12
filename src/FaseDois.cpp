@@ -1,17 +1,16 @@
 #include "FaseDois.h"
 using namespace fases;
 
-
 FaseDois::FaseDois(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
 {
     id = 6;
 
     inicializarFundoTela("texture/background2.jpeg");
     inicializarJogador(j);
-    qtdeGalhos = 0;
-    qtdeCogumelos = 1;
-    qtdeRainhas = 0;
-    qtdeGatos = 0;
+    qtdeGatos =  gerarAleatoriamente(7,3);
+    qtdeGalhos = gerarAleatoriamente(6,3);
+    qtdeCogumelos =gerarAleatoriamente(10,3);
+    qtdeRainhas = gerarAleatoriamente(5,3);
     gerarObstaculos();
     gerarInimigos();
 }
@@ -20,7 +19,7 @@ FaseDois::~FaseDois()
 {
 }
 
-void FaseDois::gerarGatos(){
+void FaseDois::gerarGatos() {
    for (int i = 0 ; i < qtdeGatos; i++) {
         Gato* temp = new Gato();
         gatos.lista.inserir(dynamic_cast<Entidade*> (temp));
@@ -28,6 +27,15 @@ void FaseDois::gerarGatos(){
         gerenciadorColisao.adicionarInimigo(temp);
     }
 }
+
+// void FaseDois::gerarCartas(){
+//    for (int i = 0 ; i < qtdeCartas; i++) {
+//         Carta* temp = new Carta();
+//         cartas.lista.inserir(dynamic_cast<Entidade*> (temp));
+//         temp->setPosicao(i);
+//         gerenciadorColisao.adicionarInimigo(temp);
+//     }
+// }
 
 void FaseDois::gerarRainhas(){
    for (int i = 0 ; i < qtdeRainhas; i++) {
@@ -70,12 +78,13 @@ void FaseDois::gerarObstaculos() {
 void FaseDois::atualizarRenderGatos(int i) {
     Gato* gato = dynamic_cast <Gato*>(gatos.lista.getItem(i)->getInfo());
     gato->render(*janela);
-
+    gato->atualizar();
 }
 
 void FaseDois::atualizarRenderRainhas(int j) {
     Rainha* rainha = dynamic_cast <Rainha*>(rainhas.lista.getItem(j)->getInfo());
     rainha->render(*janela);
+    rainha->atualizar();
 }
 
 void FaseDois::atualizarRenderGalhos(int i) {

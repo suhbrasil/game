@@ -15,8 +15,9 @@ namespace personagens {
         void inicializarVariaveis();
         void inicializarTextura();
         void inicializarDesenhavel();
+        void atualizar();
         void setPosicao(int i);
         void desenharInimigos(RenderWindow& janela);
-        float operator+(float i);
+        const Vector2f getVelocidade() const;
     };
 }

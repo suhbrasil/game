@@ -43,7 +43,7 @@ namespace fases
         void atualizarRenderCogumelos(int pos);
         void atualizarRenderObstaculos();
 
-         void atualizarRenderGatos(int pos);
+        void atualizarRenderGatos(int pos);
         void atualizarRenderRainhas(int pos);
         void atualizarRenderInimigos();
 
@@ -52,6 +52,7 @@ namespace fases
         void gerarGalhos();
         void gerarObstaculos();
 
+        // void gerarCartas();
         void gerarGatos();
         void gerarRainhas();
         void gerarInimigos();

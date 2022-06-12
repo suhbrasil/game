@@ -5,7 +5,6 @@ using namespace fases;
 Fase::Fase(Jogador* j, GerenciadorGrafico* gf) : Ente(), gerenciadorGrafico(gf)
 {
     id = 5;
-
     inicializarJogador(j);
     janela = gerenciadorGrafico->getJanela();
 }
@@ -96,22 +95,23 @@ void Fase::render()
     atualizarRenderJogador();
     atualizarRenderObstaculos();
     atualizarRenderInimigos();
+
     janela->display();
 }
 
 
 void Fase::executar() {
-        janela->clear();
-        gerenciadorGrafico->centralizar(jogador->getPosition());
-        pausarJogada();
-        verPontos();
-        atualizar();
-        render();
+    janela->clear();
+    gerenciadorGrafico->centralizar(jogador->getPosition());
+    pausarJogada();
+    verPontos();
+    atualizar();
+    render();
 }
 
 int Fase::gerarAleatoriamente(int maior, int menor) {
-    srand((unsigned)time(0)); //para gerar números aleatórios reais.
-    int aleatorio = rand()%(maior-menor+1) + menor;
+    srand(time(NULL));
+    int aleatorio = rand()%(maior-menor)+1 + menor;
 
     return aleatorio;
 }

@@ -29,7 +29,7 @@ private:
     RectangleShape backgroundRanking;
     Texture backgroundTextRanking;
 
-    stack<Ente*> pilha;
+    stack<Ente> pilha;
     int proximo;
     Menu* menu;
     FaseUm* faseUm;
@@ -37,6 +37,7 @@ private:
     Ranking* ranking;
 
     Jogador* jogador;
+    
 public:
     Jogo();
     ~Jogo();

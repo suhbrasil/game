@@ -6,10 +6,17 @@ Rainha::Rainha() : Inimigo() {
 
     inicializarTextura();
     inicializarDesenhavel();
+    inicializarVariaveis();
 }
 
 Rainha::~Rainha() {
 
+}
+
+void Rainha::inicializarVariaveis(){
+
+    posicaoX = 5000.f;
+    velocidade.x = -2.f;
 }
 
 void Rainha::inicializarTextura() {
@@ -21,11 +28,11 @@ void Rainha::inicializarTextura() {
 
 void Rainha::inicializarDesenhavel() {
     desenhavel.setTexture(textura);
-    desenhavel.setScale(0.7f, 0.7f);
+    desenhavel.setScale(1.2f, 1.2f);
 }
 
 float Rainha::operator+(float i){
-    float intervalo = 400.f;
+    float intervalo = 2000.f;
     intervalo*= i;
     return this->posicaoX + intervalo;
 }
@@ -33,7 +40,7 @@ float Rainha::operator+(float i){
 void Rainha::setPosicao(int i) {
 
     float posicao = operator+(i);
-    desenhavel.setPosition(520.f, 450.f);
+    desenhavel.setPosition(posicao, 300.f);
     this->posicaoX = posicao;
 
 

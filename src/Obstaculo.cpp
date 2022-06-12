@@ -11,6 +11,7 @@ Obstaculo::Obstaculo() : Entidade() {
 Obstaculo::~Obstaculo() {
 }
 
+
 void Obstaculo::inicializarDesenhavel() {
      desenhavel.setTexture(textura);
      desenhavel.setScale(0.2f,0.2f);
@@ -36,16 +37,4 @@ const bool Obstaculo::getEEspinho() const {
 void Obstaculo::inicializarTextura()
 {
 
-}
-void Obstaculo::setPosicao(int i) {
-    float posicao = operator+(i);
-    desenhavel.setPosition(posicao, 500.f);
-    this->posicaoX = posicao;
-
-}
-
-float Obstaculo::operator+(float i){
-    float intervalo = 250.f;
-    intervalo*= i;
-    return this->posicaoX + intervalo;
 }

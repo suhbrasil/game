@@ -13,6 +13,7 @@ namespace personagens {
         ~Rainha();
         void inicializarTextura();
         void inicializarDesenhavel();
+        void inicializarVariaveis();
         float operator+(float i);
         void setPosicao(int i);
     };

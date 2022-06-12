@@ -36,11 +36,15 @@ namespace gerenciadores {
         void verificarColisaoJogadorObstaculo(Jogador* jogador);
         void verificarColisaoObstaculoInimigo();
         void verificarColisaoChao(RenderWindow &janela, Jogador *jogador);
+        void verificarColisaoInimigoInimigo();
 
         bool colisaoDireita(FloatRect entidade1, FloatRect entidade2);
         bool colisaoEsquerda(FloatRect entidade1, FloatRect entidade2);
         bool colisaoInferior(FloatRect entidade1, FloatRect entidade2);
         bool colisaoSuperior(FloatRect entidade1, FloatRect entidade2);
+
+        void verificarColisaoInicioTelaJogador(Jogador* jogador);
+        void verificarColisaoInicioTelaRainha(Inimigo* inimigo);
     };
 
 }

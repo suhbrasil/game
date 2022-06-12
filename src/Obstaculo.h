@@ -12,6 +12,7 @@ namespace obstaculos {
     protected:
         bool dano;
         float posicaoX;
+        float posicaoY;
         bool ePlataforma;
         bool eEspinho;
     public:
@@ -25,6 +26,5 @@ namespace obstaculos {
         const bool getEEspinho() const;
         void setPosicao(int i);
         void desenharObstaculos(RenderWindow& janela);
-        float operator+(float i);
     };
 }

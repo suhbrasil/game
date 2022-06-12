@@ -14,6 +14,8 @@ Galho::~Galho() {
 
 void Galho::inicializarVariaveis() {
     ePlataforma = true;
+    posicaoX = 200.f;
+    posicaoY = 500.f;
 }
 
 void Galho::inicializarTextura()
@@ -30,14 +32,21 @@ void Galho::inicializarDesenhavel() {
 }
 
 void Galho::setPosicao(int i) {
-
-    float posicao = operator+(i);
-    desenhavel.setPosition(posicao, 500.f);
-    this->posicaoX = posicao;
+    float posY = operator-(i);
+    float posX = operator+(i);
+    desenhavel.setPosition(posX,posY);
+    this->posicaoX = posX;
+    this->posicaoY = posY;
 }
 
 float Galho::operator+(float i){
-    float intervalo = 350.f;
-    intervalo*= i;
-    return this->posicaoX + intervalo + 300;
+    float intervalo = 500.f;
+    intervalo *= i;
+    return this->posicaoX + intervalo;
+}
+
+float Galho::operator-(float i){
+    float intervalo = 75.f;
+    intervalo *= i;
+    return this->posicaoY - intervalo;
 }

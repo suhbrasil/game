@@ -6,6 +6,7 @@ Espinho::Espinho(): Obstaculo() {
 
     inicializarTextura();
     inicializarDesenhavel();
+    inicializarVariaveis();
 }
 
 Espinho::~Espinho() {
@@ -13,6 +14,8 @@ Espinho::~Espinho() {
 }
 
 void Espinho::inicializarVariaveis() {
+
+    posicaoX = 600.f;
 
 }
 
@@ -37,7 +40,7 @@ void Espinho::setPosicao(int i) {
 }
 
 float Espinho::operator+(float i){
-    float intervalo = 350.f;
+    float intervalo = 1000.f;
     intervalo*= i;
     return this->posicaoX + intervalo;
 }

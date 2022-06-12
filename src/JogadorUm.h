@@ -13,7 +13,7 @@
 using namespace sf;
 
 namespace personagens {
-    class Jogador : public Personagem {
+    class JogadorUm : public Personagem {
     private:
         // contar quantas vezes o teclado já foi pressionado (deixará a mudança de frame mais lenta)
         int countFrame;
@@ -23,12 +23,13 @@ namespace personagens {
 
         bool podePular;
     public:
-        Jogador();
-        virtual ~Jogador();
+        JogadorUm();
+        virtual ~JogadorUm();
 
         void inicializarDesenhavel();
         void atualizar();
         void inicializarVariaveis();
+        void inicializarTextura();
         void atualizarAnimacao();
          //movimentar do teclado
         void atualizarMovimentacao();

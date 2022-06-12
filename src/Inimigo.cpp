@@ -21,23 +21,22 @@ void Inimigo::inicializarVariaveis() {
     posicaoX = 400.f;
     ePlataforma = false;
     eEspinho = false;
+    velocidade.x = 0.1f;
+    velocidade.y = 0.f;
 }
 
 
 void Inimigo::inicializarTextura()
 {
-
+  
 }
 
-void Inimigo::setPosicao(int i) {
-    float posicao = operator+(i);
-    desenhavel.setPosition(posicao, 500.f);
-    this->posicaoX = posicao;
-
+void Inimigo::atualizar() {
+    desenhavel.move(velocidade);
 }
 
-float Inimigo::operator+(float i){
-    float intervalo = 450.f;
-    intervalo*= i;
-    return this->posicaoX + intervalo;
+const Vector2f Inimigo::getVelocidade() const {
+    return velocidade;
 }
+
+

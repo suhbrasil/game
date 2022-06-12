@@ -9,11 +9,27 @@ namespace personagens {
     protected:
         Vector2f posicao;
         Vector2f velocidade;
+
+        float velocidadeMaxima;
+        float velocidadeMinima;
+        float aceleracao;
+        float atrito;
+        float gravidade;
+        float velocidadeMaximaY;
+        float velocidadeMinimaY;
+        float posicaoInicialY;
+        float posicaoInicialX;
+        float alturaPulo;
     public:
         Personagem(Vector2f pos = Vector2f(0.0f, 0.0f), Vector2f v = Vector2f(0.0f, 0.0f));
         ~Personagem();
 
+        void resetVelocidadeX();
+        void resetVelocidadeY();
+        void inicializarFenomenosFisicos();
+        void atualizarFenomenosFisicos();
+        void inverterVelocidade();
         // movimentar os personagens
-        void atualizar(float tempo);
+        void atualizar();
     };
 }

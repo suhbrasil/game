@@ -8,10 +8,10 @@ FaseUm::FaseUm(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
 
     inicializarFundoTela("texture/background.jpeg");
     inicializarJogador(j);
-    qtdeGalhos = 0;
-    qtdeEspinhos = 4;
-    qtdeCartas = 4;
-    qtdeGatos = 0;
+    qtdeGalhos = gerarAleatoriamente(7,3);
+    qtdeEspinhos = gerarAleatoriamente(5,3);
+    qtdeCartas = gerarAleatoriamente(10,3);
+    qtdeGatos =  gerarAleatoriamente(7,3);
     gerarObstaculos();
     gerarInimigos();
 }
@@ -70,12 +70,14 @@ void FaseUm::gerarObstaculos() {
 void FaseUm::atualizarRenderGatos(int i) {
     Gato* gato = dynamic_cast <Gato*>(gatos.lista.getItem(i)->getInfo());
     gato->render(*janela);
+    gato->atualizar();
 
 }
 
 void FaseUm::atualizarRenderCartas(int j) {
     Carta* carta = dynamic_cast <Carta*>(cartas.lista.getItem(j)->getInfo());
     carta->render(*janela);
+    carta->atualizar();
 }
 
 void FaseUm::atualizarRenderGalhos(int i) {

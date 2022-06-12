@@ -12,6 +12,12 @@ Cogumelo::~Cogumelo() {
 
 }
 
+void Cogumelo::inicializarVariaveis() {
+
+    posicaoX = 600.f;
+
+}
+
 void Cogumelo::inicializarTextura() {
     if (!textura.loadFromFile("texture/cogumelo.png"))
     {
@@ -25,7 +31,7 @@ void Cogumelo::inicializarDesenhavel() {
 }
 
 float Cogumelo::operator+(float i){
-    float intervalo = 400.f;
+    float intervalo = 1200.f;
     intervalo*= i;
     return this->posicaoX + intervalo;
 }

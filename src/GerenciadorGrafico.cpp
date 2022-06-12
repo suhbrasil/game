@@ -27,6 +27,7 @@ void GerenciadorGrafico::centralizar(const Vector2f centro) {
 }
 
 void GerenciadorGrafico::resetCamera() {
+    // voltar a camera para o inicio da textura quando muda de fase
     camera.setCenter(Vector2f(1200, 350));
     janela.setView(camera);
 }

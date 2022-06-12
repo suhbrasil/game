@@ -13,7 +13,11 @@ namespace personagens {
         ~Carta();
         void inicializarTextura();
         void inicializarDesenhavel();
+        void inicializarVariaveis();
         float operator+(float i);
         void setPosicao(int i);
+        void setPosicao2(int i);
+        float operator-(float i);
+        float operator/(float i);
     };
 }

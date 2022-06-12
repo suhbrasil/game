@@ -30,11 +30,6 @@ void Entidade::render(RenderTarget &target)
 
 void Entidade::inicializarDesenhavel()
 {
-    desenhavel.setTexture(textura);
-    frameAtual = IntRect(0, 0, 45, 34);
-    desenhavel.setTextureRect(frameAtual);
-    // pra mudar o tamanho do desenho
-    desenhavel.setScale(2.0f, 2.0f);
 }
 
 void Entidade::inicializarAnimacao()
@@ -50,9 +45,4 @@ void Entidade::resetTimerAnimacao() {
 
 const Vector2f Entidade::getDimensoesMetade() const {
     return dimensoes/2.0f;
-}
-
-void Entidade::colidir(Entidade* p, Vector2f posicaoOutro, Vector2f dimensoesOutro) {
-    std::cout << "colidiu" << std::endl;
-    Vector2f distancia = desenhavel.getPosition() - posicaoOutro;
 }

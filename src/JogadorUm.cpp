@@ -1,11 +1,11 @@
-#include "Jogador.h"
+#include "JogadorUm.h"
 #include <iostream>
 using namespace personagens;
 using namespace sf;
 
-Jogador::Jogador() : Personagem()
+JogadorUm::JogadorUm() : Personagem()
 {
-    id = 11;
+    id = 17;
 
     inicializarVariaveis();
     inicializarTextura();
@@ -16,11 +16,11 @@ Jogador::Jogador() : Personagem()
     desenhavel.setPosition(posicaoInicialX,posicaoInicialY);
 }
 
-Jogador::~Jogador()
+JogadorUm::~JogadorUm()
 {
 }
 
-void Jogador::inicializarDesenhavel()
+void JogadorUm::inicializarDesenhavel()
 {
     desenhavel.setTexture(textura);
 
@@ -30,21 +30,21 @@ void Jogador::inicializarDesenhavel()
     desenhavel.setScale(2.0f, 2.0f);
 }
 
-void Entidade::inicializarTextura()
+void JogadorUm::inicializarTextura()
 {
     if (!textura.loadFromFile("texture/coelho.png"))
     {
         printf("imagem não encontrada");
     }
 }
-void Jogador::atualizar()
+void JogadorUm::atualizar()
 {
     atualizarMovimentacao();
     atualizarAnimacao();
     atualizarFenomenosFisicos();
 }
 
-void Jogador::inicializarVariaveis()
+void JogadorUm::inicializarVariaveis()
 {
     countFrame = 0;
     movimentando = false;
@@ -68,35 +68,35 @@ void Jogador::inicializarVariaveis()
     }
 }
 
-void Jogador::atualizarMovimentacao()
+void JogadorUm::atualizarMovimentacao()
 {
     movimentando = false;
 
-    if (Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+    if (Keyboard::isKeyPressed(sf::Keyboard::Key::J))
     {
         movimentar(-0.5f, 0.f);
         movimentando = true;
     }
 
-    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && podePular) {
+    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::L) && Keyboard::isKeyPressed(sf::Keyboard::Key::I) && podePular) {
         podePular = false;
         movimentar(2.f, -sqrtf(2.f * gravidade * alturaPulo));
         movimentando = true;
     }
 
-    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && podePular) {
+    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::J) && Keyboard::isKeyPressed(sf::Keyboard::Key::I) && podePular) {
         podePular = false;
         movimentar(-2.0f, -sqrtf(2.f * gravidade * alturaPulo));
         movimentando = true;
     }
 
-    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::L))
     {
         movimentar(0.5f, 0.f);
         movimentando = true;
     }
 
-    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && podePular)
+    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::I) && podePular)
     {
         podePular = false;
         velocidade.y = -sqrtf(2.f * gravidade * alturaPulo);
@@ -116,7 +116,7 @@ void Jogador::atualizarMovimentacao()
         estadoDeAnimacao = ESTADOINICIAL;
 }
 
-void Jogador::movimentar(const float direcaoX, const float direcaoY) {
+void JogadorUm::movimentar(const float direcaoX, const float direcaoY) {
     velocidade.x += direcaoX * aceleracao;
     velocidade.y += direcaoY * aceleracao;
 
@@ -128,11 +128,11 @@ void Jogador::movimentar(const float direcaoX, const float direcaoY) {
     }
 }
 
-void Jogador::resetPosicao() {
+void JogadorUm::resetPosicao() {
     desenhavel.setPosition(0,632);
 }
 
-void Jogador::atualizarAnimacao()
+void JogadorUm::atualizarAnimacao()
 {
     if (timerAnimacao.getElapsedTime().asSeconds() >= 0.2f)
     {
@@ -159,28 +159,28 @@ void Jogador::atualizarAnimacao()
     desenhavel.setTextureRect(frameAtual);
 }
 
-Vector2f Jogador::getVelocidade() {
+Vector2f JogadorUm::getVelocidade() {
     return velocidade;
 }
 
-bool Jogador::getPodePular() {
+bool JogadorUm::getPodePular() {
     return podePular;
 }
 
-void Jogador::setPodePular(bool pular) {
+void JogadorUm::setPodePular(bool pular) {
     podePular = pular;
 }
 
-void Jogador::diminuirPontos() {
+void JogadorUm::diminuirPontos() {
     pontos -= 10;
     cout << pontos << endl;
 }
 
-void Jogador::ganharPontos() {
+void JogadorUm::ganharPontos() {
     pontos += 10;
     cout << pontos << endl;
 }
 
-int Jogador::getPontos() {
+int JogadorUm::getPontos() {
     return pontos;
 }

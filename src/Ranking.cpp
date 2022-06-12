@@ -6,7 +6,7 @@ Ranking::Ranking() : salvo(0), pontos(100) {
 
     // Listagem ranking
     // Le o arquivo arquivo.txt
-    ifstream arq ("/Users/suzanabrasil/jogo/arquivo.txt");
+    ifstream arq ("arquivo.txt");
     string linha;
     if(arq.is_open()) {
         int posicaoY = 50;

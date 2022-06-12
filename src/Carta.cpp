@@ -5,9 +5,18 @@ Carta::Carta() : Inimigo() {
     id = 1;
     inicializarTextura();
     inicializarDesenhavel();
+    inicializarVariaveis();
 }
 
 Carta::~Carta() {
+
+}
+
+void Carta::inicializarVariaveis() {
+
+    velocidade.x = 2.f;
+    velocidade.y = 0;
+    posicaoX = 450.f;
 
 }
 
@@ -24,14 +33,35 @@ void Carta::inicializarDesenhavel() {
 }
 
 float Carta::operator+(float i){
-    float intervalo = 400.f;
+    float intervalo = 650.f;
+    intervalo*= i;
+    return this->posicaoX + intervalo;
+}
+void Carta::setPosicao(int i) {
+    float posX = operator+(i);
+    desenhavel.setPosition(posX, 575.f);
+    this->posicaoX = posX;
+}
+
+void Carta::setPosicao2(int i) {
+
+    float posY = operator/(i);
+    float posX = operator-(i);
+
+    desenhavel.setPosition(posX,posY);
+    this->posicaoX = posX;
+    this->posicaoY = posY;
+}
+
+float Carta::operator-(float i){
+    float intervalo = 570.f;
     intervalo*= i;
     return this->posicaoX + intervalo;
 }
 
-void Carta::setPosicao(int i) {
+float Carta::operator/(float i){
+    float intervalo = 75.f;
+    intervalo*= i;
 
-    float posicao = operator+(i);
-    desenhavel.setPosition(700.f, 580.f);
-    this->posicaoX = posicao;
+    return this->posicaoY - intervalo;
 }

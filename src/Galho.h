@@ -9,8 +9,7 @@ namespace obstaculos
 {
     class Galho : public Obstaculo
     {
-
-    protected:
+    private:
     public:
         Galho();
         ~Galho();
@@ -19,5 +18,6 @@ namespace obstaculos
         void inicializarVariaveis();
         void setPosicao(int i);
         float operator+(float i);
+        float operator-(float i);
     };
 }

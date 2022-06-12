@@ -10,8 +10,8 @@ using namespace std;
 namespace entidades {
     class Entidade : public Ente {
     protected:
-        float x;
-        float y;
+        float posicaoX;
+        float posicaoY;
 
         Vector2f dimensoes;
 
