@@ -90,9 +90,7 @@ void Jogo::executar() {
                             if(proximo)
                                 faseDois->executar();
                             else {
-                                cout << "oi1" << endl;
                                 faseUm->executar();
-                                cout << "oi2" << endl;
                             }
                         }
                     }
@@ -138,6 +136,8 @@ void Jogo::executar() {
         menu->desenhar(*gerenciadorGrafico.getJanela());
         gerenciadorGrafico.getJanela()->display();
     }
-    ranking->salvarPontos1(jogador1->getPontos());
-    // ranking->salvarPontos2(jogador1->getPontos(), jogador2->getPontos());
+    if(faseUm->getQtdJogadores() == 1)
+        ranking->salvarPontos1(jogador1->getPontos());
+    else
+        ranking->salvarPontos2(jogador1->getPontos(), jogador2->getPontos());
 }

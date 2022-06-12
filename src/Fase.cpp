@@ -6,13 +6,16 @@ Fase::Fase(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Ente(), gerenciad
 {
     id = 5;
 
+    jogador1 = new Jogador();
+    jogador2 = new Jogador();
     inicializarJogador(j1, j2);
     janela = gerenciadorGrafico->getJanela();
 }
 
 Fase::~Fase()
 {
-
+    delete jogador1;
+    delete jogador2;
 }
 
 
@@ -63,8 +66,6 @@ void Fase::verPontos() {
 
 void Fase::inicializarJogador(Jogador* j1, Jogador* j2)
 {
-    jogador1 = new Jogador();
-    jogador2 = new Jogador();
     jogador1 = j1;
     jogador2 = j2;
 }
@@ -96,11 +97,8 @@ void Fase::atualizar1()
             jogador1->resetTimerAnimacao();
         }
     }
-    cout << "oi13" << endl;
     atualizarJogador1();
-    cout << "oi14" << endl;
     atualizarColisao();
-    cout << "oi15" << endl;
 }
 
 void Fase::atualizar2()
@@ -137,15 +135,11 @@ void Fase::atualizarRenderJogador() {
 
 void Fase::atualizarColisao() {
     if(qtdJogadores == 1) {
-        cout << "oi16" << endl;
         gerenciadorColisao.verificarColisoes(*janela, jogador1);
     }
     else {
-        cout << "oi15" << endl;
         gerenciadorColisao.verificarColisoes(*janela, jogador1);
-        cout << "oi17" << endl;
         gerenciadorColisao.verificarColisoes(*janela, jogador2);
-        cout << "oi18" << endl;
     }
 }
 
@@ -176,25 +170,15 @@ int Fase::getQtdJogadores() {
 
 void Fase::executar() {
     janela->clear();
-    cout << "oi3" << endl;
     gerenciadorGrafico->centralizar(jogador1->getPosition());
-    cout << "oi4" << endl;
     pausarJogada();
-    cout << "oi5" << endl;
-    // verPontos();
-    cout << "oi6" << endl;
+    verPontos();
     if(qtdJogadores == 1) {
         atualizar1();
-        cout << "oi7" << endl;
     }
     else {
-        cout << "oi8" << endl;
         atualizar1();
-        cout << "oi12" << endl;
         atualizar2();
-        cout << "oi9" << endl;
     }
-    cout << "oi10" << endl;
     render();
-    cout << "oi11" << endl;
 }
