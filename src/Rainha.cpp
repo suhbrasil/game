@@ -38,10 +38,7 @@ float Rainha::operator+(float i){
 }
 
 void Rainha::setPosicao(int i) {
-
     float posicao = operator+(i);
     desenhavel.setPosition(posicao, 300.f);
     this->posicaoX = posicao;
-
-
 }

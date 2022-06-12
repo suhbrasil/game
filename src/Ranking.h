@@ -16,8 +16,12 @@ private:
     string nome1;
     string nome2;
     int pontos;
+
     // verificar se tem algum nome salvo
     int salvo;
+
+    Sprite fundoTela;
+    Texture fundoTelaTex;
 
     // Texto ranking
     Font fonteRanking;
@@ -27,6 +31,8 @@ public:
     Ranking();
     ~Ranking();
 
+    void inicializarTexto();
+    void inicializarFundoTela();
     void salvarPontos1(int p);
     void salvarPontos2(int p1, int p2);
     void salvarNome1();

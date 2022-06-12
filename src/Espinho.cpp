@@ -15,7 +15,7 @@ Espinho::~Espinho() {
 
 void Espinho::inicializarVariaveis() {
 
-    posicaoX = 600.f;
+    posicaoX = 1000.f;
 
 }
 

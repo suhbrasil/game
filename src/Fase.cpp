@@ -81,7 +81,6 @@ void Fase::atualizarJogador2() {
 
 void Fase::atualizar1()
 {
-    cout << "oi12" << endl;
     while (janela->pollEvent(event1))
     {
         if (event1.type == Event::Closed)

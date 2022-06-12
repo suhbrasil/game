@@ -16,7 +16,7 @@ void Carta::inicializarVariaveis() {
 
     velocidade.x = 2.f;
     velocidade.y = 0;
-    posicaoX = 450.f;
+    posicaoX = 600.f;
 
 }
 

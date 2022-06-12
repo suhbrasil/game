@@ -7,6 +7,25 @@
 Menu::Menu(float largura, float altura) : Ente() {
     id = 12;
 
+    inicializarFundoTela();
+    inicializarTextoMenu();
+    inicializarTextoGameOver();
+
+    selecionado = -1;
+}
+
+Menu::~Menu() {
+
+}
+
+void Menu::inicializarFundoTela() {
+    if(!fundoTelaTex.loadFromFile("texture/menu2.jpeg"))
+        cout << "Erro: nao foi possivel carregar o background" << endl;
+    fundoTela.setTexture(fundoTelaTex);
+}
+
+
+void Menu::inicializarTextoMenu() {
     if(!fonte.loadFromFile("texture/Pacifico.ttf"))
         cout << "Não tem nenhuma fonte" << endl;
 
@@ -51,18 +70,18 @@ Menu::Menu(float largura, float altura) : Ente() {
     texto[5].setString("Sair");
     texto[5].setCharacterSize(40);
     texto[5].setPosition(100, 600);
-
-    selecionado = -1;
 }
 
-Menu::~Menu() {
+void Menu::inicializarTextoGameOver() {
+     if(!fonteGameOver.loadFromFile("texture/GameOfSquids.ttf"))
+        cout << "Não tem nenhuma fonte" << endl;
 
-}
-
-void Menu::desenhar(RenderWindow& janela) {
-    for(int i = 0; i < max_texto; i++) {
-        janela.draw(texto[i]);
-    }
+    // Game Over
+    textoGameOver.setFont(fonteGameOver);
+    textoGameOver.setFillColor(Color::White);
+    textoGameOver.setString("Game Over");
+    textoGameOver.setCharacterSize(50);
+    textoGameOver.setPosition(300, 100);
 }
 
 void Menu::MoverCima() {
@@ -94,8 +113,16 @@ int Menu::pressionado() {
     return selecionado;
 }
 
-void salvarJogada(Vector2f posicao) {
-    ofstream arq("jogada.txt", fstream::app);
-    arq << "Jogada: " << "\n" << posicao.x << "\n" << posicao.y << "\n";
-    arq.close();
+void Menu::desenhar(RenderWindow& janela) {
+     janela.clear();
+    janela.draw(fundoTela);
+    // desenhar(janela);
+    for(int i = 0; i < max_texto; i++) {
+        janela.draw(texto[i]);
+    }
+    janela.display();
+}
+
+void Menu::desenharGameOver(RenderWindow& janela) {
+    janela.draw(textoGameOver);
 }

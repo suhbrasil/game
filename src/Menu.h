@@ -18,16 +18,27 @@ class Menu : public Ente
 {
 private:
     int selecionado;
+
+    Sprite fundoTela;
+    Texture fundoTelaTex;
+
     // Texto menu
     Font fonte;
     Text texto[max_texto];
+
+    // Texto game over
+    Font fonteGameOver;
+    Text textoGameOver;
 public:
     Menu(float largura = 0.0f, float altura = 0.0f);
     ~Menu();
-
-    void desenhar(RenderWindow& janela);
+    void inicializarFundoTela();
+    void inicializarTextoMenu();
+    void inicializarTextoGameOver();
     void MoverCima();
     void MoverBaixo();
     int pressionado();
+    void desenhar(RenderWindow& janela);
+    void desenharGameOver(RenderWindow& janela);
     void executar() {}
 };

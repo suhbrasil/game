@@ -5,10 +5,6 @@ Jogo::Jogo() : proximo(0)
     gerenciadorGrafico.inicializarJanela();
     inicializar();
 
-    // Background menu
-    backgroundTextMenu.loadFromFile("texture/menu2.jpeg");
-    gerenciadorGrafico.desenhar(&backgroundMenu, &backgroundTextMenu);
-
     // Background ranking
     backgroundTextRanking.loadFromFile("texture/ranking.jpg");
     gerenciadorGrafico.desenhar(&backgroundRanking, &backgroundTextRanking);
@@ -107,21 +103,7 @@ void Jogo::executar() {
 
                     // Ranking
                     if(x == 4) {
-                        while(gerenciadorGrafico.getJanela()->isOpen()) {
-                            while(gerenciadorGrafico.getJanela()->pollEvent(e)) {
-                                if(e.type == Event::Closed) {
-                                    gerenciadorGrafico.getJanela()->close();
-                                }
-                                if(e.type == Event::KeyPressed) {
-                                    if(e.key.code == Keyboard::Escape)
-                                        gerenciadorGrafico.getJanela()->close();
-                                }
-                            }
-                            gerenciadorGrafico.getJanela()->clear();
-                            gerenciadorGrafico.getJanela()->draw(backgroundRanking);
-                            ranking->desenhar(*gerenciadorGrafico.getJanela());
-                            gerenciadorGrafico.getJanela()->display();
-                        }
+                        ranking->desenhar(*gerenciadorGrafico.getJanela());
                     }
 
                     // Sair
@@ -131,10 +113,7 @@ void Jogo::executar() {
                 }
             }
         }
-        gerenciadorGrafico.getJanela()->clear();
-        gerenciadorGrafico.getJanela()->draw(backgroundMenu);
         menu->desenhar(*gerenciadorGrafico.getJanela());
-        gerenciadorGrafico.getJanela()->display();
     }
     if(faseUm->getQtdJogadores() == 1)
         ranking->salvarPontos1(jogador1->getPontos());

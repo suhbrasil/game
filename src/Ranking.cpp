@@ -1,6 +1,12 @@
 #include "Ranking.h"
 
 Ranking::Ranking() : salvo(0), pontos(100) {
+    inicializarFundoTela();
+    inicializarTexto();
+}
+Ranking::~Ranking() {}
+
+void Ranking::inicializarTexto() {
     if(!fonteRanking.loadFromFile("texture/Pacifico.ttf"))
         cout << "Não tem nenhuma fonte" << endl;
 
@@ -26,7 +32,12 @@ Ranking::Ranking() : salvo(0), pontos(100) {
         cout << "Arquivo não está aberto" << endl;
     }
 }
-Ranking::~Ranking() {}
+
+void Ranking::inicializarFundoTela() {
+    if(!fundoTelaTex.loadFromFile("texture/ranking.jpg"))
+        cout << "Erro: nao foi possivel carregar o background" << endl;
+    fundoTela.setTexture(fundoTelaTex);
+}
 
 void Ranking::salvarPontos1(int p) {
     if(salvo) {
@@ -62,7 +73,22 @@ void Ranking::salvarNome2() {
 }
 
 void Ranking::desenhar(RenderWindow& janela) {
-    for(int i = 0; i < maxRanking; i++) {
-        janela.draw(textoRanking[i]);
+    Event e;
+    while(janela.isOpen()) {
+        while(janela.pollEvent(e)) {
+            if(e.type == Event::Closed) {
+                janela.close();
+            }
+            if(e.type == Event::KeyPressed) {
+                if(e.key.code == Keyboard::Escape)
+                    janela.close();
+            }
+        }
+        janela.clear();
+        janela.draw(fundoTela);
+        for(int i = 0; i < maxRanking; i++) {
+            janela.draw(textoRanking[i]);
+        }
+        janela.display();
     }
 }

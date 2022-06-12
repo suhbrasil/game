@@ -204,7 +204,6 @@ void GerenciadorColisoes::verificarColisaoObstaculoInimigo() {
                         inimigo->inverterVelocidade();
                         inimigo->setPosition(obst->getPosition().x - inimigoLimites.width, inimigo->getPosition().y);
                     }
-
                 }
 
                 else if (colisaoEsquerda(inimigoLimites,obstaculoLimites))
@@ -226,13 +225,11 @@ void GerenciadorColisoes::verificarColisaoObstaculoInimigo() {
                 {
                     // Plataforma (galho)
                     if(obst->getId() == 8) {
-
                         inimigo->setPosition(inimigoLimites.left, obstaculoLimites.top - obstaculoLimites.height);
                     }
                     // Espinho
                     else if (obst->getId() == 4) {
                         inimigo->setPosition(inimigoLimites.left, obstaculoLimites.top - obstaculoLimites.height + 95.f);
-                        //inimigo->diminuirPontos();
                     }
                     else {
                         inimigo->setPosition(inimigoLimites.left, obstaculoLimites.top - obstaculoLimites.height + 40.f);
@@ -315,7 +312,7 @@ void GerenciadorColisoes::verificarColisaoInicioTelaRainha(Inimigo* inimigo) {
         inimigo->inverterVelocidade();
 }
 
-void GerenciadorColisoes::verificarColisoes(RenderWindow &janela, Jogador *jogador) {
+void GerenciadorColisoes::verificarColisoes(RenderWindow& janela, Jogador *jogador) {
     verificarColisaoChao(janela, jogador);
     verificarColisaoJogadorInimigo(jogador);
     verificarColisaoJogadorObstaculo(jogador);

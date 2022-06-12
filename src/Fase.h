@@ -33,9 +33,6 @@ namespace fases
         Vector2i posMouse;
         Vector2f coordMouse;
 
-        // Texto pause
-        Font fonte;
-        Text texto;
 
         Sprite fundoTela;
         Texture fundoTelaTex;
