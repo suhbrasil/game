@@ -12,7 +12,7 @@
 using namespace std;
 using namespace sf;
 
-#define max_texto 5
+#define max_texto 6
 
 class Menu : public Ente
 {

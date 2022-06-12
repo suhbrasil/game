@@ -28,19 +28,36 @@ Ranking::Ranking() : salvo(0), pontos(100) {
 }
 Ranking::~Ranking() {}
 
-void Ranking::salvarPontos(int p) {
-    pontos = p;
+void Ranking::salvarPontos1(int p) {
     if(salvo) {
         // app = append (adiciona ao final do arquivo)
         ofstream ofs("arquivo.txt", fstream::app);
-        ofs << nome << " ............................................................ " << pontos << " pontos" << "\n";
+        ofs << nome1 << " ............................................................ " << p << " pontos" << "\n";
         ofs.close();
     }
 }
 
-void Ranking::salvarNome() {
-    cout << "Digite o nome da pessoa: ";
-    cin >> nome;
+void Ranking::salvarPontos2(int p1, int p2) {
+    if(salvo) {
+        // app = append (adiciona ao final do arquivo)
+        ofstream ofs("arquivo.txt", fstream::app);
+        ofs << nome1 << " ............................................................ " << p1 << " pontos" << "\n";
+        ofs << nome2 << " ............................................................ " << p2 << " pontos" << "\n";
+        ofs.close();
+    }
+}
+
+void Ranking::salvarNome1() {
+    cout << "Digite o nome do jogador: ";
+    cin >> nome1;
+    salvo = 1;
+}
+
+void Ranking::salvarNome2() {
+    cout << "Digite o nome do jogador 1: ";
+    cin >> nome1;
+    cout << "Digite o nome do jogador 2: ";
+    cin >> nome2;
     salvo = 1;
 }
 

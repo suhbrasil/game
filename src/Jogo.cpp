@@ -1,6 +1,7 @@
 #include "Jogo.h"
 
-Jogo::Jogo() : proximo(0) {
+Jogo::Jogo() : proximo(0)
+{
     gerenciadorGrafico.inicializarJanela();
     inicializar();
 
@@ -13,7 +14,8 @@ Jogo::Jogo() : proximo(0) {
     gerenciadorGrafico.desenhar(&backgroundRanking, &backgroundTextRanking);
 }
 
-Jogo::~Jogo() {
+Jogo::~Jogo()
+{
     delete menu;
     delete faseUm;
     delete faseDois;
@@ -21,7 +23,8 @@ Jogo::~Jogo() {
     delete jogador1;
     delete jogador2;
 }
-void Jogo::inicializar() {
+void Jogo::inicializar()
+{
     jogador1 = new Jogador();
     jogador2 = new Jogador();
     faseUm = new FaseUm(jogador1, jogador2, &gerenciadorGrafico);
@@ -54,41 +57,48 @@ void Jogo::executar() {
                 {
                     int x = menu->pressionado();
 
-                    // Cadastro
+                    // Cadastro 1 jogador
                     if (x == 0)
                     {
-                        ranking->salvarNome();
+                        faseUm->setQtdJogadores(1);
+                        faseDois->setQtdJogadores(1);
+                        ranking->salvarNome1();
+                    }
+
+                    // Cadastro 2 jogadores
+                    if (x == 1)
+                    {
+                        faseUm->setQtdJogadores(2);
+                        faseDois->setQtdJogadores(2);
+                        ranking->salvarNome2();
                     }
 
                     // Fase 1
-                    if(x == 1) {
+                    if(x == 2) {
                         while (gerenciadorGrafico.getJanela()->isOpen())
                         {
-                            cout << "oi" << endl;
-
                             if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x && !proximo) {
                                 gerenciadorGrafico.getJanela()->clear();
                                 gerenciadorGrafico.resetCamera();
                                 jogador1->resetPosicao();
+                                if(faseUm->getQtdJogadores() == 2)
+                                    jogador2->resetPosicao();
                                 proximo = 1;
                             }
                             else if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x && proximo)
                                 gerenciadorGrafico.getJanela()->close();
-                            if(proximo) {
+                            if(proximo)
                                 faseDois->executar();
-                            }
                             else {
-                                cout << proximo << endl;
-                                cout << "oi2" << endl;
+                                cout << "oi1" << endl;
                                 faseUm->executar();
-                                cout << "oi3" << endl;
-                                cout << proximo << endl;
+                                cout << "oi2" << endl;
                             }
                         }
                     }
 
                     // Fase 2
-                    if(x == 2) {
+                    if(x == 3) {
                         while (gerenciadorGrafico.getJanela()->isOpen())
                         {
                             if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x)
@@ -98,7 +108,7 @@ void Jogo::executar() {
                     }
 
                     // Ranking
-                    if(x == 3) {
+                    if(x == 4) {
                         while(gerenciadorGrafico.getJanela()->isOpen()) {
                             while(gerenciadorGrafico.getJanela()->pollEvent(e)) {
                                 if(e.type == Event::Closed) {
@@ -117,7 +127,7 @@ void Jogo::executar() {
                     }
 
                     // Sair
-                    if(x == 4)
+                    if(x == 5)
                         gerenciadorGrafico.getJanela()->close();
                     break;
                 }
@@ -128,5 +138,6 @@ void Jogo::executar() {
         menu->desenhar(*gerenciadorGrafico.getJanela());
         gerenciadorGrafico.getJanela()->display();
     }
-    ranking->salvarPontos(jogador1->getPontos());
+    ranking->salvarPontos1(jogador1->getPontos());
+    // ranking->salvarPontos2(jogador1->getPontos(), jogador2->getPontos());
 }

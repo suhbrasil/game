@@ -23,6 +23,7 @@ namespace fases
     class Fase : public Ente
     {
     protected:
+        int qtdJogadores;
         Event event1;
         Event event2;
         RenderWindow* janela;
@@ -73,6 +74,9 @@ namespace fases
         // obstaculo
         virtual void gerarObstaculos() = 0;
         virtual void gerarInimigos() = 0;
+
+        void setQtdJogadores(int qtd);
+        int getQtdJogadores();
 
         void executar();
     };
