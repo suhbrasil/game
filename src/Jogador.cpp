@@ -39,7 +39,7 @@ void Entidade::inicializarTextura()
 }
 void Jogador::atualizar()
 {
-    atualizarMovimentacao();
+    // atualizarMovimentacao();
     atualizarAnimacao();
     atualizarFenomenosFisicos();
 }
@@ -68,7 +68,7 @@ void Jogador::inicializarVariaveis()
     }
 }
 
-void Jogador::atualizarMovimentacao()
+void Jogador::atualizarMovimentacaoJ1()
 {
     movimentando = false;
 
@@ -97,6 +97,54 @@ void Jogador::atualizarMovimentacao()
     }
 
     else if (Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && podePular)
+    {
+        podePular = false;
+        velocidade.y = -sqrtf(2.f * gravidade * alturaPulo);
+        velocidade.y *= 10.f;
+        movimentando = true;
+
+    }
+
+    velocidade.y += gravidade * 0.8;
+
+
+    countFrame++;
+
+    if(estadoDeAnimacao == ESTADOINICIAL)
+        estadoDeAnimacao = SEGUNDOESTADO;
+    else
+        estadoDeAnimacao = ESTADOINICIAL;
+}
+
+void Jogador::atualizarMovimentacaoJ2()
+{
+    movimentando = false;
+
+    if (Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+    {
+        movimentar(-0.5f, 0.f);
+        movimentando = true;
+    }
+
+    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::F) && Keyboard::isKeyPressed(sf::Keyboard::Key::E) && podePular) {
+        podePular = false;
+        movimentar(2.f, -sqrtf(2.f * gravidade * alturaPulo));
+        movimentando = true;
+    }
+
+    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::S) && Keyboard::isKeyPressed(sf::Keyboard::Key::E) && podePular) {
+        podePular = false;
+        movimentar(-2.0f, -sqrtf(2.f * gravidade * alturaPulo));
+        movimentando = true;
+    }
+
+    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::F))
+    {
+        movimentar(0.5f, 0.f);
+        movimentando = true;
+    }
+
+    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::E) && podePular)
     {
         podePular = false;
         velocidade.y = -sqrtf(2.f * gravidade * alturaPulo);

@@ -2,12 +2,12 @@
 using namespace fases;
 
 
-FaseUm::FaseUm(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
+FaseUm::FaseUm(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Fase(j1, j2, gf)
 {
     id = 7;
 
     inicializarFundoTela("texture/background.jpeg");
-    inicializarJogador(j);
+    inicializarJogador(j1, j2);
     qtdeGalhos = gerarAleatoriamente(7,3);
     qtdeEspinhos = gerarAleatoriamente(5,3);
     qtdeCartas = gerarAleatoriamente(10,3);

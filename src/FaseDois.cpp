@@ -1,12 +1,12 @@
 #include "FaseDois.h"
 using namespace fases;
 
-FaseDois::FaseDois(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
+FaseDois::FaseDois(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Fase(j1, j2, gf)
 {
     id = 6;
 
     inicializarFundoTela("texture/background2.jpeg");
-    inicializarJogador(j);
+    inicializarJogador(j1, j2);
     qtdeGatos =  gerarAleatoriamente(7,3);
     qtdeGalhos = gerarAleatoriamente(6,3);
     qtdeCogumelos =gerarAleatoriamente(10,3);

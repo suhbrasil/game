@@ -31,7 +31,8 @@ namespace personagens {
         void inicializarVariaveis();
         void atualizarAnimacao();
          //movimentar do teclado
-        void atualizarMovimentacao();
+        void atualizarMovimentacaoJ1();
+        void atualizarMovimentacaoJ2();
 
         //movimentar fisicamente (diz a direcao do movimento)
         void movimentar(const float direcaoX, const float direcaoY);

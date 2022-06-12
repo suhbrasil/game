@@ -37,10 +37,10 @@ namespace fases
 
         Sprite fundoTela;
         Texture fundoTelaTex;
-        Jogador* jogador;
-
+        Jogador* jogador1;
+        Jogador* jogador2;
     public:
-        Fase(Jogador *j, GerenciadorGrafico* gf);
+        Fase(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf);
         ~Fase();
 
         // Tela
@@ -57,10 +57,11 @@ namespace fases
         void verPontos();
 
         // Jogador
-        void inicializarJogador(Jogador* j);
+        void inicializarJogador(Jogador* j1, Jogador* j2);
         virtual void atualizarRenderObstaculos() = 0;
         virtual void atualizarRenderInimigos() = 0;
-        void atualizarJogador();
+        void atualizarJogador1();
+        void atualizarJogador2();
         void atualizar();
         void atualizarRenderJogador();
         void atualizarColisao();

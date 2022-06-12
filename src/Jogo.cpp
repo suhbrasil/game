@@ -20,9 +20,10 @@ Jogo::~Jogo() {
     delete ranking;
 }
 void Jogo::inicializar() {
-    jogador = new Jogador();
-    faseUm = new FaseUm(jogador, &gerenciadorGrafico);
-    faseDois = new FaseDois(jogador, &gerenciadorGrafico);
+    jogador1 = new Jogador();
+    jogador2 = new Jogador();
+    faseUm = new FaseUm(jogador1, jogador2, &gerenciadorGrafico);
+    faseDois = new FaseDois(jogador1, jogador2, &gerenciadorGrafico);
     menu = new Menu();
     ranking = new Ranking();
 }
@@ -61,13 +62,13 @@ void Jogo::executar() {
                     if(x == 1) {
                         while (gerenciadorGrafico.getJanela()->isOpen())
                         {
-                            if(jogador->getPosition().x > faseUm->getFundoTela().getSize().x && !proximo) {
+                            if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x && !proximo) {
                                 gerenciadorGrafico.getJanela()->clear();
                                 gerenciadorGrafico.resetCamera();
-                                jogador->resetPosicao();
+                                jogador1->resetPosicao();
                                 proximo = 1;
                             }
-                            else if(jogador->getPosition().x > faseUm->getFundoTela().getSize().x && proximo)
+                            else if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x && proximo)
                                 gerenciadorGrafico.getJanela()->close();
                             if(proximo)
                                 faseDois->executar();
@@ -80,7 +81,7 @@ void Jogo::executar() {
                     if(x == 2) {
                         while (gerenciadorGrafico.getJanela()->isOpen())
                         {
-                            if(jogador->getPosition().x > faseUm->getFundoTela().getSize().x)
+                            if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x)
                                 gerenciadorGrafico.getJanela()->close();
                             faseDois->executar();
                         }
@@ -117,6 +118,5 @@ void Jogo::executar() {
         menu->desenhar(*gerenciadorGrafico.getJanela());
         gerenciadorGrafico.getJanela()->display();
     }
-    ranking->salvarPontos(jogador->getPontos());
+    ranking->salvarPontos(jogador1->getPontos());
 }
-

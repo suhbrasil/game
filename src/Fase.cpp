@@ -2,10 +2,10 @@
 using namespace fases;
 
 
-Fase::Fase(Jogador* j, GerenciadorGrafico* gf) : Ente(), gerenciadorGrafico(gf)
+Fase::Fase(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Ente(), gerenciadorGrafico(gf)
 {
     id = 5;
-    inicializarJogador(j);
+    inicializarJogador(j1, j2);
     janela = gerenciadorGrafico->getJanela();
 }
 
@@ -31,7 +31,7 @@ Texture Fase::getFundoTela() {
 
 void Fase::salvarJogada() {
     ofstream arq("jogada.txt", fstream::app);
-    arq << jogador->getPosition().x << "\n" << jogador->getPosition().y << "\n";
+    arq << jogador1->getPosition().x << "\n" << jogador1->getPosition().y << "\n";
     arq.close();
 }
 
@@ -43,22 +43,33 @@ void Fase::pausarJogada() {
 }
 
 void Fase::verPontos() {
-    if(jogador->getPontos() <= 0)
+    if(jogador1->getPontos() <= 0 && jogador2->getPontos() > 0) {
+        jogador1->setPosition(-100.f, 900.f);
+    }
+    else if (jogador1->getPontos() > 0 && jogador2->getPontos() <= 0)
+        jogador2->setPosition(-100.f, 900.f);
+    else
         janela->close();
 }
 
-void Fase::inicializarJogador(Jogador* j)
+void Fase::inicializarJogador(Jogador* j1, Jogador* j2)
 {
-    jogador = new Jogador();
-    jogador = j;
+    jogador1 = new Jogador();
+    jogador2 = new Jogador();
+    jogador1 = j1;
+    jogador2 = j2;
 }
 
-void Fase::atualizarJogador()
+void Fase::atualizarJogador1()
 {
-    jogador->atualizar();
+    jogador1->atualizarMovimentacaoJ1();
+    jogador1->atualizar();
 }
 
-
+void Fase::atualizarJogador2() {
+    jogador2->atualizarMovimentacaoJ2();
+    jogador2->atualizar();
+}
 
 void Fase::atualizar()
 {
@@ -73,20 +84,25 @@ void Fase::atualizar()
             (event.key.code == Keyboard::Escape || event.key.code == Keyboard::Up ||
                  event.key.code == Keyboard::Down || event.key.code == Keyboard::Left
                     || event.key.code == Keyboard::Right))
-
-            jogador->resetTimerAnimacao();
+        {
+            jogador1->resetTimerAnimacao();
+            jogador2->resetTimerAnimacao();
+        }
     }
 
-    atualizarJogador();
+    atualizarJogador1();
+    atualizarJogador2();
     atualizarColisao();
 }
 
 void Fase::atualizarRenderJogador() {
-    jogador->render(*janela);
+    jogador1->render(*janela);
+    jogador2->render(*janela);
 }
 
 void Fase::atualizarColisao() {
-    gerenciadorColisao.verificarColisoes(*janela, jogador);
+    gerenciadorColisao.verificarColisoes(*janela, jogador1);
+    gerenciadorColisao.verificarColisoes(*janela, jogador2);
 }
 
 void Fase::render()
@@ -102,7 +118,7 @@ void Fase::render()
 
 void Fase::executar() {
     janela->clear();
-    gerenciadorGrafico->centralizar(jogador->getPosition());
+    gerenciadorGrafico->centralizar(jogador1->getPosition());
     pausarJogada();
     verPontos();
     atualizar();

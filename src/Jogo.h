@@ -36,8 +36,8 @@ private:
     FaseDois* faseDois;
     Ranking* ranking;
 
-    Jogador* jogador;
-    
+    Jogador* jogador1;
+    Jogador* jogador2;
 public:
     Jogo();
     ~Jogo();

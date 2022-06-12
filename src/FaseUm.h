@@ -36,7 +36,7 @@ namespace fases
         ListaEntidades cartas;
 
     public:
-        FaseUm(Jogador* j, GerenciadorGrafico* gf);
+        FaseUm(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf);
         ~FaseUm();
 
         // Jogador

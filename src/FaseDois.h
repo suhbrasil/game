@@ -35,7 +35,7 @@ namespace fases
         ListaEntidades gatos;
         ListaEntidades rainhas;
     public:
-        FaseDois(Jogador* j, GerenciadorGrafico* gf);
+        FaseDois(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf);
         ~FaseDois();
 
         // Jogador
