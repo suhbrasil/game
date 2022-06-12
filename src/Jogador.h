@@ -27,7 +27,8 @@ namespace personagens {
         virtual ~Jogador();
 
         void inicializarDesenhavel();
-        void atualizar();
+        void atualizar1();
+        void atualizar2();
         void inicializarVariaveis();
         void atualizarAnimacao();
          //movimentar do teclado

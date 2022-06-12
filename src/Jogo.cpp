@@ -18,6 +18,8 @@ Jogo::~Jogo() {
     delete faseUm;
     delete faseDois;
     delete ranking;
+    delete jogador1;
+    delete jogador2;
 }
 void Jogo::inicializar() {
     jogador1 = new Jogador();
@@ -62,6 +64,8 @@ void Jogo::executar() {
                     if(x == 1) {
                         while (gerenciadorGrafico.getJanela()->isOpen())
                         {
+                            cout << "oi" << endl;
+
                             if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x && !proximo) {
                                 gerenciadorGrafico.getJanela()->clear();
                                 gerenciadorGrafico.resetCamera();
@@ -70,10 +74,16 @@ void Jogo::executar() {
                             }
                             else if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x && proximo)
                                 gerenciadorGrafico.getJanela()->close();
-                            if(proximo)
+                            if(proximo) {
                                 faseDois->executar();
-                            else
+                            }
+                            else {
+                                cout << proximo << endl;
+                                cout << "oi2" << endl;
                                 faseUm->executar();
+                                cout << "oi3" << endl;
+                                cout << proximo << endl;
+                            }
                         }
                     }
 

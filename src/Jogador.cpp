@@ -37,9 +37,16 @@ void Entidade::inicializarTextura()
         printf("imagem não encontrada");
     }
 }
-void Jogador::atualizar()
+void Jogador::atualizar1()
 {
-    // atualizarMovimentacao();
+    atualizarMovimentacaoJ1();
+    atualizarAnimacao();
+    atualizarFenomenosFisicos();
+}
+
+void Jogador::atualizar2()
+{
+    atualizarMovimentacaoJ2();
     atualizarAnimacao();
     atualizarFenomenosFisicos();
 }
@@ -120,31 +127,31 @@ void Jogador::atualizarMovimentacaoJ2()
 {
     movimentando = false;
 
-    if (Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+    if (Keyboard::isKeyPressed(sf::Keyboard::Key::A))
     {
         movimentar(-0.5f, 0.f);
         movimentando = true;
     }
 
-    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::F) && Keyboard::isKeyPressed(sf::Keyboard::Key::E) && podePular) {
+    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::D) && Keyboard::isKeyPressed(sf::Keyboard::Key::W) && podePular) {
         podePular = false;
         movimentar(2.f, -sqrtf(2.f * gravidade * alturaPulo));
         movimentando = true;
     }
 
-    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::S) && Keyboard::isKeyPressed(sf::Keyboard::Key::E) && podePular) {
+    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::A) && Keyboard::isKeyPressed(sf::Keyboard::Key::W) && podePular) {
         podePular = false;
         movimentar(-2.0f, -sqrtf(2.f * gravidade * alturaPulo));
         movimentando = true;
     }
 
-    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::F))
+    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::D))
     {
         movimentar(0.5f, 0.f);
         movimentando = true;
     }
 
-    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::E) && podePular)
+    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::W) && podePular)
     {
         podePular = false;
         velocidade.y = -sqrtf(2.f * gravidade * alturaPulo);

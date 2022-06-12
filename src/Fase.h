@@ -23,7 +23,8 @@ namespace fases
     class Fase : public Ente
     {
     protected:
-        Event event;
+        Event event1;
+        Event event2;
         RenderWindow* janela;
         GerenciadorColisoes gerenciadorColisao;
         GerenciadorGrafico* gerenciadorGrafico;
@@ -62,7 +63,8 @@ namespace fases
         virtual void atualizarRenderInimigos() = 0;
         void atualizarJogador1();
         void atualizarJogador2();
-        void atualizar();
+        void atualizar1();
+        void atualizar2();
         void atualizarRenderJogador();
         void atualizarColisao();
         void render();

@@ -5,6 +5,7 @@ using namespace fases;
 Fase::Fase(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Ente(), gerenciadorGrafico(gf)
 {
     id = 5;
+
     inicializarJogador(j1, j2);
     janela = gerenciadorGrafico->getJanela();
 }
@@ -36,7 +37,7 @@ void Fase::salvarJogada() {
 }
 
 void Fase::pausarJogada() {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F)) {
         salvarJogada();
         janela->close();
     }
@@ -44,12 +45,15 @@ void Fase::pausarJogada() {
 
 void Fase::verPontos() {
     if(jogador1->getPontos() <= 0 && jogador2->getPontos() > 0) {
-        jogador1->setPosition(-100.f, 900.f);
+        jogador1->desenhavel.move(0.0f, 500.f);
     }
     else if (jogador1->getPontos() > 0 && jogador2->getPontos() <= 0)
-        jogador2->setPosition(-100.f, 900.f);
-    else
-        janela->close();
+        jogador2->desenhavel.move(0.0f, 500.f);
+    else if(jogador1->getPontos() <= 0 && jogador2->getPontos() <= 0) {
+        jogador2->desenhavel.move(0.0f, 500.f);
+        jogador1->desenhavel.move(0.0f, 500.f);
+    }
+
 }
 
 void Fase::inicializarJogador(Jogador* j1, Jogador* j2)
@@ -62,35 +66,53 @@ void Fase::inicializarJogador(Jogador* j1, Jogador* j2)
 
 void Fase::atualizarJogador1()
 {
-    jogador1->atualizarMovimentacaoJ1();
-    jogador1->atualizar();
+    jogador1->atualizar1();
 }
 
 void Fase::atualizarJogador2() {
-    jogador2->atualizarMovimentacaoJ2();
-    jogador2->atualizar();
+    jogador2->atualizar2();
 }
 
-void Fase::atualizar()
+void Fase::atualizar1()
 {
-    while (janela->pollEvent(event))
+    while (janela->pollEvent(event1))
     {
-        if (event.type == Event::Closed)
+        if (event1.type == Event::Closed)
             janela->close();
-        else if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
+        else if (event1.type == Event::KeyPressed && event1.key.code == Keyboard::Escape)
             janela->close();
 
-        if(event.type ==  Event::KeyReleased &&
-            (event.key.code == Keyboard::Escape || event.key.code == Keyboard::Up ||
-                 event.key.code == Keyboard::Down || event.key.code == Keyboard::Left
-                    || event.key.code == Keyboard::Right))
+        if(event1.type ==  Event::KeyReleased &&
+            (event1.key.code == Keyboard::Escape || event1.key.code == Keyboard::Up ||
+                 event1.key.code == Keyboard::Down || event1.key.code == Keyboard::Left
+                    || event1.key.code == Keyboard::Right))
         {
             jogador1->resetTimerAnimacao();
-            jogador2->resetTimerAnimacao();
         }
     }
 
     atualizarJogador1();
+    atualizarColisao();
+}
+
+void Fase::atualizar2()
+{
+    while (janela->pollEvent(event2))
+    {
+
+        if (event2.type == Event::Closed)
+            janela->close();
+        else if (event2.type == Event::KeyPressed && event2.key.code == Keyboard::Escape)
+            janela->close();
+
+        if(event2.type ==  Event::KeyReleased &&
+            (event2.key.code == Keyboard::Escape || event2.key.code == Keyboard::E ||
+                 event2.key.code == Keyboard::D || event2.key.code == Keyboard::S
+                    || event2.key.code == Keyboard::F))
+        {
+            jogador2->resetTimerAnimacao();
+        }
+    }
     atualizarJogador2();
     atualizarColisao();
 }
@@ -121,7 +143,8 @@ void Fase::executar() {
     gerenciadorGrafico->centralizar(jogador1->getPosition());
     pausarJogada();
     verPontos();
-    atualizar();
+    atualizar1();
+    atualizar2();
     render();
 }
 
