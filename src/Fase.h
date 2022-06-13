@@ -8,6 +8,7 @@
 #include "Fase.h"
 #include "ListaEntidades.h"
 #include "Lista.h"
+#include "Projetil.h"
 #include "Espinho.h"
 #include "Galho.h"
 #include "Ente.h"
@@ -31,11 +32,11 @@ namespace fases
         GerenciadorColisoes gerenciadorColisao;
         GerenciadorGrafico* gerenciadorGrafico;
 
-        Vector2i posMouse;
-        Vector2f coordMouse;
-
         Sprite fundoTela;
         Texture fundoTelaTex;
+        Sprite portal;
+        Texture portalTex;
+
         Jogador* jogador1;
         Jogador* jogador2;
     public:
@@ -43,7 +44,7 @@ namespace fases
         ~Fase();
 
         // Tela
-        Sprite getImagem();
+        void inicializarPortal(float x);
         void inicializarFundoTela(const char* caminho);
         void renderFundoTela();
         Texture getFundoTela();

@@ -25,16 +25,18 @@ namespace fases
     private:
         int qtdeGalhos;
         int qtdeEspinhos;
-
         int qtdeGatos;
         int qtdeCartas;
+        int tempoTiro;
+
+        Projetil* projetil;
 
         ListaEntidades galhos;
         ListaEntidades espinhos;
-
         ListaEntidades gatos;
         ListaEntidades cartas;
 
+        vector<Projetil*> projeteis;
     public:
         FaseUm(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf);
         ~FaseUm();
@@ -52,6 +54,8 @@ namespace fases
         void gerarGalhos();
         void gerarGatos();
         void gerarCartas();
+        void gerarProjeteis();
+        void moverProjeteis();
         void gerarObstaculos();
         void gerarInimigos();
     };

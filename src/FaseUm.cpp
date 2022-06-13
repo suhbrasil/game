@@ -7,6 +7,7 @@ FaseUm::FaseUm(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Fase(j1, j2, 
     id = 7;
 
     inicializarFundoTela("texture/background.jpeg");
+    inicializarPortal(fundoTelaTex.getSize().x - 620.f);
     inicializarJogador(j1, j2);
     qtdeGalhos = gerarAleatoriamente(7,3);
     qtdeEspinhos = gerarAleatoriamente(5,3);
@@ -18,6 +19,10 @@ FaseUm::FaseUm(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Fase(j1, j2, 
 
 FaseUm::~FaseUm()
 {
+    galhos.destruirEntidades();
+    espinhos.destruirEntidades();
+    gatos.destruirEntidades();
+    cartas.destruirEntidades();
 }
 
 void FaseUm::gerarGatos(){
@@ -36,6 +41,28 @@ void FaseUm::gerarCartas(){
         temp->setPosicao(i);
         gerenciadorColisao.adicionarInimigo(temp);
     }
+}
+
+void FaseUm::gerarProjeteis() {
+
+    if(tempoTiro < 1000) tempoTiro ++;
+
+    else{
+        Projetil* temp = new Projetil();
+        temp->shape.setPosition(200.f , 650.f);
+        projeteis.push_back(temp);
+        gerenciadorColisao.adicionarProjetil(temp);
+        tempoTiro = 0;
+    }
+}
+
+void FaseUm::moverProjeteis() {
+        for(int i = 0; i < projeteis.size(); i ++){
+            janela->draw(projeteis[i]->shape);
+            projeteis[i]->shape.move(0.5f,0.f);
+            if(projeteis[i]->getPosition().x < 0.0f || projeteis[i]->getPosition().x > 2000.f) projeteis.erase(projeteis.begin()+i);
+        }
+
 }
 
 void FaseUm::gerarInimigos() {
@@ -71,13 +98,14 @@ void FaseUm::atualizarRenderGatos(int i) {
     Gato* gato = dynamic_cast <Gato*>(gatos.lista.getItem(i)->getInfo());
     gato->render(*janela);
     gato->atualizar();
-
 }
 
 void FaseUm::atualizarRenderCartas(int j) {
     Carta* carta = dynamic_cast <Carta*>(cartas.lista.getItem(j)->getInfo());
     carta->render(*janela);
     carta->atualizar();
+    gerarProjeteis();
+    moverProjeteis();
 }
 
 void FaseUm::atualizarRenderGalhos(int i) {

@@ -13,9 +13,7 @@ Cogumelo::~Cogumelo() {
 }
 
 void Cogumelo::inicializarVariaveis() {
-
     posicaoX = 1000.f;
-
 }
 
 void Cogumelo::inicializarTextura() {
@@ -31,8 +29,8 @@ void Cogumelo::inicializarDesenhavel() {
 }
 
 float Cogumelo::operator+(float i){
-    float intervalo = 1200.f;
-    intervalo*= i;
+    float intervalo = 1000.f;
+    intervalo *= i;
     return this->posicaoX + intervalo;
 }
 

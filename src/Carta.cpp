@@ -6,6 +6,8 @@ Carta::Carta() : Inimigo() {
     inicializarTextura();
     inicializarDesenhavel();
     inicializarVariaveis();
+    inicializarFenomenosFisicos();
+    atualizarFenomenosFisicos();
 }
 
 Carta::~Carta() {
@@ -13,11 +15,11 @@ Carta::~Carta() {
 }
 
 void Carta::inicializarVariaveis() {
-
     velocidade.x = 2.f;
     velocidade.y = 0;
-    posicaoX = 600.f;
-
+    posicaoX = 1000.f;
+    centro.x = desenhavel.getPosition().x - desenhavel.getGlobalBounds().width/2;
+    centro.y = desenhavel.getPosition().y +- desenhavel.getGlobalBounds().height/2;
 }
 
 void Carta::inicializarTextura() {
@@ -44,7 +46,6 @@ void Carta::setPosicao(int i) {
 }
 
 void Carta::setPosicao2(int i) {
-
     float posY = operator/(i);
     float posX = operator-(i);
 

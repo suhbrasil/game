@@ -18,6 +18,15 @@ Fase::~Fase()
     delete jogador2;
 }
 
+void Fase::inicializarPortal(float x) {
+    if (!portalTex.loadFromFile("texture/portal.png"))
+    {
+        printf("imagem não encontrada");
+    }
+    portal.setTexture(portalTex);
+    portal.setScale(0.31f, 0.23f);
+    portal.setPosition(x, 610.f);
+}
 
 void Fase::inicializarFundoTela(const char* caminho) {
     if(!fundoTelaTex.loadFromFile(caminho))
@@ -27,6 +36,8 @@ void Fase::inicializarFundoTela(const char* caminho) {
 
 void Fase::renderFundoTela() {
     janela->draw(fundoTela);
+    janela->draw(portal);
+    janela->setFramerateLimit(60);
 }
 
 Texture Fase::getFundoTela() {
@@ -68,6 +79,8 @@ void Fase::inicializarJogador(Jogador* j1, Jogador* j2)
 {
     jogador1 = j1;
     jogador2 = j2;
+    j1->inicializarTextura("texture/coelho2.png");
+    j2->inicializarTextura("texture/coelho.png");
 }
 
 void Fase::atualizarJogador1()
@@ -150,6 +163,7 @@ void Fase::render()
     atualizarRenderInimigos();
 
     janela->display();
+    janela->setFramerateLimit(60);
 }
 
 int Fase::gerarAleatoriamente(int maior, int menor) {

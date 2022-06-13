@@ -23,10 +23,10 @@ namespace entidades {
     public:
         Sprite desenhavel;
         Texture textura;
-        RectangleShape shape;
 
         Entidade();
         virtual ~Entidade();
+        void inicializarTextura(const char* caminho);
         void inicializarDesenhavel();
         void inicializarAnimacao();
         virtual void inicializarVariaveis() = 0;
@@ -38,8 +38,6 @@ namespace entidades {
         const Vector2f getDimensoesMetade() const;
 
         void setPosition(const float x, const float y);
-
-        void inicializarTextura();
         //renderTarget é responsável por definir o comportamento de objetos 2D
         void render(RenderTarget& target);
         void colidir(Entidade* p, Vector2f posicaoOutro, Vector2f dimensaoOutro);

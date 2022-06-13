@@ -8,16 +8,18 @@ Jogador::Jogador() : Personagem()
     id = 11;
 
     inicializarVariaveis();
-    inicializarTextura();
     inicializarDesenhavel();
     inicializarAnimacao();
-    inicializarFenomenosFisicos();
 
     desenhavel.setPosition(posicaoInicialX,posicaoInicialY);
 }
 
 Jogador::~Jogador()
 {
+}
+
+void Jogador::setTextura(const char* caminho) {
+    inicializarTextura(caminho);
 }
 
 void Jogador::inicializarDesenhavel()
@@ -30,13 +32,6 @@ void Jogador::inicializarDesenhavel()
     desenhavel.setScale(2.0f, 2.0f);
 }
 
-void Entidade::inicializarTextura()
-{
-    if (!textura.loadFromFile("texture/coelho.png"))
-    {
-        printf("imagem não encontrada");
-    }
-}
 void Jogador::atualizar1()
 {
     atualizarMovimentacaoJ1();
@@ -184,7 +179,7 @@ void Jogador::movimentar(const float direcaoX, const float direcaoY) {
 }
 
 void Jogador::resetPosicao() {
-    desenhavel.setPosition(0,632);
+    desenhavel.setPosition(640,632);
 }
 
 void Jogador::atualizarAnimacao()

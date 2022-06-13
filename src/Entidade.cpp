@@ -9,6 +9,14 @@ Entidade::~Entidade() {
 
 }
 
+void Entidade::inicializarTextura(const char* caminho)
+{
+    if (!textura.loadFromFile(caminho))
+    {
+        printf("imagem não encontrada");
+    }
+}
+
 const FloatRect Entidade::getGlobalBounds() const {
 
     return desenhavel.getGlobalBounds();

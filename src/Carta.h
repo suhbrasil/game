@@ -2,13 +2,16 @@
 
 #include <SFML/Graphics.hpp>
 #include "Inimigo.h"
+#include "Projetil.h"
 using namespace sf;
 
 namespace personagens {
     class Carta : public Inimigo {
     private:
-
+        int tempoTiro;
+        Vector2f centro;
     public:
+        vector<Projetil*> projeteis;
         Carta();
         ~Carta();
         void inicializarTextura();

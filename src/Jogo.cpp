@@ -69,7 +69,7 @@ void Jogo::executar() {
                     if(x == 2) {
                         while (gerenciadorGrafico.getJanela()->isOpen())
                         {
-                            if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x && !proximo) {
+                            if(jogador1->getPosition().x > ((faseUm->getFundoTela().getSize().x) - 600) && !proximo) {
                                 gerenciadorGrafico.getJanela()->clear();
                                 gerenciadorGrafico.resetCamera();
                                 jogador1->resetPosicao();
@@ -77,7 +77,7 @@ void Jogo::executar() {
                                     jogador2->resetPosicao();
                                 proximo = 1;
                             }
-                            else if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x && proximo) {
+                            else if(jogador1->getPosition().x > ((faseUm->getFundoTela().getSize().x) - 600) && proximo) {
                                 menu->desenharGameOver(*gerenciadorGrafico.getJanela(), 0);
                             }
                             if(!faseUm->getPerdeu()) {
@@ -96,7 +96,7 @@ void Jogo::executar() {
                         while (gerenciadorGrafico.getJanela()->isOpen())
                         {
                             if(!faseDois->getPerdeu()) {
-                                if(jogador1->getPosition().x > faseUm->getFundoTela().getSize().x)
+                                if(jogador1->getPosition().x > ((faseUm->getFundoTela().getSize().x) - 600.f))
                                     menu->desenharGameOver(*gerenciadorGrafico.getJanela(), 0);
                                 faseDois->executar();
                             }
@@ -120,7 +120,8 @@ void Jogo::executar() {
         menu->desenhar(*gerenciadorGrafico.getJanela());
     }
     if(faseUm->getQtdJogadores() == 1)
-        ranking->salvarPontos1(jogador1->getPontos());
-    else
+         ranking->salvarPontos1(jogador1->getPontos());
+    else {
         ranking->salvarPontos2(jogador1->getPontos(), jogador2->getPontos());
+    }
 }

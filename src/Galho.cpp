@@ -14,7 +14,7 @@ Galho::~Galho() {
 
 void Galho::inicializarVariaveis() {
     ePlataforma = true;
-    posicaoX = 200.f;
+    posicaoX = 1000.f;
     posicaoY = 500.f;
 }
 

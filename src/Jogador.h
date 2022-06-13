@@ -26,6 +26,7 @@ namespace personagens {
         Jogador();
         virtual ~Jogador();
 
+        void setTextura(const char* caminho);
         void inicializarDesenhavel();
         void atualizar1();
         void atualizar2();
