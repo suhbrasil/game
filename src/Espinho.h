@@ -13,8 +13,8 @@ namespace obstaculos {
     public:
         Espinho();
         ~Espinho();
-        void inicializarTextura();
         void inicializarVariaveis();
+        void inicializarTextura();
         void inicializarDesenhavel();
         void setPosicao(int i);
         float operator+(float i);

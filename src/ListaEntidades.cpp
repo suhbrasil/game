@@ -16,7 +16,6 @@ void ListaEntidades::inserir(Entidade* info){
 }
 
 
-
 void ListaEntidades::destruirEntidades(){
     Entidade* p = lista.voltarInicio();
     while (p)
@@ -24,6 +23,5 @@ void ListaEntidades::destruirEntidades(){
         delete p;
         p = lista.irProximo();
     }
-
     lista.retirar();
 }

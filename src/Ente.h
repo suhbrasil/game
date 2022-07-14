@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 
-
 class Ente
 {
 protected:
@@ -11,6 +10,5 @@ public:
     Ente();
     ~Ente();
     int getId();
-    void imprimir();
     virtual void executar() = 0;
 };

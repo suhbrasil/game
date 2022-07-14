@@ -1,5 +1,4 @@
-#ifndef _LISTA_H_
-#define _LISTA_H_
+#pragma once
 
 namespace lista
 {
@@ -8,32 +7,30 @@ namespace lista
     {
     private:
             template <typename TE>
-            class Elemento /*no da lista*/
+            class Elemento
             {
             private:
                 TE info;
-                Elemento *ant;
+                Elemento* ant;
                 Elemento *prox;
 
             public:
-                Elemento(TE Info = nullptr, Elemento *Ant = nullptr, Elemento *Prox = nullptr);
+                Elemento(TE Info = nullptr, Elemento* Ant = nullptr, Elemento* Prox = nullptr);
                 ~Elemento();
 
                 TE getInfo();
                 void setInfo(TE Info);
 
-                Elemento *getAnt();
-                void setAnt(Elemento *Ant);
+                Elemento* getAnt();
+                void setAnt(Elemento* Ant);
 
-                Elemento *getProx();
-                void setProx(Elemento *Prox);
+                Elemento* getProx();
+                void setProx(Elemento* Prox);
             };
-
-
     public:
-        Elemento<TL> *inicio;
-        Elemento<TL> *fim;
-        Elemento<TL> *atual;
+        Elemento<TL>* inicio;
+        Elemento<TL>* fim;
+        Elemento<TL>* atual;
         Lista();
         ~Lista();
 
@@ -54,5 +51,3 @@ namespace lista
 }
 
 #include "ListaImp.h"
-
-#endif

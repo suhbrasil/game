@@ -29,7 +29,6 @@ namespace personagens {
         void inicializarFenomenosFisicos();
         void atualizarFenomenosFisicos();
         void inverterVelocidade();
-        // movimentar os personagens
         void atualizar();
     };
 }

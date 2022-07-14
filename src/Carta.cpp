@@ -6,6 +6,8 @@ Carta::Carta() : Inimigo() {
     inicializarTextura();
     inicializarDesenhavel();
     inicializarVariaveis();
+    inicializarFenomenosFisicos();
+    atualizarFenomenosFisicos();
 }
 
 Carta::~Carta() {
@@ -13,11 +15,7 @@ Carta::~Carta() {
 }
 
 void Carta::inicializarVariaveis() {
-
-    velocidade.x = 2.f;
-    velocidade.y = 0;
-    posicaoX = 450.f;
-
+    posicaoX = 1300.f;
 }
 
 void Carta::inicializarTextura() {
@@ -32,8 +30,24 @@ void Carta::inicializarDesenhavel() {
     desenhavel.setScale(0.5f, 0.5f);
 }
 
+void Carta::adicionarProjetil(Projetil* projetil){
+    projeteis.push_back(projetil);
+}
+
+const int Carta::getTempoTiro() const {
+    return tempoTiro;
+}
+
+void Carta::setTempoTiro(int tempo) {
+    tempoTiro = tempo;
+}
+
+vector<Projetil*> Carta::getProjeteis() {
+    return projeteis;
+}
+
 float Carta::operator+(float i){
-    float intervalo = 650.f;
+    float intervalo = 700.f;
     intervalo*= i;
     return this->posicaoX + intervalo;
 }
@@ -41,27 +55,4 @@ void Carta::setPosicao(int i) {
     float posX = operator+(i);
     desenhavel.setPosition(posX, 575.f);
     this->posicaoX = posX;
-}
-
-void Carta::setPosicao2(int i) {
-
-    float posY = operator/(i);
-    float posX = operator-(i);
-
-    desenhavel.setPosition(posX,posY);
-    this->posicaoX = posX;
-    this->posicaoY = posY;
-}
-
-float Carta::operator-(float i){
-    float intervalo = 570.f;
-    intervalo*= i;
-    return this->posicaoX + intervalo;
-}
-
-float Carta::operator/(float i){
-    float intervalo = 75.f;
-    intervalo*= i;
-
-    return this->posicaoY - intervalo;
 }

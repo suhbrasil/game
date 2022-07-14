@@ -6,6 +6,8 @@ Gato::Gato() : Inimigo() {
     inicializarTextura();
     inicializarDesenhavel();
     inicializarVariaveis();
+    inicializarFenomenosFisicos();
+    atualizarFenomenosFisicos();
 }
 
 Gato::~Gato() {
@@ -13,8 +15,8 @@ Gato::~Gato() {
 }
 
 void Gato::inicializarVariaveis() {
-    posicaoX = 200.f;
-    posicaoY = 450.f;
+    posicaoX = 1000.f;
+    posicaoY = 460.f;
     velocidade.x = 2.f;
     velocidade.y = 0;
 }
@@ -37,11 +39,10 @@ void Gato::setPosicao(int i) {
     desenhavel.setPosition(posX,posY);
     this->posicaoX = posX;
     this->posicaoY = posY;
-
 }
 
 float Gato::operator+(float i){
-    float intervalo = 570.f;
+    float intervalo = 545.f;
     intervalo*= i;
     return this->posicaoX + intervalo;
 }
@@ -49,6 +50,5 @@ float Gato::operator+(float i){
 float Gato::operator-(float i){
     float intervalo = 75.f;
     intervalo*= i;
-
     return this->posicaoY - intervalo;
 }

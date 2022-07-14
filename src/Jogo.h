@@ -19,32 +19,17 @@ private:
     Event event;
     GerenciadorGrafico gerenciadorGrafico;
 
-    // Menu
-    RectangleShape backgroundMenu;
-    Texture backgroundTextMenu;
-    // Jogo
-    RectangleShape background;
-    Texture backgroundText;
-    // Ranking
-    RectangleShape backgroundRanking;
-    Texture backgroundTextRanking;
-
-    stack<Ente> pilha;
     int proximo;
     Menu* menu;
     FaseUm* faseUm;
     FaseDois* faseDois;
     Ranking* ranking;
 
-    Jogador* jogador;
-    
+    Jogador* jogador1;
+    Jogador* jogador2;
 public:
     Jogo();
     ~Jogo();
-
     void inicializar();
-    // void atualizarJogador();
-    // void atualizar();
-
     void executar();
 };

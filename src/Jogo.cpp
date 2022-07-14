@@ -1,28 +1,26 @@
 #include "Jogo.h"
 
-Jogo::Jogo() : proximo(0) {
+Jogo::Jogo() : proximo(0)
+{
     gerenciadorGrafico.inicializarJanela();
     inicializar();
-
-    // Background menu
-    backgroundTextMenu.loadFromFile("texture/menu2.jpeg");
-    gerenciadorGrafico.desenhar(&backgroundMenu, &backgroundTextMenu);
-
-    // Background ranking
-    backgroundTextRanking.loadFromFile("texture/ranking.jpg");
-    gerenciadorGrafico.desenhar(&backgroundRanking, &backgroundTextRanking);
 }
 
-Jogo::~Jogo() {
+Jogo::~Jogo()
+{
     delete menu;
     delete faseUm;
     delete faseDois;
     delete ranking;
+    delete jogador1;
+    delete jogador2;
 }
-void Jogo::inicializar() {
-    jogador = new Jogador();
-    faseUm = new FaseUm(jogador, &gerenciadorGrafico);
-    faseDois = new FaseDois(jogador, &gerenciadorGrafico);
+void Jogo::inicializar()
+{
+    jogador1 = new Jogador();
+    jogador2 = new Jogador();
+    faseUm = new FaseUm(jogador1, jogador2, &gerenciadorGrafico);
+    faseDois = new FaseDois(jogador1, jogador2, &gerenciadorGrafico);
     menu = new Menu();
     ranking = new Ranking();
 }
@@ -51,72 +49,95 @@ void Jogo::executar() {
                 {
                     int x = menu->pressionado();
 
-                    // Cadastro
+                    // Cadastro 1 jogador
                     if (x == 0)
                     {
-                        ranking->salvarNome();
+                        faseUm->setQtdJogadores(1);
+                        faseDois->setQtdJogadores(1);
+                        ranking->salvarNome1();
+                    }
+
+                    // Cadastro 2 jogadores
+                    if (x == 1)
+                    {
+                        faseUm->setQtdJogadores(2);
+                        faseDois->setQtdJogadores(2);
+                        ranking->salvarNome2();
                     }
 
                     // Fase 1
-                    if(x == 1) {
+                    if(x == 2) {
                         while (gerenciadorGrafico.getJanela()->isOpen())
                         {
-                            if(jogador->getPosition().x > faseUm->getFundoTela().getSize().x && !proximo) {
-                                gerenciadorGrafico.getJanela()->clear();
-                                gerenciadorGrafico.resetCamera();
-                                jogador->resetPosicao();
-                                proximo = 1;
+                            if(!faseUm->getPerdeu()) {
+                                if(jogador1->getPosition().x > ((faseUm->getFundoTela().getSize().x) - 600) && !proximo) {
+                                    gerenciadorGrafico.getJanela()->clear();
+                                    gerenciadorGrafico.resetCamera();
+                                    jogador1->resetPosicao();
+                                    if(faseUm->getQtdJogadores() == 2)
+                                        jogador2->resetPosicao();
+                                    proximo = 1;
+                                }
+                                else if(jogador1->getPosition().x > ((faseUm->getFundoTela().getSize().x) - 600) && proximo) {
+                                    faseDois->setPerdeu(false);
+                                    faseUm->setPerdeu(false);
+                                    gerenciadorGrafico.getJanela()->close();
+                                }
+
+                                if(proximo)
+                                    faseDois->executar();
+                                else
+                                    faseUm->executar();
                             }
-                            else if(jogador->getPosition().x > faseUm->getFundoTela().getSize().x && proximo)
+                            else {
+                                faseDois->setPerdeu(true);
+                                faseUm->setPerdeu(true);
                                 gerenciadorGrafico.getJanela()->close();
-                            if(proximo)
-                                faseDois->executar();
-                            else
-                                faseUm->executar();
+                            }
                         }
                     }
 
                     // Fase 2
-                    if(x == 2) {
+                    if(x == 3) {
                         while (gerenciadorGrafico.getJanela()->isOpen())
                         {
-                            if(jogador->getPosition().x > faseUm->getFundoTela().getSize().x)
+                            if(!faseDois->getPerdeu()) {
+                                if(jogador1->getPosition().x > ((faseUm->getFundoTela().getSize().x) - 600.f)) {
+                                    faseDois->setPerdeu(false);
+                                    faseUm->setPerdeu(false);
+                                    gerenciadorGrafico.getJanela()->close();
+                                }
+                                faseDois->executar();
+                            }
+                            else {
+                                faseUm->setPerdeu(true);
+                                faseDois->setPerdeu(true);
                                 gerenciadorGrafico.getJanela()->close();
-                            faseDois->executar();
+                            }
                         }
                     }
 
                     // Ranking
-                    if(x == 3) {
-                        while(gerenciadorGrafico.getJanela()->isOpen()) {
-                            while(gerenciadorGrafico.getJanela()->pollEvent(e)) {
-                                if(e.type == Event::Closed) {
-                                    gerenciadorGrafico.getJanela()->close();
-                                }
-                                if(e.type == Event::KeyPressed) {
-                                    if(e.key.code == Keyboard::Escape)
-                                        gerenciadorGrafico.getJanela()->close();
-                                }
-                            }
-                            gerenciadorGrafico.getJanela()->clear();
-                            gerenciadorGrafico.getJanela()->draw(backgroundRanking);
-                            ranking->desenhar(*gerenciadorGrafico.getJanela());
-                            gerenciadorGrafico.getJanela()->display();
-                        }
+                    if(x == 4) {
+                        ranking->desenhar(*gerenciadorGrafico.getJanela());
                     }
 
                     // Sair
-                    if(x == 4)
+                    if(x == 5)
                         gerenciadorGrafico.getJanela()->close();
                     break;
                 }
             }
         }
-        gerenciadorGrafico.getJanela()->clear();
-        gerenciadorGrafico.getJanela()->draw(backgroundMenu);
         menu->desenhar(*gerenciadorGrafico.getJanela());
-        gerenciadorGrafico.getJanela()->display();
     }
-    ranking->salvarPontos(jogador->getPontos());
-}
+    // Salvar pontos
+    if(faseUm->getQtdJogadores() == 1)
+         ranking->salvarPontos1(jogador1->getPontos());
+    else
+        ranking->salvarPontos2(jogador1->getPontos(), jogador2->getPontos());
 
+    // game over
+    if(faseUm->getPerdeu())
+        menu->desenharGameOver();
+}

@@ -18,7 +18,7 @@ namespace personagens {
         // contar quantas vezes o teclado já foi pressionado (deixará a mudança de frame mais lenta)
         int countFrame;
         int pontos;
-        //fisica
+
         bool movimentando;
 
         bool podePular;
@@ -26,20 +26,20 @@ namespace personagens {
         Jogador();
         virtual ~Jogador();
 
+        void setTextura(const char* caminho);
         void inicializarDesenhavel();
-        void atualizar();
+        void atualizar1();
+        void atualizar2();
         void inicializarVariaveis();
         void atualizarAnimacao();
-         //movimentar do teclado
-        void atualizarMovimentacao();
-
-        //movimentar fisicamente (diz a direcao do movimento)
+        void atualizarMovimentacaoJ1();
+        void atualizarMovimentacaoJ2();
         void movimentar(const float direcaoX, const float direcaoY);
         Vector2f getVelocidade();
         bool getPodePular();
         void setPodePular(bool pular);
-        void diminuirPontos();
-        void ganharPontos();
+        void diminuirPontos(int ponto);
+        void ganharPontos(int ponto);
         int getPontos();
         void resetPosicao();
         void executar() {}

@@ -21,14 +21,14 @@ void Inimigo::inicializarVariaveis() {
     posicaoX = 400.f;
     ePlataforma = false;
     eEspinho = false;
-    velocidade.x = 0.1f;
+    velocidade.x = 2.f;
     velocidade.y = 0.f;
 }
 
 
 void Inimigo::inicializarTextura()
 {
-  
+
 }
 
 void Inimigo::atualizar() {
@@ -38,5 +38,3 @@ void Inimigo::atualizar() {
 const Vector2f Inimigo::getVelocidade() const {
     return velocidade;
 }
-
-

@@ -1,5 +1,4 @@
-#ifndef _LISTAENTIDADES_H_
-#define _LISTAENTIDADES_H_
+#pragma once
 
 #include "Entidade.h"
 #include "Lista.h"
@@ -18,12 +17,10 @@ namespace lista {
 
         void inserir(Entidade* info);
 
-        Entidade* voltarInicio(); // retorna para o início e retorna o primeiro elemento da lista
-        Entidade* irProximo(); // vai para o próximo elemento da lista e retorna o próximo
+        Entidade* voltarInicio();
+        Entidade* irProximo();
 
         void atualizarEntidades(float t);
         void destruirEntidades();
     };
 }
-
-#endif

@@ -11,11 +11,11 @@ namespace personagens {
     public:
         Gato();
         ~Gato();
+        void inicializarVariaveis();
         void inicializarTextura();
         void inicializarDesenhavel();
-        float operator+(float i);
         void setPosicao(int i);
-        void inicializarVariaveis();
+        float operator+(float i);
         float operator-(float i);
     };
 }

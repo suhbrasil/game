@@ -16,11 +16,10 @@ namespace obstaculos {
         bool ePlataforma;
         bool eEspinho;
     public:
-        vector<Sprite> obstaculos;
         Obstaculo();
         ~Obstaculo();
         void inicializarVariaveis();
-        void inicializarTextura() ;
+        void inicializarTextura();
         void inicializarDesenhavel();
         const bool getEPlataforma() const;
         const bool getEEspinho() const;

@@ -2,22 +2,27 @@
 
 #include <SFML/Graphics.hpp>
 #include "Inimigo.h"
+#include <vector>
+#include "Projetil.h"
 using namespace sf;
+using namespace std;
 
 namespace personagens {
     class Carta : public Inimigo {
     private:
-
+        int tempoTiro;
+        vector<Projetil*> projeteis;
     public:
         Carta();
         ~Carta();
+        void inicializarVariaveis();
         void inicializarTextura();
         void inicializarDesenhavel();
-        void inicializarVariaveis();
+        void adicionarProjetil(Projetil *projetil);
+        const int getTempoTiro() const;
+        void setTempoTiro(int tempo);
+        vector<Projetil*> getProjeteis();
         float operator+(float i);
         void setPosicao(int i);
-        void setPosicao2(int i);
-        float operator-(float i);
-        float operator/(float i);
     };
 }

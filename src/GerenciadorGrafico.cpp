@@ -31,8 +31,3 @@ void GerenciadorGrafico::resetCamera() {
     camera.setCenter(Vector2f(1200, 350));
     janela.setView(camera);
 }
-
-void GerenciadorGrafico::desenhar(RectangleShape* background, Texture* text) {
-    background->setSize(Vector2f(1200, 700));
-    background->setTexture(text);
-}

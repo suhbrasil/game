@@ -1,15 +1,16 @@
 #include "FaseDois.h"
 using namespace fases;
 
-FaseDois::FaseDois(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
+FaseDois::FaseDois(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Fase(j1, j2, gf)
 {
     id = 6;
 
     inicializarFundoTela("texture/background2.jpeg");
-    inicializarJogador(j);
-    qtdeGatos =  gerarAleatoriamente(7,3);
+    inicializarPortal();
+    inicializarJogador(j1, j2);
+    qtdeGatos =  gerarAleatoriamente(5,3);
     qtdeGalhos = gerarAleatoriamente(6,3);
-    qtdeCogumelos =gerarAleatoriamente(10,3);
+    qtdeCogumelos = gerarAleatoriamente(10,3);
     qtdeRainhas = gerarAleatoriamente(5,3);
     gerarObstaculos();
     gerarInimigos();
@@ -17,6 +18,10 @@ FaseDois::FaseDois(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
 
 FaseDois::~FaseDois()
 {
+    galhos.destruirEntidades();
+    cogumelos.destruirEntidades();
+    gatos.destruirEntidades();
+    rainhas.destruirEntidades();
 }
 
 void FaseDois::gerarGatos() {
@@ -28,16 +33,7 @@ void FaseDois::gerarGatos() {
     }
 }
 
-// void FaseDois::gerarCartas(){
-//    for (int i = 0 ; i < qtdeCartas; i++) {
-//         Carta* temp = new Carta();
-//         cartas.lista.inserir(dynamic_cast<Entidade*> (temp));
-//         temp->setPosicao(i);
-//         gerenciadorColisao.adicionarInimigo(temp);
-//     }
-// }
-
-void FaseDois::gerarRainhas(){
+void FaseDois::gerarRainhas() {
    for (int i = 0 ; i < qtdeRainhas; i++) {
         Rainha* temp = new Rainha();
         rainhas.lista.inserir(dynamic_cast<Entidade*> (temp));

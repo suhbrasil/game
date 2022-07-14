@@ -35,26 +35,24 @@ namespace fases
         ListaEntidades gatos;
         ListaEntidades rainhas;
     public:
-        FaseDois(Jogador* j, GerenciadorGrafico* gf);
+        FaseDois(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf);
         ~FaseDois();
 
-        // Jogador
-        void atualizarRenderGalhos(int pos);
-        void atualizarRenderCogumelos(int pos);
-        void atualizarRenderObstaculos();
-
-        void atualizarRenderGatos(int pos);
-        void atualizarRenderRainhas(int pos);
-        void atualizarRenderInimigos();
+        // Inimigos
+        void gerarGatos();
+        void gerarRainhas();
+        void gerarInimigos();
 
         // obstaculo
         void gerarCogumelos();
         void gerarGalhos();
         void gerarObstaculos();
 
-        // void gerarCartas();
-        void gerarGatos();
-        void gerarRainhas();
-        void gerarInimigos();
+        void atualizarRenderGatos(int pos);
+        void atualizarRenderRainhas(int pos);
+        void atualizarRenderGalhos(int pos);
+        void atualizarRenderCogumelos(int pos);
+        void atualizarRenderInimigos();
+        void atualizarRenderObstaculos();
     };
 }

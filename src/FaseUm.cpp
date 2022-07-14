@@ -2,15 +2,16 @@
 using namespace fases;
 
 
-FaseUm::FaseUm(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
+FaseUm::FaseUm(Jogador* j1, Jogador* j2, GerenciadorGrafico* gf) : Fase(j1, j2, gf)
 {
     id = 7;
 
     inicializarFundoTela("texture/background.jpeg");
-    inicializarJogador(j);
+    inicializarPortal();
+    inicializarJogador(j1, j2);
     qtdeGalhos = gerarAleatoriamente(7,3);
     qtdeEspinhos = gerarAleatoriamente(5,3);
-    qtdeCartas = gerarAleatoriamente(10,3);
+    qtdeCartas = gerarAleatoriamente(6,3);
     qtdeGatos =  gerarAleatoriamente(7,3);
     gerarObstaculos();
     gerarInimigos();
@@ -18,9 +19,13 @@ FaseUm::FaseUm(Jogador* j, GerenciadorGrafico* gf) : Fase(j, gf)
 
 FaseUm::~FaseUm()
 {
+    galhos.destruirEntidades();
+    espinhos.destruirEntidades();
+    gatos.destruirEntidades();
+    cartas.destruirEntidades();
 }
 
-void FaseUm::gerarGatos(){
+void FaseUm::gerarGatos() {
    for (int i = 0 ; i < qtdeGatos; i++) {
         Gato* temp = new Gato();
         gatos.lista.inserir(dynamic_cast<Entidade*> (temp));
@@ -29,7 +34,7 @@ void FaseUm::gerarGatos(){
     }
 }
 
-void FaseUm::gerarCartas(){
+void FaseUm::gerarCartas() {
    for (int i = 0 ; i < qtdeCartas; i++) {
         Carta* temp = new Carta();
         cartas.lista.inserir(dynamic_cast<Entidade*> (temp));
@@ -37,12 +42,6 @@ void FaseUm::gerarCartas(){
         gerenciadorColisao.adicionarInimigo(temp);
     }
 }
-
-void FaseUm::gerarInimigos() {
-    gerarCartas();
-    gerarGatos();
-}
-
 
 void FaseUm::gerarEspinhos(){
    for (int i = 0 ; i < qtdeEspinhos; i++) {
@@ -62,22 +61,59 @@ void FaseUm::gerarGalhos(){
     }
 }
 
+void FaseUm::gerarInimigos() {
+    gerarCartas();
+    gerarGatos();
+}
+
 void FaseUm::gerarObstaculos() {
     gerarGalhos();
     gerarEspinhos();
+}
+
+void FaseUm::gerarProjeteis() {
+    if(tempoTiro < 1000)
+        tempoTiro++;
+    else{
+        for(int i = 0; i < qtdeCartas; i++){
+            Carta* carta = dynamic_cast <Carta*>(cartas.lista.getItem(i)->getInfo());
+            Projetil* temp = new Projetil();
+            temp->shape.setPosition(carta->getPosition().x , 650.f);
+            carta->adicionarProjetil(temp);
+            gerenciadorColisao.adicionarProjetil(temp);
+        }
+        tempoTiro = 0;
+    }
+}
+
+void FaseUm::moverProjeteis() {
+    for(int i = 0; i < qtdeCartas; i++){
+        Carta* carta = dynamic_cast <Carta*>(cartas.lista.getItem(i)->getInfo());
+        for(int j = 0; j < carta->getProjeteis().size(); j ++){
+
+            janela->draw(carta->getProjeteis()[j]->shape);
+            if(i%2 == 1)
+                carta->getProjeteis()[j]->shape.move(0.5f,0.f);
+            else
+                carta->getProjeteis()[j]->shape.move(-0.5f,0.f);
+            if(carta->getProjeteis()[j]->getPosition().x < 0.0f || carta->getProjeteis()[j]->getPosition().x > 2000.f)
+                carta->getProjeteis().erase(carta->getProjeteis().begin()+i);
+        }
+    }
 }
 
 void FaseUm::atualizarRenderGatos(int i) {
     Gato* gato = dynamic_cast <Gato*>(gatos.lista.getItem(i)->getInfo());
     gato->render(*janela);
     gato->atualizar();
-
 }
 
 void FaseUm::atualizarRenderCartas(int j) {
     Carta* carta = dynamic_cast <Carta*>(cartas.lista.getItem(j)->getInfo());
     carta->render(*janela);
     carta->atualizar();
+    gerarProjeteis();
+    moverProjeteis();
 }
 
 void FaseUm::atualizarRenderGalhos(int i) {

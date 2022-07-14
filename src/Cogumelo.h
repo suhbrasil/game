@@ -7,7 +7,6 @@ using namespace sf;
 namespace obstaculos {
     class Cogumelo : public Obstaculo {
     private:
-
     public:
         Cogumelo();
         ~Cogumelo();

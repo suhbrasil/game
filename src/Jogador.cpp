@@ -8,10 +8,8 @@ Jogador::Jogador() : Personagem()
     id = 11;
 
     inicializarVariaveis();
-    inicializarTextura();
     inicializarDesenhavel();
     inicializarAnimacao();
-    inicializarFenomenosFisicos();
 
     desenhavel.setPosition(posicaoInicialX,posicaoInicialY);
 }
@@ -20,26 +18,30 @@ Jogador::~Jogador()
 {
 }
 
+void Jogador::setTextura(const char* caminho) {
+    inicializarTextura(caminho);
+}
+
 void Jogador::inicializarDesenhavel()
 {
     desenhavel.setTexture(textura);
 
     frameAtual = IntRect(0, 0, 45, 34);
     desenhavel.setTextureRect(frameAtual);
-    // pra mudar o tamanho do desenho
+    // para mudar o tamanho do desenho
     desenhavel.setScale(2.0f, 2.0f);
 }
 
-void Entidade::inicializarTextura()
+void Jogador::atualizar1()
 {
-    if (!textura.loadFromFile("texture/coelho.png"))
-    {
-        printf("imagem não encontrada");
-    }
+    atualizarMovimentacaoJ1();
+    atualizarAnimacao();
+    atualizarFenomenosFisicos();
 }
-void Jogador::atualizar()
+
+void Jogador::atualizar2()
 {
-    atualizarMovimentacao();
+    atualizarMovimentacaoJ2();
     atualizarAnimacao();
     atualizarFenomenosFisicos();
 }
@@ -52,6 +54,7 @@ void Jogador::inicializarVariaveis()
     podePular = true;
     pontos = 700;
     fstream pos ("jogada.txt");
+    // colcocar a posicao inicial para a salva se estiver pausado o jogo
     if(pos.is_open()) {
         string linhaPosX;
         pos >> linhaPosX;
@@ -63,12 +66,12 @@ void Jogador::inicializarVariaveis()
         remove("jogada.txt");
     }
     else {
-        posicaoInicialX = 0.f;
+        posicaoInicialX = 640.f;
         posicaoInicialY = 637.f;
     }
 }
 
-void Jogador::atualizarMovimentacao()
+void Jogador::atualizarMovimentacaoJ1()
 {
     movimentando = false;
 
@@ -104,10 +107,52 @@ void Jogador::atualizarMovimentacao()
         movimentando = true;
 
     }
-
     velocidade.y += gravidade * 0.8;
+    countFrame++;
 
+    if(estadoDeAnimacao == ESTADOINICIAL)
+        estadoDeAnimacao = SEGUNDOESTADO;
+    else
+        estadoDeAnimacao = ESTADOINICIAL;
+}
 
+void Jogador::atualizarMovimentacaoJ2()
+{
+    movimentando = false;
+
+    if (Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+    {
+        movimentar(-0.5f, 0.f);
+        movimentando = true;
+    }
+
+    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::D) && Keyboard::isKeyPressed(sf::Keyboard::Key::W) && podePular) {
+        podePular = false;
+        movimentar(2.f, -sqrtf(2.f * gravidade * alturaPulo));
+        movimentando = true;
+    }
+
+    else if(Keyboard::isKeyPressed(sf::Keyboard::Key::A) && Keyboard::isKeyPressed(sf::Keyboard::Key::W) && podePular) {
+        podePular = false;
+        movimentar(-2.0f, -sqrtf(2.f * gravidade * alturaPulo));
+        movimentando = true;
+    }
+
+    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+    {
+        movimentar(0.5f, 0.f);
+        movimentando = true;
+    }
+
+    else if (Keyboard::isKeyPressed(sf::Keyboard::Key::W) && podePular)
+    {
+        podePular = false;
+        velocidade.y = -sqrtf(2.f * gravidade * alturaPulo);
+        velocidade.y *= 10.f;
+        movimentando = true;
+
+    }
+    velocidade.y += gravidade * 0.8;
     countFrame++;
 
     if(estadoDeAnimacao == ESTADOINICIAL)
@@ -129,7 +174,7 @@ void Jogador::movimentar(const float direcaoX, const float direcaoY) {
 }
 
 void Jogador::resetPosicao() {
-    desenhavel.setPosition(0,632);
+    desenhavel.setPosition(640,632);
 }
 
 void Jogador::atualizarAnimacao()
@@ -171,14 +216,12 @@ void Jogador::setPodePular(bool pular) {
     podePular = pular;
 }
 
-void Jogador::diminuirPontos() {
-    pontos -= 10;
-    cout << pontos << endl;
+void Jogador::diminuirPontos(int ponto) {
+    pontos -= ponto;
 }
 
-void Jogador::ganharPontos() {
-    pontos += 10;
-    cout << pontos << endl;
+void Jogador::ganharPontos(int ponto) {
+    pontos += ponto;
 }
 
 int Jogador::getPontos() {

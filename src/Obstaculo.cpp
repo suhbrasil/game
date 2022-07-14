@@ -26,12 +26,10 @@ void Obstaculo::inicializarVariaveis() {
 
 const bool Obstaculo::getEPlataforma() const {
     return ePlataforma;
-
 }
 
 const bool Obstaculo::getEEspinho() const {
     return eEspinho;
-
 }
 
 void Obstaculo::inicializarTextura()
